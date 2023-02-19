@@ -10,15 +10,14 @@
 				<div ref="nav">
 					<div
 						@click="navOpen = !navOpen"
-						:class="[navOpen ? 'rotate-[360deg]' : '']"
 						class="duration-[600ms] relative z-30 h-[100%] w-[26px] cursor-pointer">
 						<div
 							:class="[
 								navOpen
-									? 'before:hidden after:rotate-[-90deg] after:top-0 rotate-45 top-[15px]'
+									? 'bg-transparent translate-x-[-35px] before:rotate-[40deg] before:origin-left before:translate-x-[35px] after:rotate-[-40deg] after:origin-left after:translate-x-[35px]'
 									: '',
 							]"
-							class="duration-[1000ms] bg-white h-[2px] w-full absolute top-[25%] before:content-[''] before:bg-white before:h-[2px] before:w-full before:absolute before:top-[8px] after:content-[''] after:bg-white after:h-[2px] after:w-full after:absolute after:top-[16px]"></div>
+							class="duration-[700ms] before:duration-[700ms] after:duration-[700ms] bg-white h-[2px] w-[70%] absolute top-[50%] before:content-[''] before:bg-white before:h-[2px] before:w-[143%] before:absolute before:bottom-[8px] after:content-[''] after:bg-white after:h-[2px] after:w-[143%] after:absolute after:top-[8px]"></div>
 					</div>
 					<nav
 						:class="[navOpen ? 'right-0' : 'right-[-50%]']"
