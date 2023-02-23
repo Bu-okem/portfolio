@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-black h-screen">
+	<div class="bg-black min-h-screen">
 		<header>
 			<div class="fixed w-full p-[1em] flex justify-between">
 				<div>
@@ -10,7 +10,7 @@
 				<div ref="nav">
 					<div
 						@click="navOpen = !navOpen"
-						class="duration-[600ms] relative z-30 h-[100%] w-[26px] cursor-pointer">
+						class="duration-[600ms] relative z-30 h-full w-[26px] cursor-pointer">
 						<div
 							:class="[
 								navOpen
@@ -21,22 +21,17 @@
 					</div>
 					<nav
 						:class="[navOpen ? 'right-0' : 'right-[-50%]']"
-						class="fixed top-0 text-white h-full w-[50%] bg-teal-600 backdrop-blur-md duration-700">
+						class="fixed top-0 text-white h-full w-[50%] bg-transparent backdrop-blur-md duration-700">
 						<ul class="flex flex-col justify-around h-[33%] py-[2em]">
-							<li v-for="link in navLinks" :key="link" class="px-[1em]">
+							<li
+								v-for="(object, index) in navLinksObjects"
+								:key="index"
+								class="px-[1em]">
 								<NuxtLink
-									v-if="link === 'home'"
-									to="/"
+									:to="`${object.link}`"
 									@click="navOpen = false"
 									class="capitalize"
-									>{{ link }}</NuxtLink
-								>
-								<NuxtLink
-									v-else
-									:to="`/${link}`"
-									@click="navOpen = false"
-									class="capitalize"
-									>{{ link }}</NuxtLink
+									>{{ object.title }}</NuxtLink
 								>
 							</li>
 						</ul>
@@ -45,14 +40,18 @@
 			</div>
 		</header>
 
-		<main class="pt-[5em] h-full">
+		<main class="pt-[5em] h-screen">
 			<slot />
 		</main>
 	</div>
 </template>
 
 <script setup>
-const navLinks = ["home", "about", "projects"];
+const navLinksObjects = [
+	{ title: "home", link: "/" },
+	{ title: "about", link: "/about" },
+	{ title: "projects", link: "/projects" },
+];
 const nav = ref(null);
 const navOpen = ref(false);
 useDetectOutsideClick(nav, () => {
