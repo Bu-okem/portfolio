@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<span class="inline" v-html="currentText"></span>
-		<span class="inline">_</span>
+		<span class="inline animate-blink text-[1.5rem]">_</span>
 	</div>
 </template>
 
