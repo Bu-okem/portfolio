@@ -1,6 +1,9 @@
 <template>
 	<div>
-		<h2 class="text-white">About</h2>
+		<div
+			class="text-slate-500 text-[4rem] uppercase font-semibold text-center opacity-20 overflow-hidden whitespace-nowrap pulse">
+			About Me
+		</div>
 	</div>
 </template>
 

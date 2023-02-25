@@ -27,14 +27,14 @@ const typing = () => {
 	}, 100);
 };
 
-onMounted(() => {
-	typing();
-});
+typing();
 </script>
 
 <style scoped>
 .blink {
 	animation: blink 1s infinite;
+	position: relative;
+	z-index: 0;
 }
 
 @keyframes blink {
