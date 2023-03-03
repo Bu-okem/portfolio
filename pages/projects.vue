@@ -1,12 +1,17 @@
 <template>
 	<div>
 		<div
-			class="text-slate-500 text-[4.3rem] uppercase font-semibold text-center opacity-20 overflow-hidden pulse">
+			class="fixed z-0 text-slate-500 text-[4.9rem] uppercase font-semibold text-center opacity-20 overflow-hidden pulse">
 			Projects
 		</div>
 	</div>
 
-	<section class="flex flex-wrap max-w-[1050px] mx-auto">
+	<section class="flex flex-wrap max-w-[1050px] relative mx-auto mt-[6em]">
+		<Card />
+		<Card />
+		<Card />
+		<Card />
+		<Card />
 		<Card />
 	</section>
 </template>

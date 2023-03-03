@@ -1,7 +1,8 @@
 <template>
 	<div class="bg-black min-h-screen">
 		<header>
-			<div class="fixed z-20 w-full p-[1em] flex justify-between">
+			<div
+				class="fixed z-20 w-full p-[1em] flex justify-between bg-gradient-to-b from-black to-transparent">
 				<div>
 					<h2 class="text-[1.5rem] text-white">
 						b<span class="hidden lg:inline">uokem</span>_

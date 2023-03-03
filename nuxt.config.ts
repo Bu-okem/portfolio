@@ -3,7 +3,14 @@ export default defineNuxtConfig({
 	modules: ["@nuxtjs/tailwindcss"],
 	app: {
 		head: {
-			title: "Buokem's Portfolio",
+			title: "Buokem",
+			link: [
+				{
+					rel: "icon",
+					type: "image/x-icon",
+					href: "favicon.png",
+				},
+			],
 		},
 	},
 });

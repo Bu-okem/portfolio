@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="h-[80%] flex flex-col items-center justify-center text-white text-center">
+		class="h-[80vh] flex flex-col items-center justify-center text-white text-center">
 		<TypingAnimationText
 			text='<h2 class="text-[2rem] mb-5 inline">
 			Hello,<br />
