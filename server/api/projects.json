@@ -1,0 +1,32 @@
+{
+	"1": {
+		"name": "Huddle Project",
+		"stack": "HTML + CSS",
+		"description": "Description"
+	},
+	"2": {
+		"name": "Fyyur",
+		"stack": "HTML + CSS + Jinja + Flask",
+		"description": "Description"
+	},
+	"3": {
+		"name": "Blog for Godspower Eze",
+		"stack": "HTML + CSS",
+		"description": "Description"
+	},
+	"4": {
+		"name": "Space Exploration Website",
+		"stack": "VueJS + TailwindCSS",
+		"description": "Description"
+	},
+	"5": {
+		"name": "Trivia Website",
+		"stack": "ReactJS + Flask",
+		"description": "Description"
+	},
+	"6": {
+		"name": "Sunnyside Website",
+		"stack": "HTML + CSS + VanillaJS",
+		"description": "Description"
+	}
+}

@@ -1,5 +1,4 @@
+import data from "../projects.json";
 export default defineEventHandler((event) => {
-	return {
-		test: "This is a test",
-	};
+	return data;
 });
