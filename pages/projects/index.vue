@@ -1,18 +1,17 @@
 <template>
 	<div>
 		<div
-			class="fixed z-0 text-slate-500 text-[4.9rem] uppercase font-semibold text-center opacity-20 overflow-hidden pulse">
+			class="select-none fixed z-0 w-full text-slate-500 text-[calc(3.5rem_+_6vw)] uppercase font-semibold text-center opacity-20 overflow-hidden pulse">
 			Projects
 		</div>
 	</div>
 
-	<section
-		class="flex flex-wrap max-w-[1050px] relative mx-auto mt-[6em] pb-[4em]">
+	<section class="w-[100%] relative mt-[6em] pb-[4em]">
 		<NuxtLink
 			v-for="(project, key) in projects"
 			:key="key"
 			:to="`projects/${key}`"
-			class="w-[90%] max-w-xs mx-auto">
+			class="block w-[90%] max-w-[450px] mx-auto">
 			<Card
 				:projectName="project.name"
 				:stack="project.stack"
