@@ -1,5 +1,10 @@
 <template>
 	<div class="bg-black min-h-screen">
+		<div
+			:class="[!isLoading ? 'hidden' : '']"
+			class="h-screen w-screen bg-black text-[3rem] text-white flex items-center justify-center duration-500 ease-linear">
+			<h2 class="animate-bounce">b_</h2>
+		</div>
 		<header>
 			<div
 				class="fixed z-20 w-full p-[1em] flex justify-between bg-gradient-to-b from-black to-transparent">
@@ -48,6 +53,8 @@
 </template>
 
 <script setup>
+const isLoading = ref(true);
+setTimeout(() => (isLoading.value = false), 2000);
 const navLinksObjects = [
 	{ title: "home", link: "/" },
 	{ title: "about", link: "/about" },

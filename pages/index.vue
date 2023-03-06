@@ -8,7 +8,17 @@
 		</h2>
 		<br />
 		<h4 class="inline">I am a Web Developer<br />
-				To know more about me click this button</h4>' />
+				To know more about me, click this button</h4>' />
+
+		<section class="mt-[3em]">
+			<NuxtLink to="/about">
+				<button
+					:class="[isVisible ? 'block' : 'hidden']"
+					class="bg-white text-black p-[0.3em] rounded duration-200">
+					About Me
+				</button>
+			</NuxtLink>
+		</section>
 	</div>
 </template>
 

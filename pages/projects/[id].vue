@@ -1,18 +1,14 @@
 <template>
 	<div>
-		<section>
-			<div class="h-[350px] w-[350px] m-4 bg-gray-700">
-				<h3>{{ project.name }} Image</h3>
-			</div>
-		</section>
-		<section>
-			<h2 class="text-white">{{ project.name }}</h2>
+		<section class="text-white p-[1.5em]">
+			<h2 class="text-[2.5rem] mb-[0.4em]">{{ project.name }}</h2>
+			<h4 class="my-[1em]">{{ project.stack }}</h4>
+			<h4>{{ project.description }}</h4>
 		</section>
 	</div>
 </template>
 
 <script setup>
-//PortfolioDB.c0m
 const { id } = useRoute().params;
 const { data: project } = await useFetch(`/api/projects/${id}`);
 </script>
