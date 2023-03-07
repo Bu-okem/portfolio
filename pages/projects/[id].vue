@@ -5,6 +5,22 @@
 			<h4 class="my-[1em]">{{ project.stack }}</h4>
 			<h4>{{ project.description }}</h4>
 		</section>
+		<section class="p-[1.5em]">
+			<div class="text-slate-400 flex justify-between w-[200px]">
+				<a v-if="project.link" :href="project.link">
+					<span class="flex items-center">
+						<icon name="eye" class="mr-[0.2em]" />
+						<p>View</p>
+					</span>
+				</a>
+				<a v-if="project.sourceCode" :href="project.sourceCode">
+					<span class="flex">
+						<icon name="github" class="mr-[0.2em]" />
+						<p>Source Code</p>
+					</span>
+				</a>
+			</div>
+		</section>
 	</div>
 </template>
 

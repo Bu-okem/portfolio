@@ -2,31 +2,43 @@
 	"1": {
 		"name": "Huddle Project",
 		"stack": "HTML + CSS",
-		"description": "A landing page for a community platform. Gotten from Frontend Mentor. Testing the overflow for this div"
+		"description": "A landing page for a community platform. Gotten from Frontend Mentor. Testing the overflow for this div",
+		"link": "https://huddleproject.netlify.app",
+		"sourceCode": "https://github.com/Bu-okem/self-project-2"
 	},
 	"2": {
 		"name": "Fyyur",
 		"stack": "HTML + CSS + Jinja + Flask",
-		"description": "Description"
+		"description": "Description",
+		"link": "",
+		"sourceCode": "https://github.com/Bu-okem/cd0046-SQL-and-Data-Modeling-for-the-Web"
 	},
 	"3": {
 		"name": "Blog for Godspower Eze",
 		"stack": "HTML + CSS",
-		"description": "Description"
+		"description": "Description",
+		"link": "https://godspowereze.com",
+		"sourceCode": ""
 	},
 	"4": {
 		"name": "Space Exploration Website",
 		"stack": "VueJS + TailwindCSS",
-		"description": "Description"
+		"description": "Description",
+		"link": "https://space-exploration-mauve.vercel.app",
+		"sourceCode": "https://github.com/Bu-okem/space-exploration-project"
 	},
 	"5": {
 		"name": "Trivia Website",
 		"stack": "ReactJS + Flask",
-		"description": "Description"
+		"description": "Description",
+		"link": "",
+		"sourceCode": "https://github.com/Bu-okem/udacitrivia-project.git"
 	},
 	"6": {
 		"name": "Sunnyside Website",
 		"stack": "HTML + CSS + VanillaJS",
-		"description": "Description"
+		"description": "Description",
+		"link": "",
+		"sourceCode": ""
 	}
 }

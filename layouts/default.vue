@@ -2,7 +2,7 @@
 	<div class="bg-black min-h-screen">
 		<div
 			:class="[!isLoading ? 'hidden' : '']"
-			class="h-screen w-screen bg-black text-[3rem] text-white flex items-center justify-center duration-500 ease-linear">
+			class="fixed z-30 h-screen w-screen bg-black text-[3rem] text-white flex items-center justify-center duration-500 ease-linear">
 			<h2 class="animate-bounce">b_</h2>
 		</div>
 		<header>

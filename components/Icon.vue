@@ -1,13 +1,23 @@
 <template>
-	<span v-html="svg"></span>
+	<span
+		v-html="svg"
+		:class="[
+			isButton ? 'bg-[#19161c] p-[0.4em] block rounded-sm cursor-pointer' : '',
+		]"></span>
 </template>
 
 <script setup>
 const props = defineProps({
 	name: String,
+	width: Number,
+	height: Number,
+	button: Boolean,
 });
 const svg = ref("");
 const iconName = props.name;
+const iconWidth = props.width;
+const iconHeight = props.height;
+const isButton = props.button;
 
 if (iconName === "code") {
 	svg.value = `<svg
