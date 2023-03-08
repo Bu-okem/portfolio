@@ -9,14 +9,14 @@
 			<div class="text-slate-400 flex justify-between w-[200px]">
 				<a v-if="project.link" :href="project.link">
 					<span class="flex items-center">
-						<icon name="eye" class="mr-[0.2em]" />
-						<p>View</p>
+						<icon name="eye" />
+						<p class="ml-[0.2em]">View</p>
 					</span>
 				</a>
 				<a v-if="project.sourceCode" :href="project.sourceCode">
 					<span class="flex">
-						<icon name="github" class="mr-[0.2em]" />
-						<p>Source Code</p>
+						<icon name="github" />
+						<p class="ml-[0.2em]">Source Code</p>
 					</span>
 				</a>
 			</div>

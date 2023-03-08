@@ -10,14 +10,14 @@
 				rich experience in web design and customization
 			</h4>
 			<button
-				class="bg-[#19161c] w-80 py-[0.5em] px-[1em] mb-[1em] mx-auto rounded-sm flex justify-center">
+				class="bg-[#19161c] w-[90%] max-w-[320px] py-[0.5em] px-[1em] mb-[1em] mx-auto rounded-sm flex justify-center">
 				<icon name="download-rounded" /> Download Resume
 			</button>
 			<div class="flex justify-around w-[160px] mx-auto">
 				<a href="https://github.com/bu-okem">
 					<icon name="github" button="true" />
 				</a>
-				<a href="https://linkedin.com/in/chibuokem-obiegublem">
+				<a href="https://linkedin.com/in/chibuokem-obiegbulem">
 					<icon name="linkedin" button="true" />
 				</a>
 				<a href="mailto:chiobiegbulem@gmail.com">
@@ -28,8 +28,8 @@
 		<section class="mx-[1em] my-[2em]">
 			<div class="bg-[#16191c] p-[1em] rounded-sm">
 				<span class="text-slate-400 flex">
-					<icon name="paper" class="mr-[0.2em]" />
-					<p>Certificate</p>
+					<icon name="paper" />
+					<p class="ml-[0.2em]">Certificate</p>
 				</span>
 			</div>
 		</section>

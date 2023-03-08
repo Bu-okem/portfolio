@@ -54,7 +54,7 @@
 
 <script setup>
 const isLoading = ref(true);
-setTimeout(() => (isLoading.value = false), 2000);
+setTimeout(() => (isLoading.value = false), 3000);
 const navLinksObjects = [
 	{ title: "home", link: "/" },
 	{ title: "about", link: "/about" },

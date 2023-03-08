@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="h-[156px]">
 		<span class="inline" v-html="currentText"></span>
 		<span class="inline text-[1.5rem]" :class="[isBlinking ? 'blink' : '']"
 			>_</span
@@ -14,6 +14,8 @@ const props = defineProps({
 const currentText = ref("");
 const charIndex = ref(0);
 const isBlinking = ref(true);
+const isVisible = useVisiblity();
+const runAnimation = useAnimation();
 
 const typing = () => {
 	isBlinking.value = false;
@@ -23,6 +25,7 @@ const typing = () => {
 		if (charIndex.value > props.text.length) {
 			clearInterval();
 			isBlinking.value = true;
+			isVisible.value = true;
 		}
 	}, 100);
 };
