@@ -11,11 +11,10 @@
 const props = defineProps({
 	text: String,
 });
-const currentText = ref("");
-const charIndex = ref(0);
+const currentText = useAnimationText();
+const charIndex = useAnimationTextIndex();
 const isBlinking = ref(true);
 const isVisible = useVisiblity();
-const runAnimation = useAnimation();
 
 const typing = () => {
 	isBlinking.value = false;
@@ -23,7 +22,6 @@ const typing = () => {
 		currentText.value = props.text.slice(0, charIndex.value);
 		charIndex.value++;
 		if (charIndex.value > props.text.length) {
-			clearInterval();
 			isBlinking.value = true;
 			isVisible.value = true;
 		}

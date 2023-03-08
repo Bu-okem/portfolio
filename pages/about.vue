@@ -15,23 +15,20 @@
 			</button>
 			<div class="flex justify-around w-[160px] mx-auto">
 				<a href="https://github.com/bu-okem">
-					<icon name="github" button="true" />
+					<icon name="github" :button="true" />
 				</a>
 				<a href="https://linkedin.com/in/chibuokem-obiegbulem">
-					<icon name="linkedin" button="true" />
+					<icon name="linkedin" :button="true" />
 				</a>
 				<a href="mailto:chiobiegbulem@gmail.com">
-					<icon name="mail" button="true" />
+					<icon name="mail" :button="true" />
 				</a>
 			</div>
 		</section>
-		<section class="mx-[1em] my-[2em]">
-			<div class="bg-[#16191c] p-[1em] rounded-sm">
-				<span class="text-slate-400 flex">
-					<icon name="paper" />
-					<p class="ml-[0.2em]">Certificate</p>
-				</span>
-			</div>
+		<section class="mx-[1em] py-[2em]">
+			<Certification />
+			<Education />
+			<Experience />
 		</section>
 	</div>
 </template>

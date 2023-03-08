@@ -1,2 +1,4 @@
 export const useVisiblity = () => useState("isVisible", () => false);
-export const useAnimation = () => useState("runAnimation", () => true);
+export const useAnimationText = () => useState("animationText", () => "");
+export const useAnimationTextIndex = () =>
+	useState("animationTextIndex", () => 0);

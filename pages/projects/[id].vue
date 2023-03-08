@@ -21,6 +21,11 @@
 				</a>
 			</div>
 		</section>
+		<button
+			@click="$router.back()"
+			class="text-black bg-white ml-[1.5em] px-[0.8em] py-[0.3em]">
+			Back
+		</button>
 	</div>
 </template>
 
