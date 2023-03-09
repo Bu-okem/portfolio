@@ -9,10 +9,12 @@
 				Hello, I'm Chibuokem, a web-developer based in Port Harcourt. I have
 				rich experience in web design and customization
 			</h4>
-			<button
-				class="bg-[#19161c] w-[90%] max-w-[320px] py-[0.5em] px-[1em] mb-[1em] mx-auto rounded-sm flex justify-center">
-				<icon name="download-rounded" /> Download Resume
-			</button>
+			<a href="" class="" download="Chibuokem's_Resume">
+				<button
+					class="bg-[#19161c] w-[90%] max-w-[320px] py-[0.5em] px-[1em] mb-[1em] mx-auto rounded-sm flex justify-center">
+					<icon name="download-rounded" /> Download Resume
+				</button>
+			</a>
 			<div class="flex justify-around w-[160px] mx-auto">
 				<a href="https://github.com/bu-okem">
 					<icon name="github" :button="true" />
