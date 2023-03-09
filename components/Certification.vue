@@ -1,19 +1,15 @@
 <template>
 	<AboutCard category="certification">
-		<div class="py-[1em]">
-			<h3 class="text-[1.3rem]">Certificate</h3>
-			<h4>Institution</h4>
-			<p class="text-[0.8rem]">Date Issued</p>
-		</div>
-		<hr />
-		<div class="py-[1em]">
-			<h3 class="text-[1.3rem]">Certificate</h3>
-			<h4>Institution</h4>
-			<p class="text-[0.8rem]">Date Issued</p>
-		</div>
+		<AboutCardContent
+			v-for="(certificate, index) in certifications"
+			:key="index"
+			:header="certificate.certification"
+			:paragraph="certificate.institution"
+			:footer="certificate.dateIssued" />
 	</AboutCard>
 </template>
 
 <script setup>
-// Create AboutCardContent component
+const { data: certifications } = await useFetch("/api/about/certifications");
+// certificate = { certification, institution, dateIssued }
 </script>

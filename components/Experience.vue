@@ -1,11 +1,15 @@
 <template>
 	<AboutCard category="experience">
-		<div class="py-[1em]">
-			<h3 class="text-[1.3rem]">Position</h3>
-			<h4>Institution</h4>
-			<p class="text-[0.8rem]">Duration</p>
-		</div>
+		<AboutCardContent
+			v-for="(item, index) in experience"
+			:key="index"
+			:header="item.position"
+			:paragraph="item.institution"
+			:footer="item.duration" />
 	</AboutCard>
 </template>
 
-<script setup></script>
+<script setup>
+const { data: experience } = await useFetch("/api/about/experience");
+// item = {position, institution, duration}
+</script>

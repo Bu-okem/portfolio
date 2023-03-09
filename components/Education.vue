@@ -1,11 +1,15 @@
 <template>
 	<AboutCard category="education">
-		<div class="py-[1em]">
-			<h3 class="text-[1.3rem]">Institution</h3>
-			<h4>Degree</h4>
-			<p class="text-[0.8rem]">Duration</p>
-		</div>
+		<AboutCardContent
+			v-for="(item, index) in education"
+			:key="index"
+			:header="item.institution"
+			:paragraph="item.degree"
+			:footer="item.duration" />
 	</AboutCard>
 </template>
 
-<script setup></script>
+<script setup>
+const { data: education } = await useFetch("/api/about/education");
+// item = {institution, degree, duration}
+</script>

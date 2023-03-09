@@ -1,10 +1,10 @@
 <template>
-	<div class="mt-[2em]">
+	<div class="max-w-[695px] mt-[2em] mx-auto">
 		<span class="flex text-white mb-[0.4em]">
 			<icon :name="iconName" />
 			<p class="ml-[0.2em]">{{ cardHeader }}</p>
 		</span>
-		<div class="bg-[#16191c] text-slate-400 px-[1em] rounded-sm">
+		<div class="bg-[#16191c] text-slate-400 px-[1em] pb-[2em] rounded-sm">
 			<div>
 				<slot />
 			</div>
@@ -28,6 +28,6 @@ if (category === "certification") {
 	iconName.value = "education";
 } else if (category === "experience") {
 	cardHeader.value = "Experience";
-	iconName.value = "paper";
+	iconName.value = "tools";
 }
 </script>

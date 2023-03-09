@@ -214,6 +214,25 @@ if (iconName === "code") {
 			<path d="M11.5 3.5v3a2 2 0 0 0 2 2h3" />
 		</g>
 	</svg>`;
+} else if (iconName === "person") {
+	svg.value = `<svg 
+		xmlns="http://www.w3.org/2000/svg" 
+		width="32" height="32" 
+		viewBox="0 0 512 512">
+		<path 
+			fill="none" 
+			stroke="currentColor" 
+			stroke-linecap="round" 
+			stroke-linejoin="round" 
+			stroke-width="32" 
+			d="M344 144c-3.92 52.87-44 96-88 96s-84.15-43.12-88-96c-4-55 35-96 88-96s92 42 88 96Z"/>
+		<path 
+			fill="none" 
+			stroke="currentColor" 
+			stroke-miterlimit="10" 
+			stroke-width="32" 
+			d="M256 304c-87 0-175.3 48-191.64 138.6C62.39 453.52 68.57 464 80 464h352c11.44 0 17.62-10.48 15.65-21.4C431.3 352 343 304 256 304Z"/>
+			</svg>`;
 } else if (iconName === "postgres") {
 	svg.value = `<svg
 		xmlns="http://www.w3.org/2000/svg"
@@ -279,6 +298,22 @@ if (iconName === "code") {
 		<path
 			d="M18.5 9.51a4.22 4.22 0 0 1-1.91-1.34A5.77 5.77 0 0 0 12 6a4.72 4.72 0 0 0-5 4a3.23 3.23 0 0 1 3.5-1.49a4.32 4.32 0 0 1 1.91 1.35A5.77 5.77 0 0 0 17 12a4.72 4.72 0 0 0 5-4a3.2 3.2 0 0 1-3.5 1.51zm-13 4.98a4.22 4.22 0 0 1 1.91 1.34A5.77 5.77 0 0 0 12 18a4.72 4.72 0 0 0 5-4a3.23 3.23 0 0 1-3.5 1.49a4.32 4.32 0 0 1-1.91-1.35A5.8 5.8 0 0 0 7 12a4.72 4.72 0 0 0-5 4a3.2 3.2 0 0 1 3.5-1.51z"
 			fill="currentColor" />
+	</svg>`;
+} else if (iconName === "tools") {
+	svg.value = `<svg 
+		xmlns="http://www.w3.org/2000/svg" 
+		width="32" 
+		height="32" 
+		viewBox="0 0 24 24">
+		<g 
+			fill="none" 
+			stroke="currentColor" 
+			stroke-linecap="round" 
+			stroke-linejoin="round" 
+			stroke-width="1.5">
+			<path d="m10.05 10.607l-7.07 7.07a2 2 0 0 0 0 2.83v0a2 2 0 0 0 2.828 0l7.07-7.072m4.315.365l3.878 3.878a2 2 0 0 1 0 2.828v0a2 2 0 0 1-2.828 0l-6.209-6.208M6.733 5.904L4.61 6.61L2.49 3.075l1.414-1.414L7.44 3.782l-.707 2.122Zm0 0l2.83 2.83"/>
+			<path d="M10.05 10.607c-.844-2.153-.679-4.978 1.061-6.718c1.74-1.74 4.95-2.121 6.717-1.06l-3.04 3.04l-.283 3.111l3.111-.282l3.04-3.041c1.062 1.768.68 4.978-1.06 6.717c-1.74 1.74-4.564 1.905-6.717 1.061"/>
+			</g>
 	</svg>`;
 } else if (iconName === "twitter") {
 	svg.value = `<svg
