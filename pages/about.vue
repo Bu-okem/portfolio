@@ -9,7 +9,10 @@
 				Hello, I'm Chibuokem, a web-developer based in Port Harcourt. I have
 				rich experience in web design and customization
 			</h4>
-			<a href="" class="" download="Chibuokem's_Resume">
+			<a
+				href="https://www.dropbox.com/s/p3m79g4o8g31fcs/Chibuokem-Obiegbulem_Resume.pdf?dl=0"
+				class=""
+				download="Chibuokem-Obiegbulem_Resume">
 				<button
 					class="bg-[#19161c] w-[90%] max-w-[320px] py-[0.5em] px-[1em] mb-[1em] mx-auto rounded-sm flex justify-center">
 					<icon name="download-rounded" /> Download Resume
