@@ -4,7 +4,8 @@
 			<icon :name="iconName" />
 			<p class="ml-[0.2em]">{{ cardHeader }}</p>
 		</span>
-		<div class="bg-[#16191c] text-slate-400 px-[1em] pb-[2em] rounded-sm">
+		<div
+			class="bg-[#16191c] bg-opacity-60 backdrop-blur text-slate-400 px-[1em] pb-[2em] rounded-sm">
 			<div>
 				<slot />
 			</div>

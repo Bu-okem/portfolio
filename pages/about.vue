@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div
-			class="select-none text-slate-500 text-[calc(3.3rem_+_6vw)] uppercase font-semibold text-center opacity-20 overflow-hidden whitespace-nowrap pulse">
+			class="select-none text-slate-500 text-[calc(3.3rem_+_6vw)] uppercase font-semibold text-center opacity-20 overflow-hidden whitespace-nowrap pulse lg:hidden">
 			About Me
 		</div>
 		<section class="text-white mx-[1em]">

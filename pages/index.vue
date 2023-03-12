@@ -17,8 +17,8 @@
 				<button
 					:class="[isVisible ? 'opacity-1' : 'opacity-0']"
 					class="bg-white text-black flex items-end justify-around font-bold w-[110px] p-[0.3em] rounded duration-1000">
-					<icon name="person" />
 					About Me
+					<icon name="person" color="#000" />
 				</button>
 			</NuxtLink>
 		</section>

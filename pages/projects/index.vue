@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div
-			class="select-none fixed z-0 w-full text-slate-500 text-[calc(3.5rem_+_6vw)] uppercase font-semibold text-center opacity-20 overflow-hidden pulse">
+			class="select-none fixed z-0 w-full text-slate-500 text-[calc(3.5rem_+_6vw)] uppercase font-semibold text-center opacity-20 overflow-hidden pulse lg:hidden">
 			Projects
 		</div>
 	</div>
