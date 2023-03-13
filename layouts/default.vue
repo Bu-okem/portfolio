@@ -10,7 +10,7 @@
 				class="fixed z-20 w-full p-[1em] flex justify-between bg-gradient-to-b from-black to-transparent">
 				<div class="flex z-30">
 					<h2
-						:class="[navOpen ? 'w-[88.1px]' : 'w-[15px]']"
+						:class="[navOpen ? 'w-[88.1px] delay-[200ms]' : 'w-[15px]']"
 						class="text-[1.5rem] text-white overflow-x-hidden whitespace-nowrap w-[15px] duration-[600ms]">
 						b<span class="">uokem</span>
 					</h2>
@@ -30,8 +30,9 @@
 					</div>
 					<nav
 						:class="[navOpen ? 'left-0' : 'left-[-100%]']"
-						class="flex items-center justify-center fixed top-0 text-white h-full w-1/2 bg-[#00000096] backdrop-blur-md duration-700">
-						<ul class="flex flex-col justify-around h-[40%] py-[2em]">
+						class="flex fixed top-0 text-white h-full w-1/2 bg-[#00000096] backdrop-blur-md duration-700">
+						<ul
+							class="relative top-[88px] left-[16px] flex flex-col justify-around h-[30%] py-[2em]">
 							<li
 								v-for="(object, index) in navLinksObjects"
 								:key="index"
@@ -39,7 +40,7 @@
 								<NuxtLink
 									:to="`${object.link}`"
 									@click="navOpen = false"
-									class="capitalize text-[1.8rem]"
+									class="uppercase text-[1.2rem]"
 									>{{ object.title }}</NuxtLink
 								>
 							</li>
