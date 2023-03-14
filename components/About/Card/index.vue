@@ -29,6 +29,9 @@ if (category === "certification") {
 	iconName.value = "education";
 } else if (category === "experience") {
 	cardHeader.value = "Experience";
+	iconName.value = "briefcase";
+} else if (category === "skills") {
+	cardHeader.value = "Skills";
 	iconName.value = "tools";
 }
 </script>

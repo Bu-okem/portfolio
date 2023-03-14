@@ -30,6 +30,9 @@
 				</a>
 			</div>
 		</section>
+		<section class="text-white mx-[1em]">
+			<Skills />
+		</section>
 		<section class="mx-[1em] py-[2em]">
 			<Certification />
 			<Education />
