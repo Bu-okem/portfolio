@@ -25,7 +25,7 @@ const typing = () => {
 			isBlinking.value = true;
 			isVisible.value = true;
 		}
-	}, 100);
+	}, 70);
 };
 
 typing();

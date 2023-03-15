@@ -5,7 +5,7 @@
 			About Me
 		</div>
 		<section class="text-white mx-[1em]">
-			<h4 class="text-[1.2rem] text-center mb-[1.57em]">
+			<h4 class="text-[1.2rem] text-center mb-[1.57em] max-w-[696px] mx-auto">
 				Hello, I'm Chibuokem, a web-developer based in Port Harcourt. I have
 				rich experience in web design and customization
 			</h4>

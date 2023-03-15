@@ -1,10 +1,10 @@
 <template>
 	<div class="bg-black min-h-screen">
-		<!-- <div
+		<div
 			:class="[!isLoading ? 'opacity-0 scale-150 z-[-5]' : '']"
 			class="fixed z-30 h-screen w-screen bg-black text-[3rem] text-white flex items-center justify-center duration-500 ease-linear">
 			<h2 class="animate-bounce">b_</h2>
-		</div> -->
+		</div>
 		<header>
 			<div
 				class="fixed z-20 w-full p-[1em] flex justify-between bg-gradient-to-b from-black to-transparent">
@@ -50,32 +50,9 @@
 			</div>
 		</header>
 
-		<main class="pt-[5em] min-h-screen flex justify-between">
+		<main class="pt-[5em] min-h-screen">
 			<!-- <ToggleDarkMode /> -->
-			<section
-				:class="[isHome ? '' : 'lg:block']"
-				class="hidden text-white w-1/2">
-				<div class="fixed h-full w-1/3 flex items-center">
-					<nav class="h-[20%]">
-						<ul class="h-full flex flex-col justify-between">
-							<li
-								v-for="(object, index) in navLinksObjects"
-								:key="index"
-								class="px-[1em]">
-								<NuxtLink
-									:to="`${object.link}`"
-									@click="navOpen = false"
-									class="uppercase text-[1.2rem] lg:text-[4rem] lg:text-slate-400 lg:hover:text-white lg:hover:text-[4.5rem] lg:duration-500"
-									>{{ object.title }}</NuxtLink
-								>
-							</li>
-						</ul>
-					</nav>
-				</div>
-			</section>
-			<div class="w-full lg:w-[75%]">
-				<slot />
-			</div>
+			<slot />
 		</main>
 	</div>
 </template>

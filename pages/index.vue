@@ -18,7 +18,7 @@
 					:class="[isVisible ? 'opacity-1' : 'opacity-0']"
 					class="bg-[#19161c] text-white text-[1.2rem] flex items-center justify-around w-[125px] px-[0.5em] py-[0.3em] rounded duration-1000">
 					About Me
-					<icon name="person" color="white" />
+					<icon name="person" />
 				</button>
 			</NuxtLink>
 		</section>
@@ -26,6 +26,9 @@
 </template>
 
 <script setup>
+definePageMeta({
+	layout: "home",
+});
 const isVisible = useVisiblity();
 </script>
 
