@@ -40,12 +40,3 @@
 		</section>
 	</div>
 </template>
-
-<script setup></script>
-
-<style>
-svg {
-	width: 22px;
-	height: 22px;
-}
-</style>

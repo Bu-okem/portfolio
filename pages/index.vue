@@ -31,7 +31,3 @@ definePageMeta({
 });
 const isVisible = useVisiblity();
 </script>
-
-<style>
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap");
-</style>

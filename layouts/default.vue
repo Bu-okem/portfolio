@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-black min-h-screen">
+	<div class="bg-black min-h-screen overflow-x-hidden">
 		<!-- <div
 			:class="[!isLoading ? 'opacity-0 scale-150 z-[-5]' : '']"
 			class="fixed z-30 h-screen w-screen bg-black text-[3rem] text-white flex items-center justify-center duration-500 ease-linear">
@@ -52,11 +52,9 @@
 
 		<main class="pt-[5em] min-h-screen flex justify-between">
 			<!-- <ToggleDarkMode /> -->
-			<section
-				:class="[isHome ? '' : 'lg:block']"
-				class="hidden text-white w-1/2">
+			<section class="hidden text-white w-1/2 lg:block">
 				<div class="fixed h-full w-1/3 flex items-center">
-					<nav class="h-[20%]">
+					<nav class="h-[20%] onload-translate-from-bottom">
 						<ul class="h-full flex flex-col justify-between">
 							<li
 								v-for="(object, index) in navLinksObjects"
@@ -73,7 +71,7 @@
 					</nav>
 				</div>
 			</section>
-			<div class="w-full lg:w-[75%]">
+			<div class="w-full lg:w-[75%] onload-translate-from-right">
 				<slot />
 			</div>
 		</main>
@@ -94,9 +92,3 @@ useDetectOutsideClick(nav, () => {
 	navOpen.value = false;
 });
 </script>
-
-<style>
-html.dark {
-	color-scheme: dark;
-}
-</style>

@@ -1,7 +1,7 @@
 <template>
-	<div class="bg-black min-h-screen">
+	<div class="bg-black min-h-screen fixed top-0 left-0 right-0 bottom-0">
 		<div
-			:class="[!isLoading ? 'opacity-0 scale-150 z-[-5]' : '']"
+			:class="[!isLoading ? 'opacity-0 scale-150 z-[-5] hidden' : '']"
 			class="fixed z-30 h-screen w-screen bg-black text-[3rem] text-white flex items-center justify-center duration-500 ease-linear">
 			<h2 class="animate-bounce">b_</h2>
 		</div>
@@ -71,9 +71,3 @@ useDetectOutsideClick(nav, () => {
 	navOpen.value = false;
 });
 </script>
-
-<style>
-html.dark {
-	color-scheme: dark;
-}
-</style>
