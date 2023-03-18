@@ -14,19 +14,17 @@
 				class=""
 				download="Chibuokem-Obiegbulem_Resume">
 				<button
-					class="bg-[#19161c] w-[90%] max-w-[320px] py-[0.5em] px-[1em] mb-[1em] mx-auto rounded-sm flex justify-center">
+					class="bg-[#19161c] w-[90%] max-w-[320px] py-[0.5em] px-[1em] mb-[1em] mx-auto rounded-sm flex justify-center lg:hover:scale-105 duration-300">
 					<icon name="download-rounded" /> Download Resume
 				</button>
 			</a>
 			<div class="flex justify-around w-[160px] mx-auto">
-				<a href="https://github.com/bu-okem">
-					<icon name="github" :button="true" />
-				</a>
-				<a href="https://linkedin.com/in/chibuokem-obiegbulem">
-					<icon name="linkedin" :button="true" />
-				</a>
-				<a href="mailto:chiobiegbulem@gmail.com">
-					<icon name="mail" :button="true" />
+				<a
+					v-for="(button, index) in buttons"
+					:key="index"
+					:href="button.link"
+					class="lg:hover:scale-105 duration-300">
+					<icon :name="button.iconName" :button="true" />
 				</a>
 			</div>
 		</section>
@@ -40,3 +38,20 @@
 		</section>
 	</div>
 </template>
+
+<script setup>
+const buttons = ref([
+	{
+		link: "https://github.com/bu-okem",
+		iconName: "github",
+	},
+	{
+		link: "https://linkedin.com/in/chibuokem-obiegbulem",
+		iconName: "linkedin",
+	},
+	{
+		link: "mailto:chiobiegbulem@gmail.com",
+		iconName: "mail",
+	},
+]);
+</script>

@@ -7,16 +7,18 @@
 						I am Chibuokem
 					</h2>
 					<br />
-					<h4 class="inline text-[1.2rem]">
+					<h4 class="inline text-[1.15rem]">
 						I am a Web Developer<br />
 						To know more about me, click this button
 					</h4>' />
 
-		<section class="mt-[3em] h-[33.6px]">
+		<section
+			:class="[isVisible ? 'opacity-1' : 'opacity-0']"
+			class="mt-[3em] h-[83.6px] text-white flex flex-col items-center justify-between duration-1000">
+			<icon name="arrow-down" class="animate-bounce" />
 			<NuxtLink to="/about">
 				<button
-					:class="[isVisible ? 'opacity-1' : 'opacity-0']"
-					class="bg-[#19161c] text-white text-[1.2rem] flex items-center justify-around w-[125px] px-[0.5em] py-[0.3em] rounded duration-1000">
+					class="bg-[#19161c] text-[1.15rem] flex items-center justify-around w-[125px] px-[0.5em] py-[0.3em] rounded">
 					About Me
 					<icon name="person" />
 				</button>
@@ -31,3 +33,10 @@ definePageMeta({
 });
 const isVisible = useVisiblity();
 </script>
+
+<style>
+section > span > svg {
+	height: 28px !important;
+	width: 28px !important;
+}
+</style>

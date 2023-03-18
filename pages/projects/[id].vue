@@ -8,13 +8,13 @@
 		<section class="p-[1.5em]">
 			<div class="text-slate-400 flex justify-between w-[200px]">
 				<a v-if="project.link" :href="project.link">
-					<span class="flex items-center">
+					<span class="flex items-center hover:text-white duration-500">
 						<icon name="eye" />
 						<p class="ml-[0.2em]">View</p>
 					</span>
 				</a>
 				<a v-if="project.sourceCode" :href="project.sourceCode">
-					<span class="flex">
+					<span class="flex hover:text-white duration-500">
 						<icon name="github" />
 						<p class="ml-[0.2em]">Source Code</p>
 					</span>
@@ -23,7 +23,10 @@
 		</section>
 		<button
 			@click="$router.back()"
-			class="text-black bg-white ml-[1.5em] px-[0.8em] py-[0.3em]">
+			class="text-white border-b-2 ml-[1.5em] pr-1 pb-[0.3em] flex group">
+			<icon
+				name="arrow-back"
+				class="block w-0 mr-1 overflow-x-hidden lg:group-hover:w-[18px] duration-700" />
 			Back
 		</button>
 	</div>

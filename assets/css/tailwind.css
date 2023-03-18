@@ -30,11 +30,19 @@ svg {
 /* Desktop */
 
 @media (min-width: 1024px) {
+	/* Active Class */
+
+	a.router-link-active,
+	a.router-link-exact-active {
+		@apply text-[4.5rem];
+		@apply text-white;
+	}
+
 	/* Page Transition */
 
 	.page-enter-active,
 	.page-leave-active {
-		transition: all 0.8s;
+		transition: all 0.3s;
 	}
 
 	.page-enter-from,
@@ -86,15 +94,18 @@ svg {
 	}
 }
 
-.page-loader-exit {
-	animation: page-loader-exit 1s;
+.float:hover {
+	animation: float 3s infinite;
 }
 
-@keyframes page-loader-exit {
+@keyframes float {
 	0% {
-		@apply block;
+		@apply translate-y-0;
+	}
+	50% {
+		@apply translate-y-1;
 	}
 	100% {
-		@apply hidden;
+		@apply translate-y-0;
 	}
 }
