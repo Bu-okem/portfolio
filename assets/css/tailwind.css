@@ -53,16 +53,6 @@ svg {
 
 	/* Animations */
 
-	.pulse {
-		animation: pulse 8s infinite;
-	}
-
-	@keyframes pulse {
-		50% {
-			opacity: 0.38;
-		}
-	}
-
 	.onload-translate-from-right {
 		animation: translate-from-right 2s;
 	}
@@ -80,6 +70,16 @@ svg {
 			opacity: 1;
 			transform: translateX(0%);
 		}
+	}
+}
+
+.pulse {
+	animation: pulse 8s infinite;
+}
+
+@keyframes pulse {
+	50% {
+		opacity: 0.38;
 	}
 }
 
