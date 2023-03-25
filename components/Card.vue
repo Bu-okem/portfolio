@@ -4,7 +4,7 @@
 		<h3 class="text-white text-[1.6rem] capitalize">{{ projectName }}</h3>
 		<h5 class="text-slate-400 my-2">{{ stack }}</h5>
 		<div class="h-[75px] line-clamp-3">
-			<p class="text-slate-400">
+			<p class="text-card-dark">
 				{{ description }}
 			</p>
 		</div>

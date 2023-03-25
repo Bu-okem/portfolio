@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-black min-h-screen overflow-x-hidden">
+	<div class="bg-dark min-h-screen overflow-x-hidden">
 		<!-- <div
 			:class="[!isLoading ? 'opacity-0 scale-150 z-[-5]' : '']"
 			class="fixed z-30 h-screen w-screen bg-black text-[3rem] text-white flex items-center justify-center duration-500 ease-linear">
@@ -8,13 +8,13 @@
 		<header>
 			<div
 				class="fixed z-20 w-full p-[1em] flex justify-between bg-gradient-to-b from-black to-transparent">
-				<div class="flex z-30">
+				<div class="flex z-30 text-dark">
 					<h2
 						:class="[navOpen ? 'w-[88.1px] delay-[200ms]' : 'w-[15px]']"
-						class="text-[1.5rem] text-white overflow-x-hidden whitespace-nowrap w-[15px] lg:w-[88.1px] duration-[600ms]">
+						class="text-[1.5rem] overflow-x-hidden whitespace-nowrap w-[15px] lg:w-[88.1px] duration-[600ms]">
 						b<span class="">uokem</span>
 					</h2>
-					<h2 class="text-[1.5rem] text-white inline">_</h2>
+					<h2 class="text-[1.5rem] inline">_</h2>
 				</div>
 				<div ref="nav" class="lg:hidden">
 					<div
@@ -30,7 +30,7 @@
 					</div>
 					<nav
 						:class="[navOpen ? 'left-0' : 'left-[-100%]']"
-						class="flex fixed top-0 text-white h-full w-1/2 bg-[#00000096] backdrop-blur-md duration-700">
+						class="flex fixed top-0 text-dark h-full w-1/2 bg-[#00000096] backdrop-blur-md duration-700">
 						<ul
 							class="relative top-[88px] left-[16px] flex flex-col justify-around h-[40%] py-[2em]">
 							<li
@@ -52,7 +52,7 @@
 
 		<main class="pt-[5em] min-h-screen flex justify-between">
 			<!-- <ToggleDarkMode /> -->
-			<section class="hidden text-white w-1/2 lg:block">
+			<section class="hidden text-dark w-1/2 lg:block">
 				<div class="fixed h-full w-1/3 flex items-center">
 					<nav class="h-[20%] onload-translate-from-bottom">
 						<ul class="h-full flex flex-col justify-between">
