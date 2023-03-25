@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="h-[80vh] flex flex-col items-center justify-center text-dark text-center font-['Ubuntu_Mono',_'monospace']">
+		class="h-[80vh] flex flex-col items-center justify-center text-white text-center font-['Ubuntu_Mono',_'monospace']">
 		<TypingTextAnimation
 			text='<h2 class="text-[2rem] mb-5 inline">
 						Hello,<br />
@@ -14,7 +14,7 @@
 
 		<section
 			:class="[isVisible ? 'opacity-1' : 'opacity-0']"
-			class="mt-[3em] h-[83.6px] text-dark flex flex-col items-center justify-between duration-1000">
+			class="mt-[3em] h-[83.6px] text-white flex flex-col items-center justify-between duration-1000">
 			<icon name="arrow-down" class="animate-bounce" />
 			<NuxtLink to="/about">
 				<button
