@@ -10,7 +10,8 @@
 				rich experience in web design and customization
 			</h4>
 			<a
-				href="https://www.dropbox.com/s/p3m79g4o8g31fcs/Chibuokem-Obiegbulem_Resume.pdf?dl=0"
+				href="https://www.dropbox.com/s/5cujrs3d6kbhp0d/Chibuokem-Obiegbulem_Resume.pdf?dl=0"
+				target="_blank"
 				class=""
 				download="Chibuokem-Obiegbulem_Resume">
 				<button
@@ -23,6 +24,7 @@
 					v-for="(button, index) in buttons"
 					:key="index"
 					:href="button.link"
+					target="_blank"
 					class="lg:hover:scale-105 duration-300">
 					<icon :name="button.iconName" :button="true" />
 				</a>

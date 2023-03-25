@@ -7,13 +7,13 @@
 		</section>
 		<section class="p-[1.5em]">
 			<div class="text-slate-400 flex justify-between w-[200px]">
-				<a v-if="project.link" :href="project.link">
+				<a v-if="project.link" :href="project.link" target="_blank">
 					<span class="flex items-center hover:text-white duration-500">
 						<icon name="eye" />
 						<p class="ml-[0.2em]">View</p>
 					</span>
 				</a>
-				<a v-if="project.sourceCode" :href="project.sourceCode">
+				<a v-if="project.sourceCode" :href="project.sourceCode" target="_blank">
 					<span class="flex hover:text-white duration-500">
 						<icon name="github" />
 						<p class="ml-[0.2em]">Source Code</p>
