@@ -1,6 +1,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap");
 
 @tailwind base;
+
+* {
+	scrollbar-width: 10px;
+	scrollbar-color: white;
+	scrollbar-track-color: black;
+}
+
+*::-webkit-scrollbar {
+	@apply w-[10px];
+}
+
+*::-webkit-scrollbar-track {
+	@apply bg-black;
+}
+
+*::-webkit-scrollbar-thumb {
+	@apply bg-white;
+	@apply rounded-md;
+}
+
 @tailwind components;
 @tailwind utilities;
 
@@ -19,7 +39,7 @@ svg {
 
 .layout-enter-active,
 .layout-leave-active {
-	transition: all 0.2s;
+	transition: all 1s;
 }
 
 .layout-enter-from,
