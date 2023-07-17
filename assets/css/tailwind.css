@@ -44,7 +44,7 @@ svg {
 
 .layout-enter-from,
 .layout-leave-to {
-	filter: blur(3px);
+	filter: blur(10px);
 }
 
 /* Desktop */
