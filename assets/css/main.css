@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.router-link-exact-active span {
+  @apply bg-black dark:bg-light;
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+}
