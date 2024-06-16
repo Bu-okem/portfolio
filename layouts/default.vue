@@ -15,7 +15,7 @@
       </ul>
     </header>
     <main
-      class="mt-[40px] mx-auto px-[20px] h-[60%] max-w-[703px] overflow-y-scroll lg:self-end lg:mr-[30px] hide-scrollbar">
+      class="mt-[40px] px-[20px] h-[60%] max-w-[703px] overflow-y-scroll lg:self-end lg:mr-[30px] hide-scrollbar">
       <slot />
     </main>
     <Footer />
