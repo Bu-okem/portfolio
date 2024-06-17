@@ -1,9 +1,9 @@
 <template>
   <div
-    class="bg-light text-black dark:bg-dark dark:text-light h-screen relative lg:flex">
+    class="font-ubuntu bg-light text-black dark:bg-dark dark:text-light h-screen relative lg:flex">
     <Nav />
     <header
-      class="mt-[43px] mx-[20px] lg:mx-[32px] flex flex-col gap-2 lg:h-fit lg:mb-[44px] lg:self-end">
+      class="mt-[43px] mx-[20px] lg:mx-[32px] flex flex-col gap-2 lg:h-fit lg:min-w-[390px] lg:mb-[44px] lg:self-end">
       <h2 class="text-[25px] lg:text-[35px]">Chibuokem Obiegbulem</h2>
       <h5 class="text-[17px] lg:text-[20px]">Frontend Web Developer</h5>
       <ul class="flex items-center gap-[22px] list-none">
@@ -15,7 +15,7 @@
       </ul>
     </header>
     <main
-      class="mt-[40px] px-[20px] h-[60%] max-w-[703px] overflow-y-scroll lg:self-end lg:mr-[30px] hide-scrollbar">
+      class="mt-[40px] px-[20px] h-[60%] lg:h-[65%] lg:w-1/2 overflow-y-scroll lg:self-end lg:ml-[10%] lg:mr-[30px] hide-scrollbar">
       <slot />
     </main>
     <Footer />

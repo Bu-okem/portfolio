@@ -1,5 +1,5 @@
 <template>
-  <div class="lg:h-fit lg:mb-[100px]">
+  <div class="lg:h-fit">
     <p class="font-lato font-light text-[17px] leading-7">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos
       tempore aspernatur, consequatur nisi reiciendis error velit eius impedit
