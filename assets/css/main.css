@@ -7,5 +7,19 @@
 }
 
 .hide-scrollbar {
-  scrollbar-width: thin;
+  scrollbar-width: 1px;
+  scrollbar-color: white;
+  scrollbar-track-color: black;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  @apply w-[1px];
+}
+
+.hide-scrollbar::-webkit-scrollbar-track {
+  @apply bg-light dark:bg-dark;
+}
+
+.hide-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-dark dark:bg-light rounded-full;
 }
