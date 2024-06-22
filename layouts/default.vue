@@ -1,6 +1,6 @@
 <template>
   <div
-    class="font-ubuntu bg-light text-black dark:bg-dark dark:text-light h-screen relative lg:flex">
+    class="font-ubuntu bg-light text-black dark:bg-dark bg-grain-pattern dark:text-light h-screen relative lg:flex">
     <Nav />
     <header
       class="mt-[43px] mx-[20px] lg:mx-[32px] flex flex-col gap-2 lg:h-fit lg:min-w-[390px] lg:mb-[44px] lg:self-end">
