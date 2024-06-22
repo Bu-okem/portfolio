@@ -1,6 +1,8 @@
 <template>
-  <div class="">
-    <p class="">projects</p>
+  <div class="flex flex-col gap-5" :class="useIsAbsolute && absolute">
+    <Project />
+    <Project />
+    <Project />
   </div>
 </template>
 
