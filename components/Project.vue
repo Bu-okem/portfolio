@@ -2,7 +2,10 @@
   <div
     class="duration-500 h-screen w-screen fixed top-0 left-0"
     :class="expanded ? 'bg-light dark:bg-dark z-30' : 'bg-transparent -z-10'"
-    @click="expanded = false"></div>
+    @click="
+      expanded = false;
+      isAbsolute = false;
+    "></div>
   <div class="flex gap-x-[25px]">
     <div
       ref="elementRef"
@@ -11,6 +14,7 @@
       :style="computedVar"
       @click="
         expanded = true;
+        isAbsolute = true;
         calculateDistance;
       "></div>
     <div class="hidden lg:block">
@@ -30,10 +34,9 @@ const computedClass = computed(() => {
     : 'relative z-0';
 });
 const computedVar = computed(() => {
-  return `--tw-translate-y: ${
-    -distanceFromTop.value + 140
-  }px; --tw-translate-x: ${-distanceFromLeft.value + 200}px);`;
+  return `--tw-translate-y: ${-distanceFromTop.value + 140}px;`;
 });
+const isAbsolute = useIsAbsolute();
 </script>
 
 <style scoped>
@@ -44,8 +47,6 @@ const computedVar = computed(() => {
 .custom-absolute {
   animation-name: custom-absolute;
   animation-duration: 1s;
-  /* animation-delay: 800ms; */
-  /* animation-timing-function: ease-in-out; */
   position: absolute;
 }
 </style>
