@@ -1,36 +1,49 @@
 <template>
   <div
-    class="duration-500 h-screen w-screen fixed top-0 left-0"
-    :class="expanded ? 'bg-light dark:bg-dark z-30' : 'bg-transparent -z-10'">
-    <div class="px-[20px] pt-[30px] relative" key="expanded">
+    class="duration-700 ease-in h-screen w-screen fixed top-0 left-0"
+    :class="
+      isOpen
+        ? 'bg-light dark:bg-dark z-30'
+        : 'bg-transparent -z-10 delay-[500ms]'
+    ">
+    <div class="px-[20px] pt-[30px] relative">
       <span
         v-html="arrow"
         class="block w-fit mb-[20px] cursor-pointer"
-        @click="expanded = false"></span>
+        @click="isOpen = false"></span>
       <div class="lg:flex lg:justify-between lg:gap-x-[20px]">
         <div
-          class="bg-gray-400 h-[198px] lg:h-auto w-[334px] lg:w-1/2 duration-500 relative z-0"></div>
-        <div>
+          class="bg-gray-400 h-[198px] lg:h-auto w-[334px] lg:w-1/2 relative z-0 duration-300 ease-in"
+          :class="isOpen ? 'opacity-100 delay-200' : 'opacity-0'"></div>
+        <div class="">
           <h3
-            class="font-ubuntu-condensed text-[40px] my-[20px] leading-normal">
+            class="font-ubuntu-condensed text-[40px] py-[20px] leading-normal relative duration-300 ease-in"
+            :class="isOpen ? 'top-0 opacity-100' : 'top-[70px] opacity-0'">
             Stock Afrika
           </h3>
-          <div class="h-[42vh] overflow-y-scroll hide-scrollbar">
+          <div
+            class="h-[41vh] overflow-y-scroll hide-scrollbar duration-300 ease-out"
+            :class="
+              isOpen
+                ? 'relative z-40 bg-light dark:bg-dark'
+                : 'bg-transparent delay-500'
+            ">
             <p
-              class="font-lato text-[20px] lg:text-[18px] font-light leading-8 max-w-[591px]">
+              class="font-lato text-[20px] lg:text-[18px] font-light leading-8 max-w-[591px] duration-300 ease-in"
+              :class="isOpen ? 'opacity-100 pt-0' : 'opacity-0 pt-6'">
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Dignissimos tempore aspernatur, consequatur nisi reiciendis error
               velit eius impedit. Lorem ipsum dolor sit amet consectetur
               adipisicing elit. Dignissimos tempore aspernatur, consequatur nisi
-              reiciendis error velit eius impedit. Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Lorem ipsum dolor sit amet
-              consectetur adipisicing elit.
+              reiciendis error velit eius impedit.
             </p>
           </div>
         </div>
       </div>
     </div>
-    <div class="absolute bottom-0 w-full">
+    <div
+      class="absolute w-full duration-300 ease-in"
+      :class="isOpen ? 'bottom-0' : '-bottom-[74px]'">
       <div
         class="mx-[20px] py-[20px] flex justify-between border-t border-solid border-black dark:border-light">
         <p class="lg:ml-[20px]">React + Typescript</p>
@@ -47,9 +60,9 @@
       </div>
     </div>
   </div>
-  <div class="flex gap-x-[25px] cursor-pointer" @click="expanded = true">
+  <div class="flex gap-x-[25px] cursor-pointer" @click="isOpen = true">
     <div
-      class="bg-gray-400 h-[198px] lg:h-[139px] w-[334px] lg:w-[257px] duration-500 relative z-0"></div>
+      class="bg-gray-400 h-[198px] lg:h-[139px] w-[334px] lg:w-[257px]"></div>
     <div class="hidden lg:block">
       <h3 class="font-ubuntu-condensed text-[40px]">Stock Afrika</h3>
       <p class="font-lato">React + Typescript</p>
@@ -58,14 +71,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-
-const expanded = ref(false);
+const isOpen = ref(false);
 
 const github = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="black" class="fill-black dark:fill-light" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"/></svg>`;
 const link = `<svg width="27" height="27" viewBox="0 0 27 27" fill="black" class="fill-black dark:fill-light" xmlns="http://www.w3.org/2000/svg">
 <path d="M18 0.25C17.31 0.25 16.75 0.81 16.75 1.5C16.75 2.19 17.31 2.75 18 2.75H22.4824L12.1162 13.1162C11.6281 13.6043 11.6281 14.3957 12.1162 14.8838C12.3606 15.1282 12.68 15.25 13 15.25C13.32 15.25 13.6394 15.1282 13.8838 14.8838L24.25 4.51758V9C24.25 9.69 24.81 10.25 25.5 10.25C26.19 10.25 26.75 9.69 26.75 9V1.5C26.75 0.81 26.19 0.25 25.5 0.25H18ZM4.25 1.5C2.18187 1.5 0.5 3.18187 0.5 5.25V22.75C0.5 24.8181 2.18187 26.5 4.25 26.5H21.75C23.8181 26.5 25.5 24.8181 25.5 22.75V15.25C25.5 14.56 24.94 14 24.25 14C23.56 14 23 14.56 23 15.25V22.75C23 23.4394 22.4394 24 21.75 24H4.25C3.56063 24 3 23.4394 3 22.75V5.25C3 4.56063 3.56063 4 4.25 4H11.75C12.44 4 13 3.44 13 2.75C13 2.06 12.44 1.5 11.75 1.5H4.25Z" fill="white"/>
 </svg>
 `;
-const arrow = `<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path fill="black" class="fill-black dark:fill-light" d="m7.85 13l2.85 2.85q.3.3.288.7t-.288.7q-.3.3-.712.313t-.713-.288L4.7 12.7q-.3-.3-.3-.7t.3-.7l4.575-4.575q.3-.3.713-.287t.712.312q.275.3.288.7t-.288.7L7.85 11H19q.425 0 .713.288T20 12t-.288.713T19 13z"/></svg>`;
+const arrow = `<svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="black" class="fill-black dark:fill-light"><path fill="currentColor" d="M9.904 17.308L4.596 12l5.308-5.308l.708.72L6.523 11.5h12.88v1H6.524l4.089 4.089z"/></svg>`;
 </script>
