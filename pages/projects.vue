@@ -1,11 +1,9 @@
 <template>
-  <div class="flex flex-col gap-5" :class="isAbsolute && 'absolute'">
+  <div class="flex flex-col gap-5">
     <Project />
     <Project />
     <Project />
   </div>
 </template>
 
-<script setup>
-const isAbsolute = useIsAbsolute();
-</script>
+<script setup></script>
