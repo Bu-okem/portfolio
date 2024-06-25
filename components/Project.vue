@@ -1,6 +1,6 @@
 <template>
   <div
-    class="duration-700 ease-in h-screen w-screen fixed top-0 left-0"
+    class="duration-500 ease-in h-screen w-screen fixed top-0 left-0"
     :class="
       isOpen
         ? 'bg-light dark:bg-dark z-30'
