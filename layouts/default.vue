@@ -23,7 +23,6 @@
 </template>
 
 <script setup>
-const svg = ref('');
 const socials = [
   {
     icon: `<svg
