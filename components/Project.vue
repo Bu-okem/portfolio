@@ -9,7 +9,8 @@
     <div class="px-[20px] pt-[30px] relative">
       <span
         v-html="arrow"
-        class="block w-fit mb-[20px] cursor-pointer"
+        class="block w-fit mb-[20px] cursor-pointer duration-300"
+        :class="isOpen ? 'opacity-100 delay-200' : 'opacity-0'"
         @click="isOpen = false"></span>
       <div class="lg:flex lg:justify-between lg:gap-x-[20px]">
         <div
