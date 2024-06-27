@@ -17,18 +17,17 @@
           class="bg-gray-400 h-[198px] lg:h-auto w-[334px] lg:w-1/2 relative z-0 duration-300 ease-in"
           :class="isOpen ? 'opacity-100 delay-200' : 'opacity-0'"></div>
         <div class="">
-          <h3
-            class="font-ubuntu-condensed text-[40px] py-[20px] leading-normal relative duration-300 ease-in"
-            :class="isOpen ? 'top-0 opacity-100' : 'top-[70px] opacity-0'">
-            Stock Afrika
-          </h3>
           <div
-            class="h-[41vh] overflow-y-scroll hide-scrollbar duration-300 ease-out"
-            :class="
-              isOpen
-                ? 'relative z-40 bg-light dark:bg-dark'
-                : 'bg-transparent delay-500'
-            ">
+            class="py-[20px]"
+            style="clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%)">
+            <h3
+              class="font-ubuntu-condensed text-[40px] leading-normal relative duration-300 ease-in"
+              :class="isOpen ? 'top-0 opacity-100' : 'top-[70px] opacity-0'">
+              Stock Afrika
+            </h3>
+          </div>
+          <div
+            class="h-[41vh] overflow-y-scroll hide-scrollbar duration-300 ease-out">
             <p
               class="font-lato text-[20px] lg:text-[18px] font-light leading-8 max-w-[591px] duration-300 ease-in"
               :class="isOpen ? 'opacity-100 pt-0' : 'opacity-0 pt-6'">
