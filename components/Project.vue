@@ -1,5 +1,7 @@
 <template>
+  <p class="" v-if="isLoading">Loading</p>
   <div
+    v-else
     class="duration-500 ease-in h-screen w-screen fixed top-0 left-0"
     :class="
       isOpen
@@ -16,14 +18,14 @@
         <div
           class="bg-gray-400 h-[198px] lg:h-auto w-[334px] lg:w-1/2 relative z-0 duration-300 ease-in"
           :class="isOpen ? 'opacity-100 delay-200' : 'opacity-0'"></div>
-        <div class="">
+        <div class="lg:w-[45%]">
           <div
             class="py-[20px]"
             style="clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%)">
             <h3
               class="font-ubuntu-condensed text-[40px] leading-normal relative duration-300 ease-in"
               :class="isOpen ? 'top-0 opacity-100' : 'top-[70px] opacity-0'">
-              Stock Afrika
+              {{ name }}
             </h3>
           </div>
           <div
@@ -31,11 +33,7 @@
             <p
               class="font-lato text-[20px] lg:text-[18px] font-light leading-8 max-w-[591px] duration-300 ease-in"
               :class="isOpen ? 'opacity-100 pt-0' : 'opacity-0 pt-6'">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Dignissimos tempore aspernatur, consequatur nisi reiciendis error
-              velit eius impedit. Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Dignissimos tempore aspernatur, consequatur nisi
-              reiciendis error velit eius impedit.
+              {{ description }}
             </p>
           </div>
         </div>
@@ -46,13 +44,16 @@
       :class="isOpen ? 'bottom-0' : '-bottom-[74px]'">
       <div
         class="mx-[20px] py-[20px] flex justify-between border-t border-solid border-black dark:border-light">
-        <p class="lg:ml-[20px]">React + Typescript</p>
+        <p class="lg:ml-[20px]">{{ stack }}</p>
         <div class="lg:mr-[20px] flex items-center gap-x-[30px]">
-          <a href="" class="flex items-center gap-x-[5px] cursor-pointer">
+          <a
+            v-if="sourceCode"
+            :href="sourceCode"
+            class="flex items-center gap-x-[5px] cursor-pointer">
             <p class="hidden lg:block">View Source Code</p>
             <span v-html="github"></span>
           </a>
-          <a href="" class="flex items-center gap-x-[5px] cursor-pointer">
+          <a :href="url" class="flex items-center gap-x-[5px] cursor-pointer">
             <p class="hidden lg:block">View Project</p>
             <span v-html="link"></span>
           </a>
@@ -62,15 +63,33 @@
   </div>
   <div class="flex gap-x-[25px] cursor-pointer" @click="isOpen = true">
     <div
-      class="bg-gray-400 h-[198px] lg:h-[139px] w-[334px] lg:w-[257px]"></div>
-    <div class="hidden lg:block">
-      <h3 class="font-ubuntu-condensed text-[40px]">Stock Afrika</h3>
-      <p class="font-lato">React + Typescript</p>
+      class="bg-gray-400 h-[198px] lg:h-[139px] w-[334px] lg:w-[50%] lg:min-w-[257px] lg:max-w-[257px]"></div>
+    <div class="hidden lg:block w-1/2">
+      <h3 class="font-ubuntu-condensed text-[40px] truncate">
+        {{ name }}
+      </h3>
+      <p class="font-lato">{{ stack }}</p>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+const props = defineProps({
+  name: String,
+  description: String,
+  link: String,
+  sourcecode: String,
+  stack: String,
+});
+
+const isLoading = useProjectsLoading();
+
+const name: string | undefined = props.name;
+const description: string | undefined = props.description;
+const url: string | undefined = props.link;
+const sourceCode: string | undefined = props.sourcecode;
+const stack: string | undefined = props.stack?.split(',').join(' + ');
+
 const isOpen = ref(false);
 
 const github = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="black" class="fill-black dark:fill-light" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"/></svg>`;

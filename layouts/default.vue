@@ -8,9 +8,9 @@
       <h5 class="text-[17px] lg:text-[20px]">Frontend Web Developer</h5>
       <ul class="flex items-center gap-[22px] list-none">
         <li v-for="(social, index) in socials" :key="index" class="">
-          <nuxt-link :to="social.link">
+          <a :href="social.link" target="_blank">
             <span v-html="social.icon"></span>
-          </nuxt-link>
+          </a>
         </li>
       </ul>
     </header>
@@ -23,6 +23,7 @@
 </template>
 
 <script setup>
+import axios from 'axios';
 const socials = [
   {
     icon: `<svg
@@ -38,7 +39,7 @@ const socials = [
         />
       </svg>
     `,
-    link: '/',
+    link: 'https://github.com/bu-okem',
   },
   {
     icon: `
@@ -55,7 +56,7 @@ const socials = [
         />
       </svg>
     `,
-    link: '/',
+    link: 'https://linkedin.com/in/chibuokem-obiegbulem',
   },
   {
     icon: `
@@ -72,7 +73,7 @@ const socials = [
         />
       </svg>
     `,
-    link: '/',
+    link: 'mailto:chiobiebulem@gmail.com',
   },
 ];
 
@@ -91,6 +92,60 @@ useHead({
     },
   ],
 });
+
+const projects = useProjects();
+const experience = useExperience();
+const projectsLoading = useProjectsLoading();
+const experienceLoading = useExperienceLoading();
+
+const config = {
+  base: 'app87cXP9r4Zma5Q3',
+  projectTableId: 'tblW5o5jdCOBCSkai',
+  experienceTableId: 'tbli7VFCLG8NWvb6b',
+  socialsTableId: 'tblkdkadpwd9kDDY6',
+  apiKey:
+    'patC4pSSenWMFb5kv.bce8d15866587999d11a3e6d78145bc75177fbcbdce84684c1378d08d6079410',
+};
+
+const headers = {
+  Authorization: `Bearer ${config.apiKey}`,
+};
+
+const fetchProjects = async () => {
+  try {
+    const res = await axios.get(
+      `https://api.airtable.com/v0/${config.base}/${config.projectTableId}`,
+      {
+        headers: headers,
+      }
+    );
+    const { records } = res.data;
+    projects.value = records;
+    projectsLoading.value = false;
+  } catch (err) {
+    console.log('Error loading projects');
+  }
+};
+const fetchExperience = async () => {
+  try {
+    const res = await axios.get(
+      `https://api.airtable.com/v0/${config.base}/${config.experienceTableId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${config.apiKey}`,
+        },
+      }
+    );
+    const { records } = res.data;
+    experience.value = records;
+    experienceLoading.value = false;
+  } catch (err) {
+    console.log('Error loading experience');
+  }
+};
+
+fetchProjects();
+fetchExperience();
 </script>
 
 <style>
