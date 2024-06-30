@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  // ssr: false,
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
   postcss: {
@@ -35,6 +36,17 @@ export default defineNuxtConfig({
     pageTransition: {
       name: 'page',
       mode: 'out-in',
+    },
+  },
+  runtimeConfig: {
+    // The private keys which are only available within server-side
+
+    // Keys within public, will be also exposed to the client-side
+    public: {
+      API_TOKEN: process.env.API_TOKEN,
+      AIRTABLE_BASE_ID: process.env.AIRTABLE_BASE_ID,
+      PROJECT_TABLE_ID: process.env.PROJECT_TABLE_ID,
+      EXPERIENCE_TABLE_ID: process.env.EXPERIENCE_TABLE_ID,
     },
   },
 });

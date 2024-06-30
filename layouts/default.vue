@@ -93,18 +93,18 @@ useHead({
   ],
 });
 
+const runtimeConfig = useRuntimeConfig();
+
 const projects = useProjects();
 const experience = useExperience();
 const projectsLoading = useProjectsLoading();
 const experienceLoading = useExperienceLoading();
 
 const config = {
-  base: 'app87cXP9r4Zma5Q3',
-  projectTableId: 'tblW5o5jdCOBCSkai',
-  experienceTableId: 'tbli7VFCLG8NWvb6b',
-  socialsTableId: 'tblkdkadpwd9kDDY6',
-  apiKey:
-    'patC4pSSenWMFb5kv.bce8d15866587999d11a3e6d78145bc75177fbcbdce84684c1378d08d6079410',
+  base: runtimeConfig.public.AIRTABLE_BASE_ID,
+  projectTableId: runtimeConfig.public.PROJECT_TABLE_ID,
+  experienceTableId: runtimeConfig.public.EXPERIENCE_TABLE_ID,
+  apiKey: runtimeConfig.public.API_TOKEN,
 };
 
 const headers = {
