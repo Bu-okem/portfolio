@@ -1,7 +1,5 @@
 <template>
-  <p class="" v-if="isLoading">Loading</p>
   <div
-    v-else
     class="duration-500 ease-in h-screen w-screen fixed top-0 left-0"
     :class="
       isOpen
@@ -49,11 +47,15 @@
           <a
             v-if="sourceCode"
             :href="sourceCode"
+            target="_blank"
             class="flex items-center gap-x-[5px] cursor-pointer">
             <p class="hidden lg:block">View Source Code</p>
             <span v-html="github"></span>
           </a>
-          <a :href="url" class="flex items-center gap-x-[5px] cursor-pointer">
+          <a
+            :href="url"
+            target="_blank"
+            class="flex items-center gap-x-[5px] cursor-pointer">
             <p class="hidden lg:block">View Project</p>
             <span v-html="link"></span>
           </a>
@@ -81,8 +83,6 @@ const props = defineProps({
   sourcecode: String,
   stack: String,
 });
-
-const isLoading = useProjectsLoading();
 
 const name: string | undefined = props.name;
 const description: string | undefined = props.description;

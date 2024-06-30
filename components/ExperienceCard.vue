@@ -1,8 +1,7 @@
 <template>
-  <div class="" v-if="isLoading"></div>
-  <div v-else class="relative flex gap-x-[60px] max-w-[495px]">
+  <div class="relative flex gap-x-[60px] max-w-[495px]">
     <h5
-      class="w-[30%] font-light font-ubuntu text-[20px] absolute bottom-0 right-0 lg:relative">
+      class="w-fit lg:w-[30%] font-light font-ubuntu text-[20px] absolute bottom-0 right-0 lg:relative">
       {{ getDuration(startDate, endDate) }}
     </h5>
     <div class="">
@@ -24,8 +23,6 @@ const props = defineProps({
   startDate: String,
   endDate: String,
 });
-
-const isLoading = useExperienceLoading();
 
 const institution = props.institution;
 const position = props.position;
