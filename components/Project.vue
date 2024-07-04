@@ -12,13 +12,14 @@
         class="block w-fit mb-[20px] cursor-pointer duration-300"
         :class="isOpen ? 'opacity-100 delay-200' : 'opacity-0'"
         @click="isOpen = false"></span>
-      <div class="lg:flex lg:justify-between lg:gap-x-[20px]">
+      <div
+        class="lg:flex lg:justify-between lg:gap-x-[20px] landscape:flex landscape:gap-x-[20px]">
         <div
-          class="bg-gray-400 h-[198px] lg:h-auto w-[334px] lg:w-1/2 relative z-0 duration-300 ease-in"
+          class="bg-gray-400 h-[198px] lg:h-auto lg:min-h-[304px] w-[334px] lg:w-1/2 landscape:w-1/2 relative z-0 duration-300 ease-in"
           :class="isOpen ? 'opacity-100 delay-200' : 'opacity-0'"></div>
-        <div class="lg:w-[45%]">
+        <div class="h-[54vh] lg:w-[45%]">
           <div
-            class="py-[20px]"
+            class="py-[20px] landscape:pt-0"
             style="clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%)">
             <h3
               class="font-ubuntu-condensed text-[40px] leading-normal relative duration-300 ease-in"
@@ -27,7 +28,7 @@
             </h3>
           </div>
           <div
-            class="h-[41vh] overflow-y-scroll hide-scrollbar duration-300 ease-out">
+            class="h-[60%] lg:h-[75%] overflow-y-scroll hide-scrollbar duration-300 ease-out">
             <p
               class="font-lato text-[20px] lg:text-[18px] font-light leading-8 max-w-[591px] duration-300 ease-in"
               :class="isOpen ? 'opacity-100 pt-0' : 'opacity-0 pt-6'">
@@ -41,7 +42,7 @@
       class="absolute w-full duration-300 ease-in"
       :class="isOpen ? 'bottom-0' : '-bottom-[74px]'">
       <div
-        class="mx-[20px] py-[20px] flex justify-between border-t border-solid border-black dark:border-light">
+        class="mx-[20px] py-[20px] landscape:py-[10px] flex justify-between border-t border-solid border-black dark:border-light">
         <p class="lg:ml-[20px]">{{ stack }}</p>
         <div class="lg:mr-[20px] flex items-center gap-x-[30px]">
           <a
@@ -63,7 +64,10 @@
       </div>
     </div>
   </div>
-  <div class="flex gap-x-[25px] cursor-pointer" @click="isOpen = true">
+  <!-- Card -->
+  <div
+    class="flex justify-center gap-x-[25px] cursor-pointer"
+    @click="isOpen = true">
     <div
       class="bg-gray-400 h-[198px] lg:h-[139px] w-[334px] lg:w-[50%] lg:min-w-[257px] lg:max-w-[257px]"></div>
     <div class="hidden lg:block w-1/2">

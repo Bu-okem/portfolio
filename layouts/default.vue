@@ -15,7 +15,7 @@
       </ul>
     </header>
     <main
-      class="mt-[40px] px-[20px] h-[60%] lg:h-[65%] lg:w-1/2 overflow-y-scroll lg:self-end lg:ml-[10%] lg:mr-[30px] hide-scrollbar">
+      class="mt-[40px] px-[20px] h-[59%] lg:h-[65%] lg:w-1/2 overflow-y-scroll lg:self-end lg:ml-[10%] lg:mr-[30px] hide-scrollbar landscape:absolute landscape:top-24 landscape:right-0">
       <slot />
     </main>
     <Footer />
@@ -123,6 +123,7 @@ const fetchProjects = async () => {
     projects.value = records;
     projectsLoading.value = false;
   } catch (err) {
+    fetchProjects();
     console.log('Error loading projects');
   }
 };
@@ -140,6 +141,7 @@ const fetchExperience = async () => {
     experience.value = records;
     experienceLoading.value = false;
   } catch (err) {
+    fetchExperience();
     console.log('Error loading experience');
   }
 };

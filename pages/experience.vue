@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isLoading" class="flex flex-col gap-y-8">
+  <div v-if="isLoading" class="flex flex-col items-center gap-y-8">
     <ExperienceSkeleton />
     <ExperienceSkeleton />
     <ExperienceSkeleton />
