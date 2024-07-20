@@ -10,7 +10,8 @@
       :description="project.fields.description"
       :link="project.fields.link"
       :sourcecode="project.fields.sourcecode"
-      :stack="project.fields.stackArray" />
+      :stack="project.fields.stackArray"
+      :image="project.fields.image" />
   </div>
 </template>
 

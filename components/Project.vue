@@ -14,9 +14,10 @@
         @click="isOpen = false"></span>
       <div
         class="lg:flex lg:justify-between lg:gap-x-[20px] landscape:flex landscape:gap-x-[20px]">
-        <div
-          class="bg-gray-400 h-[198px] lg:h-auto lg:min-h-[304px] w-[334px] lg:w-1/2 landscape:w-1/2 relative z-0 duration-300 ease-in"
-          :class="isOpen ? 'opacity-100 delay-200' : 'opacity-0'"></div>
+        <img
+          :src="image"
+          class="bg-gray-400 h-[198px] lg:h-auto lg:max-h-[404px] w-[334px] lg:w-1/2 landscape:w-1/2 relative z-0 duration-300 ease-in object-cover object-top"
+          :class="isOpen ? 'opacity-100 delay-200' : 'opacity-0'" />
         <div class="h-[54vh] lg:w-[45%]">
           <div
             class="py-[20px] landscape:pt-0"
@@ -66,10 +67,11 @@
   </div>
   <!-- Card -->
   <div
-    class="flex justify-center gap-x-[25px] cursor-pointer"
+    class="flex justify-center lg:justify-start gap-x-[25px] cursor-pointer grayscale hover:grayscale-0 duration-300"
     @click="isOpen = true">
-    <div
-      class="bg-gray-400 h-[198px] lg:h-[139px] w-[334px] lg:w-[50%] lg:min-w-[257px] lg:max-w-[257px]"></div>
+    <img
+      :src="image"
+      class="bg-gray-400 h-[198px] lg:h-[139px] w-[334px] lg:w-[50%] lg:min-w-[257px] lg:max-w-[257px] object-cover object-top" />
     <div class="hidden lg:block w-1/2">
       <h3 class="font-ubuntu-condensed text-[40px] truncate">
         {{ name }}
@@ -86,6 +88,7 @@ const props = defineProps({
   link: String,
   sourcecode: String,
   stack: String,
+  image: String,
 });
 
 const name: string | undefined = props.name;
@@ -93,6 +96,8 @@ const description: string | undefined = props.description;
 const url: string | undefined = props.link;
 const sourceCode: string | undefined = props.sourcecode;
 const stack: string | undefined = props.stack?.split(',').join(' + ');
+// @ts-ignore
+const image: string | undefined = props.image?.[0]?.thumbnails?.large?.url;
 
 const isOpen = ref(false);
 
