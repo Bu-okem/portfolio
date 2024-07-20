@@ -1,94 +1,162 @@
 <template>
-	<div class="bg-black min-h-screen overflow-x-hidden">
-		<!-- <div
-			:class="[!isLoading ? 'opacity-0 scale-150 z-[-5]' : '']"
-			class="fixed z-30 h-screen w-screen bg-black text-[3rem] text-white flex items-center justify-center duration-500 ease-linear">
-			<h2 class="animate-bounce">b_</h2>
-		</div> -->
-		<header>
-			<div
-				class="fixed z-20 w-full p-[1em] flex justify-between bg-gradient-to-b from-black to-transparent">
-				<div class="flex z-30">
-					<h2
-						:class="[navOpen ? 'w-[88.1px] delay-[200ms]' : 'w-[15px]']"
-						class="text-[1.5rem] text-white overflow-x-hidden whitespace-nowrap w-[15px] lg:w-[88.1px] duration-[600ms]">
-						b<span class="">uokem</span>
-					</h2>
-					<h2 class="text-[1.5rem] text-white inline">_</h2>
-				</div>
-				<div ref="nav" class="lg:hidden">
-					<div
-						@click="navOpen = !navOpen"
-						class="duration-[600ms] relative z-30 h-full w-[26px] cursor-pointer">
-						<div
-							:class="[
-								navOpen
-									? '!bg-transparent translate-x-[-35px] before:rotate-[40deg] before:origin-left before:translate-x-[35px] after:rotate-[-40deg] after:origin-left after:translate-x-[35px]'
-									: '',
-							]"
-							class="duration-[700ms] before:duration-[700ms] after:duration-[700ms] bg-white h-[2px] w-[70%] absolute top-[50%] before:content-[''] before:bg-white before:h-[2px] before:w-[143%] before:absolute before:bottom-[8px] after:content-[''] after:bg-white after:h-[2px] after:w-[143%] after:absolute after:top-[8px]"></div>
-					</div>
-					<nav
-						:class="[navOpen ? 'left-0' : 'left-[-100%]']"
-						class="flex fixed top-0 text-white h-full w-1/2 bg-[#00000096] backdrop-blur-md duration-700">
-						<ul
-							class="relative top-[88px] left-[16px] flex flex-col justify-around h-[40%] py-[2em]">
-							<li
-								v-for="(object, index) in navLinksObjects"
-								:key="index"
-								class="px-[1em]">
-								<NuxtLink
-									:to="`${object.link}`"
-									@click="navOpen = false"
-									class="uppercase text-[1.2rem]"
-									>{{ object.title }}</NuxtLink
-								>
-							</li>
-						</ul>
-					</nav>
-				</div>
-			</div>
-		</header>
-
-		<main class="pt-[5em] min-h-screen flex justify-between">
-			<!-- <ToggleDarkMode /> -->
-			<section class="hidden text-white w-1/2 lg:block">
-				<div class="fixed h-full w-1/3 flex items-center">
-					<nav class="h-[20%] onload-translate-from-bottom">
-						<ul class="h-full flex flex-col justify-between">
-							<li
-								v-for="(object, index) in navLinksObjects"
-								:key="index"
-								class="px-[1em]">
-								<NuxtLink
-									:to="`${object.link}`"
-									@click="navOpen = false"
-									class="uppercase text-[1.2rem] lg:text-[4rem] lg:text-slate-400 lg:hover:text-white lg:hover:text-[4.5rem] lg:duration-500"
-									>{{ object.title }}</NuxtLink
-								>
-							</li>
-						</ul>
-					</nav>
-				</div>
-			</section>
-			<div class="w-full lg:w-[75%] onload-translate-from-right">
-				<slot />
-			</div>
-		</main>
-	</div>
+  <div
+    class="font-ubuntu bg-light text-black dark:bg-dark bg-grain-pattern dark:text-light h-screen relative lg:flex duration-500">
+    <Nav />
+    <header
+      class="mt-[43px] mx-[20px] lg:mx-[32px] flex flex-col gap-2 lg:h-fit lg:min-w-[390px] lg:mb-[44px] lg:self-end">
+      <h2 class="text-[25px] lg:text-[35px]">Chibuokem Obiegbulem</h2>
+      <h5 class="text-[17px] lg:text-[20px]">Frontend Web Developer</h5>
+      <ul class="flex items-center gap-[22px] list-none">
+        <li v-for="(social, index) in socials" :key="index" class="">
+          <a :href="social.link" target="_blank">
+            <span v-html="social.icon"></span>
+          </a>
+        </li>
+      </ul>
+    </header>
+    <main
+      class="mt-[40px] px-[20px] h-[59%] lg:h-[65%] lg:w-1/2 overflow-y-scroll lg:self-end lg:ml-[10%] lg:mr-[30px] hide-scrollbar landscape:absolute landscape:top-24 landscape:right-0">
+      <slot />
+    </main>
+    <Footer />
+  </div>
 </template>
 
 <script setup>
-const isLoading = useLoadingIndicator();
-setTimeout(() => (isLoading.value = false), 3000);
-const navLinksObjects = [
-	{ title: "home", link: "/" },
-	{ title: "about", link: "/about" },
-	{ title: "projects", link: "/projects" },
+import axios from 'axios';
+const socials = [
+  {
+    icon: `<svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M12 0C5.373 0 0 5.373 0 12C0 17.623 3.872 22.328 9.092 23.63C9.036 23.468 9 23.28 9 23.047V20.996C8.513 20.996 7.697 20.996 7.492 20.996C6.671 20.996 5.941 20.643 5.587 19.987C5.194 19.258 5.126 18.143 4.152 17.461C3.863 17.234 4.083 16.975 4.416 17.01C5.031 17.184 5.541 17.606 6.021 18.232C6.499 18.859 6.724 19.001 7.617 19.001C8.05 19.001 8.698 18.976 9.308 18.88C9.636 18.047 10.203 17.28 10.896 16.918C6.9 16.507 4.993 14.519 4.993 11.82C4.993 10.658 5.488 9.534 6.329 8.587C6.053 7.647 5.706 5.73 6.435 5C8.233 5 9.32 6.166 9.581 6.481C10.477 6.174 11.461 6 12.495 6C13.531 6 14.519 6.174 15.417 6.483C15.675 6.17 16.763 5 18.565 5C19.297 5.731 18.946 7.656 18.667 8.594C19.503 9.539 19.995 10.66 19.995 11.82C19.995 14.517 18.091 16.504 14.101 16.917C15.199 17.49 16 19.1 16 20.313V23.047C16 23.151 15.977 23.226 15.965 23.315C20.641 21.676 24 17.236 24 12C24 5.373 18.627 0 12 0Z"
+          fill="black"
+          class="fill-black dark:fill-light"
+        />
+      </svg>
+    `,
+    link: 'https://github.com/bu-okem',
+  },
+  {
+    icon: `
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 22 22"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M20 0H2C0.895 0 0 0.895 0 2V20C0 21.105 0.895 22 2 22H20C21.105 22 22 21.105 22 20V2C22 0.895 21.105 0 20 0ZM6.954 18H4.004V8.508H6.954V18ZM5.449 7.151C4.498 7.151 3.729 6.38 3.729 5.431C3.729 4.482 4.499 3.712 5.449 3.712C6.397 3.712 7.168 4.483 7.168 5.431C7.168 6.38 6.397 7.151 5.449 7.151ZM18.004 18H15.056V13.384C15.056 12.283 15.036 10.867 13.523 10.867C11.988 10.867 11.752 12.066 11.752 13.304V18H8.804V8.508H11.634V9.805H11.674C12.068 9.059 13.03 8.272 14.465 8.272C17.452 8.272 18.004 10.238 18.004 12.794V18Z"
+          fill="black"
+          class="fill-black dark:fill-light"
+        />
+      </svg>
+    `,
+    link: 'https://linkedin.com/in/chibuokem-obiegbulem',
+  },
+  {
+    icon: `
+      <svg
+        width="26"
+        height="20"
+        viewBox="0 0 26 20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M2 0C0.906937 0 0 0.906936 0 2V18C0 19.093 0.906937 20 2 20H24C25.0931 20 26 19.093 26 18V2C26 0.906936 25.0931 0 24 0H2ZM4.69922 2H21.3008L13 8.13476L4.69922 2ZM3 4.47461L13 11.8652L23 4.47461V18H3V4.47461Z"
+          fill="black"
+          class="fill-black dark:fill-light"
+        />
+      </svg>
+    `,
+    link: 'mailto:chiobiebulem@gmail.com',
+  },
 ];
-const nav = ref(null);
-const navOpen = ref(false);
-useDetectOutsideClick(nav, () => {
-	navOpen.value = false;
+
+useHead({
+  script: [
+    {
+      children: `if (
+    localStorage.theme === 'dark' ||
+    (!('theme' in localStorage) &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches)
+  ) {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }`,
+    },
+  ],
 });
+
+const runtimeConfig = useRuntimeConfig();
+
+const projects = useProjects();
+const experience = useExperience();
+const projectsLoading = useProjectsLoading();
+const experienceLoading = useExperienceLoading();
+
+const config = {
+  base: runtimeConfig.public.AIRTABLE_BASE_ID,
+  projectTableId: runtimeConfig.public.PROJECT_TABLE_ID,
+  experienceTableId: runtimeConfig.public.EXPERIENCE_TABLE_ID,
+  apiKey: runtimeConfig.public.API_TOKEN,
+};
+
+const headers = {
+  Authorization: `Bearer ${config.apiKey}`,
+};
+
+const fetchProjects = async () => {
+  try {
+    const res = await axios.get(
+      `https://api.airtable.com/v0/${config.base}/${config.projectTableId}`,
+      {
+        headers: headers,
+      }
+    );
+    const { records } = res.data;
+    projects.value = records;
+    projectsLoading.value = false;
+  } catch (err) {
+    fetchProjects();
+    console.log('Error loading projects');
+  }
+};
+const fetchExperience = async () => {
+  try {
+    const res = await axios.get(
+      `https://api.airtable.com/v0/${config.base}/${config.experienceTableId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${config.apiKey}`,
+        },
+      }
+    );
+    const { records } = res.data;
+    experience.value = records;
+    experienceLoading.value = false;
+  } catch (err) {
+    fetchExperience();
+    console.log('Error loading experience');
+  }
+};
+
+fetchProjects();
+fetchExperience();
 </script>
+
+<style>
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+}
+</style>
