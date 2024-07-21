@@ -88,7 +88,7 @@ const props = defineProps({
   link: String,
   sourcecode: String,
   stack: String,
-  image: String,
+  image: Array,
 });
 
 const name: string | undefined = props.name;
