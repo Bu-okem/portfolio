@@ -97,6 +97,7 @@ const runtimeConfig = useRuntimeConfig();
 
 const projects = useProjects();
 const experience = useExperience();
+const resume = useResume();
 const projectsLoading = useProjectsLoading();
 const experienceLoading = useExperienceLoading();
 
@@ -123,7 +124,8 @@ const fetchProjects = async () => {
     projects.value = records;
     projectsLoading.value = false;
   } catch (err) {
-    fetchProjects();
+    setTimeout(fetchProjects, 10000);
+
     console.log('Error loading projects');
   }
 };
@@ -141,13 +143,32 @@ const fetchExperience = async () => {
     experience.value = records;
     experienceLoading.value = false;
   } catch (err) {
-    fetchExperience();
+    setTimeout(fetchExperience, 10000);
     console.log('Error loading experience');
   }
 };
 
-fetchProjects();
+const fetchResume = async () => {
+  try {
+    const res = await axios.get(
+      `https://api.airtable.com/v0/${config.base}/${config.resumeTableId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${config.apiKey}`,
+        },
+      }
+    );
+    const { records } = res.data;
+    resume.value = records;
+  } catch {
+    setTimeout(fetchResume, 10000);
+    console.log('Error loading resume');
+  }
+};
+
 fetchExperience();
+fetchProjects();
+fetchResume();
 </script>
 
 <style>
