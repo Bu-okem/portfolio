@@ -1,28 +1,30 @@
 <template>
-  <div v-if="isLoading" class="flex flex-col items-center gap-y-8">
-    <ExperienceSkeleton />
-    <ExperienceSkeleton />
-    <ExperienceSkeleton />
-  </div>
-  <div
-    v-else
-    class="flex flex-col gap-y-[45px] lg:gap-y-[60px] lg:h-fit lg:mb-[40px]">
-    <ExperienceCard
-      v-for="experience in experiences"
-      :institution="experience.fields.institution"
-      :position="experience.fields.position"
-      :startDate="experience.fields.startDate"
-      :endDate="experience.fields.endDate" />
-  </div>
   <div class="">
-    <div v-if="isLoading" class=""></div>
-    <a
-      href="/"
-      target="_blank"
+    <div v-if="isLoading" class="flex flex-col items-center gap-y-8">
+      <ExperienceSkeleton />
+      <ExperienceSkeleton />
+      <ExperienceSkeleton />
+    </div>
+    <div
       v-else
-      class="capitalize font-light font-ubuntu text-[20px] flex items-center gap-x-2"
-      >view resume <span v-html="link"></span
-    ></a>
+      class="flex flex-col gap-y-[45px] lg:gap-y-[60px] lg:h-fit lg:mb-[40px]">
+      <ExperienceCard
+        v-for="experience in experiences"
+        :institution="experience.fields.institution"
+        :position="experience.fields.position"
+        :startDate="experience.fields.startDate"
+        :endDate="experience.fields.endDate" />
+    </div>
+    <div class="">
+      <div v-if="isLoading" class=""></div>
+      <nuxt-link
+        to="resume"
+        target="_blank"
+        v-else
+        class="capitalize font-light font-ubuntu text-[20px] flex items-center gap-x-2"
+        >view resume <span v-html="link"></span>
+      </nuxt-link>
+    </div>
   </div>
 </template>
 
