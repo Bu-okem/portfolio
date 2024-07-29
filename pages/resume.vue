@@ -11,11 +11,11 @@ useSeoMeta({
   title: "Buokem's Resume",
   ogTitle: "Buokem's Resume",
   ogDescription: "Buokem's resume",
-  ogImage: '/urlImg.png',
+  ogImage: '/urlImg.svg',
   ogUrl: 'https://buokem.vercel.app/resume',
   twitterTitle: "Buokem's Resume",
   twitterDescription: "Buokem's resume",
-  twitterImage: '/urlImg.png',
+  twitterImage: '/urlImg.svg',
   twitterCard: 'summary',
 });
 
