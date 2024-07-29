@@ -93,11 +93,22 @@ useHead({
   ],
 });
 
+useSeoMeta({
+  title: "Buokem's Portfolio",
+  ogTitle: "Buokem's Portfolio",
+  ogDescription: "A website showcasing Buokem's work and experience",
+  ogImage: '/urlImg.svg',
+  ogUrl: 'https://buokem.vercel.app',
+  twitterTitle: "Buokem's Portfolio",
+  twitterDescription: "A website showcasing Buokem's work and experience",
+  twitterImage: '/urlImg.svg',
+  twitterCard: 'summary',
+});
+
 const runtimeConfig = useRuntimeConfig();
 
 const projects = useProjects();
 const experience = useExperience();
-const resume = useResume();
 const projectsLoading = useProjectsLoading();
 const experienceLoading = useExperienceLoading();
 
@@ -148,27 +159,27 @@ const fetchExperience = async () => {
   }
 };
 
-const fetchResume = async () => {
-  try {
-    const res = await axios.get(
-      `https://api.airtable.com/v0/${config.base}/${config.resumeTableId}`,
-      {
-        headers: {
-          Authorization: `Bearer ${config.apiKey}`,
-        },
-      }
-    );
-    const { records } = res.data;
-    resume.value = records;
-  } catch {
-    setTimeout(fetchResume, 10000);
-    console.log('Error loading resume');
-  }
-};
+// const fetchResume = async () => {
+//   try {
+//     const res = await axios.get(
+//       `https://api.airtable.com/v0/${config.base}/${config.resumeTableId}`,
+//       {
+//         headers: {
+//           Authorization: `Bearer ${config.apiKey}`,
+//         },
+//       }
+//     );
+//     const { records } = res.data;
+//     resume.value = records;
+//   } catch {
+//     setTimeout(fetchResume, 10000);
+//     console.log('Error loading resume');
+//   }
+// };
 
 fetchExperience();
 fetchProjects();
-fetchResume();
+// fetchResume();
 </script>
 
 <style>
