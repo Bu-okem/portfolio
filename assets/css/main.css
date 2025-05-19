@@ -23,3 +23,7 @@
 .hide-scrollbar::-webkit-scrollbar-thumb {
   @apply bg-dark dark:bg-light rounded-full;
 }
+
+html {
+  @apply bg-light dark:bg-dark bg-grain-pattern;
+}

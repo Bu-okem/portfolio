@@ -4,7 +4,7 @@
     <ProjectSkeleton />
   </div>
   <div v-else class="pb-5 flex flex-col gap-5">
-    <Project
+    <Projectii
       v-for="project in projects"
       :name="project.fields.name"
       :description="project.fields.description"

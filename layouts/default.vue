@@ -1,11 +1,11 @@
 <template>
   <div
-    class="font-ubuntu bg-light text-black dark:bg-dark bg-grain-pattern dark:text-light h-screen relative lg:flex duration-500">
+    class="font-ubuntu bg-light text-black dark:bg-dark bg-grain-pattern dark:text-light lg:h-[100dvh] relative lg:flex duration-500">
     <Nav />
     <header
       class="mt-[43px] mx-[20px] lg:mx-[32px] flex flex-col gap-2 lg:h-fit lg:min-w-[390px] lg:mb-[44px] lg:self-end">
       <h2 class="text-[25px] lg:text-[35px]">Chibuokem Obiegbulem</h2>
-      <h5 class="text-[17px] lg:text-[20px]">Frontend Web Developer</h5>
+      <h5 class="text-[17px] lg:text-[20px]">Web Developer</h5>
       <ul class="flex items-center gap-[22px] list-none">
         <li v-for="(social, index) in socials" :key="index" class="">
           <a :href="social.link" target="_blank">
@@ -15,7 +15,7 @@
       </ul>
     </header>
     <main
-      class="mt-[40px] px-[20px] h-[59%] lg:h-[65%] lg:w-1/2 overflow-y-scroll lg:self-end lg:ml-[10%] lg:mr-[30px] hide-scrollbar landscape:absolute landscape:top-24 landscape:right-0">
+      class="mt-[40px] px-[20px] pb-12 h-fit lg:h-[65%] lg:w-1/2 overflow-y-scroll lg:self-end lg:ml-[10%] lg:mr-[30px] hide-scrollbar">
       <slot />
     </main>
     <Footer />

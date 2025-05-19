@@ -1,6 +1,6 @@
 <template>
   <div
-    class="duration-500 ease-in min-h-screen w-screen fixed top-0 left-0 bg-light dark:bg-dark z-30 overflow-auto"
+    class="duration-500 ease-in min-h-[100dvh] w-screen fixed top-0 left-0 bg-light dark:bg-dark z-30 overflow-auto"
     :class="
       isOpen ? 'visible opacity-100' : 'invisible opacity-0 delay-[100ms]'
     ">
@@ -21,12 +21,10 @@
             class="py-[20px] landscape:pt-0"
             style="clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%)">
             <h3
-              class="font-ubuntu-condensed text-[40px] leading-normal relative duration-300 ease-in"
+              class="font-ubuntu-condensed text-[40px] leading-normal duration-300 ease-in"
               :class="isOpen ? 'top-0 opacity-100' : 'top-[70px] opacity-0'">
               {{ name }}
             </h3>
-          </div>
-          <div class="duration-300 ease-out">
             <p
               class="font-lato text-[20px] lg:text-[18px] font-light leading-8 max-w-[591px] duration-300 ease-in"
               :class="isOpen ? 'opacity-100 pt-0' : 'opacity-0 pt-6'">
@@ -35,29 +33,29 @@
           </div>
         </div>
       </div>
-    </div>
-    <div
-      class="relative bottom-12 w-full duration-300 ease-in bg-light dark:bg-dark"
-      :class="isOpen ? 'bottom-0' : '-bottom-[74px]'">
       <div
-        class="mx-[20px] py-[20px] landscape:py-[10px] flex justify-between border-t border-solid border-black dark:border-light">
-        <p class="lg:ml-[20px]">{{ stack }}</p>
-        <div class="lg:mr-[20px] flex items-center gap-x-[30px]">
-          <a
-            v-if="sourceCode"
-            :href="sourceCode"
-            target="_blank"
-            class="flex items-center gap-x-[5px] cursor-pointer">
-            <p class="hidden lg:block">View Source Code</p>
-            <span v-html="github"></span>
-          </a>
-          <a
-            :href="url"
-            target="_blank"
-            class="flex items-center gap-x-[5px] cursor-pointer">
-            <p class="hidden lg:block">View Project</p>
-            <span v-html="link"></span>
-          </a>
+        class="relative bottom-12 w-full duration-300 ease-in bg-light dark:bg-dark"
+        :class="isOpen ? 'bottom-0' : '-bottom-[74px]'">
+        <div
+          class="py-[20px] landscape:py-[10px] flex justify-between border-t border-solid border-black dark:border-light">
+          <p class="lg:ml-[20px]">{{ stack }}</p>
+          <div class="lg:mr-[20px] flex items-center gap-x-[30px]">
+            <a
+              v-if="sourceCode"
+              :href="sourceCode"
+              target="_blank"
+              class="flex items-center gap-x-[5px] cursor-pointer">
+              <p class="hidden lg:block">View Source Code</p>
+              <span v-html="github"></span>
+            </a>
+            <a
+              :href="url"
+              target="_blank"
+              class="flex items-center gap-x-[5px] cursor-pointer">
+              <p class="hidden lg:block">View Project</p>
+              <span v-html="link"></span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -78,7 +76,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 const props = defineProps({
   name: String,
   description: String,
@@ -88,13 +86,12 @@ const props = defineProps({
   image: Array,
 });
 
-const name: string | undefined = props.name;
-const description: string | undefined = props.description;
-const url: string | undefined = props.link;
-const sourceCode: string | undefined = props.sourcecode;
-const stack: string | undefined = props.stack?.split(',').join(' + ');
-// @ts-ignore
-const image: string | undefined = props.image?.[0]?.thumbnails?.large?.url;
+const name = props.name;
+const description = props.description;
+const url = props.link;
+const sourceCode = props.sourcecode;
+const stack = props.stack?.split(',').join(' + ');
+const image = props.image?.[0]?.thumbnails?.large?.url;
 
 const isOpen = ref(false);
 

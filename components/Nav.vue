@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="p-[20px] flex items-center justify-between border-b lg:border-b-0 lg:border-r border-solid border-b-black lg:border-r-black dark:border-b-light lg:dark:border-r-light lg:w-[43px]">
+    class="sticky top-0 z-50 lg:z-0 bg-grain-pattern bg-light dark:bg-dark p-[20px] flex items-center justify-between border-b lg:border-b-0 lg:border-r border-solid border-b-black lg:border-r-black dark:border-b-light lg:dark:border-r-light lg:w-[43px]">
     <h3 class="font-ubuntu text-[30px] lg:hidden">b_</h3>
     <div
       class="flex items-center gap-x-[16px] lg:gap-x-[32px] lg:w-full lg:-rotate-90 lg:relative lg:-top-52 lg:flex-row-reverse">
