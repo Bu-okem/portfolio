@@ -1,24 +1,57 @@
 <template>
   <nav
-    class="sticky top-0 z-50 lg:z-0 bg-grain-pattern bg-light dark:bg-dark p-[20px] flex items-center justify-between border-b lg:border-b-0 lg:border-r border-solid border-b-black lg:border-r-black dark:border-b-light lg:dark:border-r-light lg:w-[43px]">
-    <h3 class="font-ubuntu text-[30px] lg:hidden">b_</h3>
-    <div
-      class="flex items-center gap-x-[16px] lg:gap-x-[32px] lg:w-full lg:-rotate-90 lg:relative lg:-top-52 lg:flex-row-reverse">
-      <span v-for="(navLink, index) in navLinks" :key="index" class="">
-        <nuxt-link :to="navLink.link" class="flex items-baseline gap-1">
-          <span
-            class="block h-[10px] w-[10px] border border-solid border-black dark:border-light rounded-full"></span>
-          {{ navLink.title }}
-        </nuxt-link>
-      </span>
+    class="fixed z-50 top-0 left-0 right-0 lg:right-auto overflow-hidden transition-all duration-700 border-b border-solid border-accent"
+    :class="
+      isOpen
+        ? 'h-[calc(100vh+2px)] border-b lg:border-b-0'
+        : 'h-0 border-b-0 lg:h-screen'
+    ">
+    <div class="flex flex-col h-screen w-screen lg:w-auto bg-background">
+      <ul class="text-2xl lg:text-base relative top-[30%] ml-5 lg:mr-5">
+        <li v-for="link in links" :key="link.name" class="duration-300">
+          <NuxtLink
+            @click="toggleMenu"
+            :to="link.href"
+            :class="
+              link.href !== $route.fullPath
+                ? 'opacity-40 font-normal'
+                : 'font-semibold'
+            "
+            class="hover:opacity-100 transition-all duration-300"
+            >{{ link.name }}</NuxtLink
+          >
+        </li>
+      </ul>
     </div>
   </nav>
+  <header
+    class="sticky top-0 z-50 w-full lg:w-fit bg-background flex items-center justify-between px-5 py-6">
+    <h1 class="text-2xl font-ubuntu-mono">b_</h1>
+    <div class="lg:hidden">
+      <button v-if="!isOpen" @click="toggleMenu">
+        <Icon name="hugeicons:menu-02" size="24" />
+      </button>
+      <button v-if="isOpen" @click="toggleMenu">
+        <Icon name="jam:close" size="24" />
+      </button>
+    </div>
+  </header>
 </template>
 
 <script setup>
-const navLinks = [
-  { title: 'about', link: '/' },
-  { title: 'experience', link: '/experience' },
-  { title: 'projects', link: '/projects' },
+import { NuxtLink } from '#components';
+
+const links = [
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/about' },
+  { name: 'Projects', href: '/projects' },
+  { name: 'Blog', href: '/blog' },
+  { name: 'Contact', href: '/contact' },
 ];
+
+const isOpen = ref(false);
+
+const toggleMenu = () => {
+  isOpen.value = !isOpen.value;
+};
 </script>
