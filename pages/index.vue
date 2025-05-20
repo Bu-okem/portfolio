@@ -37,7 +37,7 @@
         <div
           v-for="item in featured"
           :key="item.name"
-          class="group pt-5 pb-2 border-b border-accent cursor-pointer"
+          class="group pt-5 pb-2 border-b border-accent"
           @click="toggleDescription(item)">
           <NuxtLink :to="item.link">
             <div class="flex items-center justify-between">
