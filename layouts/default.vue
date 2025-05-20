@@ -2,7 +2,7 @@
   <div>
     <Nav />
     <div
-      class="lg:fixed lg:left-[100px] lg:w-[calc(100%-100px)] lg:h-full lg:top-0 lg:overflow-y-scroll">
+      class="lg:fixed 3xl:absolute lg:left-[100px] lg:w-[calc(100%-100px)] 3xl: lg:h-full lg:top-0 lg:overflow-y-scroll 3xl:border-x 3xl:border-accent">
       <slot />
       <Switch />
     </div>

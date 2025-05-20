@@ -31,6 +31,8 @@
   --color-accent: var(--accent);
   --color-secondary-text: var(--secondary-text);
   --color-border: var(--border);
+
+  --breakpoint-3xl: 115rem;
 }
 
 .markdown > h3 {
@@ -45,4 +47,5 @@
 
 html {
   background-color: var(--color-background);
+  @apply 3xl:max-w-[1800px] 3xl:relative 3xl:mx-auto;
 }
