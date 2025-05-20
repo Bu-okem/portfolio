@@ -51,13 +51,52 @@ useHead({
 const experience = useExperience();
 
 const sortExperience = (experiences) => {
+  const months = {
+    january: 0,
+    february: 1,
+    march: 2,
+    april: 3,
+    may: 4,
+    june: 5,
+    july: 6,
+    august: 7,
+    september: 8,
+    october: 9,
+    november: 10,
+    december: 11,
+  };
+
+  // Parse "Month YYYY" format safely across all browsers
+  const parseMonthYear = (dateString) => {
+    if (!dateString) return 0;
+
+    try {
+      const parts = dateString.toLowerCase().trim().split(/\s+/);
+
+      if (parts.length >= 2) {
+        const month = months[parts[0]];
+        // Get the last element as the year (in case there are spaces)
+        const year = parseInt(parts[parts.length - 1], 10);
+
+        if (!isNaN(month) && !isNaN(year)) {
+          // Create a date object for the first day of the month
+          return new Date(year, month, 1).getTime();
+        }
+      }
+    } catch (e) {
+      console.error('Error parsing date:', dateString, e);
+    }
+
+    return 0;
+  };
+
   return experiences.sort((a, b) => {
     // Get end dates or fall back to start dates
-    const dateA = new Date(a.fields.endDate || a.fields.startDate);
-    const dateB = new Date(b.fields.endDate || b.fields.startDate);
+    const timeA = parseMonthYear(a.fields.endDate || a.fields.startDate);
+    const timeB = parseMonthYear(b.fields.endDate || b.fields.startDate);
 
     // Sort in ascending order (oldest first)
-    return dateA - dateB;
+    return timeA - timeB;
   });
 };
 
