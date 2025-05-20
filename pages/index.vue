@@ -1,7 +1,7 @@
 <template>
   <div class="grid grid-cols-1 lg:grid-cols-11 lg:h-full">
     <div
-      class="border-b border-l border-accent p-6 pt-20 text-4xl lg:text-5xl lg:col-span-4 lg:row-end-2 lg:flex flex-col justify-end">
+      class="border-b lg:border-l border-accent p-6 pt-20 text-4xl lg:text-5xl lg:col-span-4 lg:row-end-2 lg:flex flex-col justify-end">
       <h1 class="font-semibold font-header">Software</h1>
       <h1 class="font-light font-header">Developer</h1>
     </div>
@@ -14,7 +14,7 @@
 
     <NuxtLink
       to="/about"
-      class="group border-b border-l border-accent p-6 pt-[100px] lg:pl-10 lg:pb-14 lg:pr-20 relative lg:col-span-7 lg:row-end-3 lg:flex flex-col justify-end">
+      class="group border-b lg:border-b-0 lg:border-l border-accent p-6 pt-[100px] lg:pl-10 lg:pb-14 lg:pr-20 relative lg:col-span-7 lg:row-end-3 lg:flex flex-col justify-end">
       <Icon
         name="streamline:interface-arrows-corner-up-right-keyboard-top-arrow-right-up"
         size="24"
@@ -32,12 +32,12 @@
 
     <!-- Featured projects and blogposts -->
     <div
-      class="border-l border-accent p-6 pb-0 lg:col-span-4 lg:row-end-3 lg:row-span-2 overflow-hidden">
+      class="lg:border-x border-accent p-6 pb-0 lg:col-span-4 lg:row-end-3 lg:row-span-2 overflow-hidden">
       <div ref="featuredContainer" class="grid grid-cols-1">
         <div
           v-for="item in featured"
           :key="item.name"
-          class="group pt-5 pb-2 border-b border-accent cursor-pointer"
+          class="group pt-5 pb-2 border-b border-accent"
           @click="toggleDescription(item)">
           <NuxtLink :to="item.link">
             <div class="flex items-center justify-between">
@@ -58,8 +58,9 @@
         </div>
       </div>
     </div>
-    <div
-      class="border-b border-accent px-6 pt-[100px] pb-20 relative lg:hidden">
+    <NuxtLink
+      to="/contact"
+      class="border-y border-accent mt-3 px-6 pt-[100px] pb-20 relative lg:hidden">
       <Icon
         name="streamline:interface-arrows-corner-up-right-keyboard-top-arrow-right-up"
         size="24"
@@ -67,7 +68,7 @@
       <h3 class="text-4xl font-extralight font-header">
         <span class="font-semibold">Contact</span> Me
       </h3>
-    </div>
+    </NuxtLink>
   </div>
 </template>
 

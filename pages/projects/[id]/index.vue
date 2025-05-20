@@ -2,7 +2,7 @@
   <div>
     <NuxtLink
       to="/projects"
-      class="block w-[90vw] lg:w-auto py-5 lg:py-0 bg-background fixed top-0 lg:top-5 left-5 lg:left-10 z-50 font-bold">
+      class="block w-[90vw] lg:w-auto py-5 lg:py-0 bg-background fixed 3xl:absolute top-0 lg:top-5 left-5 lg:left-10 z-50 font-bold">
       Back to projects
     </NuxtLink>
 
@@ -10,7 +10,7 @@
       <ProjectLoading v-if="loading" />
 
       <section v-else class="relative min-h-screen mt-10">
-        <div class="lg:w-[26vw] lg:fixed mb-6">
+        <div class="lg:w-[26vw] 3xl:w-[26%] lg:fixed 3xl:absolute mb-6">
           <h1
             class="text-3xl lg:text-4xl font-semibold mb-5 lg:mb-10 font-header"
             style="word-break: break-word">
