@@ -51,61 +51,84 @@ useHead({
 const experience = useExperience();
 
 const sortExperience = (experiences) => {
-  const months = {
-    january: 0,
-    february: 1,
-    march: 2,
-    april: 3,
-    may: 4,
-    june: 5,
-    july: 6,
-    august: 7,
-    september: 8,
-    october: 9,
-    november: 10,
-    december: 11,
-  };
+  // Convert "Month YYYY" to ISO format "YYYY-MM-DD"
+  const convertToIsoDate = (dateString) => {
+    if (!dateString) return '2000-01-01';
 
-  // Parse "Month YYYY" format safely across all browsers
-  const parseMonthYear = (dateString) => {
-    if (!dateString) return 0;
+    const months = {
+      january: '01',
+      february: '02',
+      march: '03',
+      april: '04',
+      may: '05',
+      june: '06',
+      july: '07',
+      august: '08',
+      september: '09',
+      october: '10',
+      november: '11',
+      december: '12',
+      jan: '01',
+      feb: '02',
+      mar: '03',
+      apr: '04',
+      may: '05',
+      jun: '06',
+      jul: '07',
+      aug: '08',
+      sep: '09',
+      oct: '10',
+      nov: '11',
+      dec: '12',
+    };
 
+    // Check if it's already in ISO format
+    if (/^\d{4}-\d{2}-\d{2}/.test(dateString)) {
+      return dateString;
+    }
+
+    // Try to parse "Month YYYY" format
+    const monthYearRegex = /^([a-z]+)\s+(\d{4})$/i;
+    const match = dateString.match(monthYearRegex);
+
+    if (match) {
+      const monthName = match[1].toLowerCase();
+      const year = match[2];
+      const month = months[monthName];
+
+      if (month && year) {
+        // Return ISO format date (YYYY-MM-DD)
+        return `${year}-${month}-01`;
+      }
+    }
+
+    // For any other format, try to parse and convert to ISO
     try {
-      const parts = dateString.toLowerCase().trim().split(/\s+/);
-
-      if (parts.length >= 2) {
-        const month = months[parts[0]];
-        // Get the last element as the year (in case there are spaces)
-        const year = parseInt(parts[parts.length - 1], 10);
-
-        if (!isNaN(month) && !isNaN(year)) {
-          // Create a date object for the first day of the month
-          return new Date(year, month, 1).getTime();
-        }
+      const date = new Date(dateString);
+      if (!isNaN(date.getTime())) {
+        const year = date.getFullYear();
+        // getMonth() is 0-indexed, so I added 1 and padded with leading zero
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
       }
     } catch (e) {
       console.error('Error parsing date:', dateString, e);
     }
 
-    return 0;
+    return '2000-01-01';
   };
 
   return experiences.sort((a, b) => {
-    // Get end dates or fall back to start dates
-    const timeA = new Date(
-      parseMonthYear(a.fields.endDate || a.fields.startDate)
-    );
-    const timeB = new Date(
-      parseMonthYear(b.fields.endDate || b.fields.startDate)
-    );
-
+    const dateA = convertToIsoDate(a.fields.endDate || a.fields.startDate);
+    const dateB = convertToIsoDate(b.fields.endDate || b.fields.startDate);
     console.log({
-      'Time A': timeA,
-      'Time B': timeB,
+      'date A': dateA,
+      'date B': dateB,
     });
 
-    // Sort in ascending order (oldest first)
-    return timeA - timeB;
+    // For ascending order (oldest first)
+    return dateA.localeCompare(dateB);
   });
 };
 
@@ -115,10 +138,6 @@ const sortExperience = (experiences) => {
 //     const dateA = new Date(a.fields.endDate || a.fields.startDate);
 //     const dateB = new Date(b.fields.endDate || b.fields.startDate);
 
-//     console.log({
-//       'date A': dateA,
-//       'date B': dateB,
-//     });
 //     // Sort in ascending order (oldest first)
 //     return dateA - dateB;
 //   });
