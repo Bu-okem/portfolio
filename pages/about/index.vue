@@ -92,13 +92,36 @@ const sortExperience = (experiences) => {
 
   return experiences.sort((a, b) => {
     // Get end dates or fall back to start dates
-    const timeA = parseMonthYear(a.fields.endDate || a.fields.startDate);
-    const timeB = parseMonthYear(b.fields.endDate || b.fields.startDate);
+    const timeA = new Date(
+      parseMonthYear(a.fields.endDate || a.fields.startDate)
+    );
+    const timeB = new Date(
+      parseMonthYear(b.fields.endDate || b.fields.startDate)
+    );
+
+    console.log({
+      'Time A': timeA,
+      'Time B': timeB,
+    });
 
     // Sort in ascending order (oldest first)
     return timeA - timeB;
   });
 };
 
+// const sortExperience = (experiences) => {
+//   return experiences.sort((a, b) => {
+//     // Get end dates or fall back to start dates
+//     const dateA = new Date(a.fields.endDate || a.fields.startDate);
+//     const dateB = new Date(b.fields.endDate || b.fields.startDate);
+
+//     console.log({
+//       'date A': dateA,
+//       'date B': dateB,
+//     });
+//     // Sort in ascending order (oldest first)
+//     return dateA - dateB;
+//   });
+// };
 const sortedExperience = computed(() => sortExperience(experience.value || []));
 </script>
