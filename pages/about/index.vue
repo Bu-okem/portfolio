@@ -122,10 +122,6 @@ const sortExperience = (experiences) => {
   return experiences.sort((a, b) => {
     const dateA = convertToIsoDate(a.fields.endDate || a.fields.startDate);
     const dateB = convertToIsoDate(b.fields.endDate || b.fields.startDate);
-    console.log({
-      'date A': dateA,
-      'date B': dateB,
-    });
 
     // For ascending order (oldest first)
     return dateA.localeCompare(dateB);
