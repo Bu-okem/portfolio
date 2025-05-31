@@ -1,20 +1,44 @@
 <template>
   <div class="grid grid-cols-1 lg:grid-cols-11 lg:h-full">
     <div
-      class="border-b lg:border-l border-accent p-6 pt-20 text-4xl lg:text-5xl lg:col-span-4 lg:row-end-2 lg:flex flex-col justify-end">
+      class="relative p-6 pt-20 text-4xl lg:text-5xl lg:col-span-4 lg:row-end-2 lg:flex flex-col justify-end">
       <h1 class="font-semibold font-header">Software</h1>
       <h1 class="font-light font-header">Developer</h1>
+      <!-- Grid lines -->
+      <motion.div
+        :initial="{ height: 0 }"
+        :animate="{ height: '100%' }"
+        :transition="{ duration: 0.6 }"
+        class="absolute top-0 left-0 w-[1px] bg-accent hidden lg:block"></motion.div>
+      <motion.div
+        :initial="{ width: 0 }"
+        :animate="{ width: '100%' }"
+        :transition="{ duration: 0.6 }"
+        class="absolute bottom-0 left-0 w-full h-[1px] bg-accent"></motion.div>
+      <!--  -->
     </div>
     <!--  -->
     <div
-      class="border-b border-l border-accent p-6 pt-20 text-6xl hidden lg:col-span-3 lg:row-end-2 lg:flex flex-col justify-end">
+      class="relative p-6 pt-20 text-6xl hidden lg:col-span-3 lg:row-end-2 lg:flex flex-col justify-end">
       <h1 class="text-6xl font-ubuntu-mono">b_</h1>
+      <!-- Grid lines -->
+      <motion.div
+        :initial="{ height: 0 }"
+        :animate="{ height: '100%' }"
+        :transition="{ duration: 0.6 }"
+        class="absolute top-0 left-0 h-full w-[1px] bg-accent"></motion.div>
+      <motion.div
+        :initial="{ width: 0 }"
+        :animate="{ width: '100%' }"
+        :transition="{ delay: 0.55, duration: 0.6 }"
+        class="absolute bottom-0 left-0 w-full h-[1px] bg-accent"></motion.div>
+      <!--  -->
     </div>
     <!--  -->
 
     <NuxtLink
       to="/about"
-      class="group border-b lg:border-b-0 lg:border-l border-accent p-6 pt-[100px] lg:pl-10 lg:pb-14 lg:pr-20 relative lg:col-span-7 lg:row-end-3 lg:flex flex-col justify-end">
+      class="group border-b lg:border-b-0 border-accent p-6 pt-[100px] lg:pl-10 lg:pb-14 lg:pr-20 relative lg:col-span-7 lg:row-end-3 lg:flex flex-col justify-end">
       <Icon
         name="streamline:interface-arrows-corner-up-right-keyboard-top-arrow-right-up"
         size="24"
@@ -28,11 +52,19 @@
         always looking for new challenges and opportunities to grow as a
         developer.
       </h3>
+      <!-- Grid lines -->
+      <motion.div
+        :initial="{ height: 0 }"
+        :animate="{ height: '100%' }"
+        :transition="{ delay: 0.55, duration: 0.6 }"
+        class="absolute top-0 left-0 h-full w-[1px] bg-accent hidden lg:block">
+      </motion.div>
+      <!--  -->
     </NuxtLink>
 
     <!-- Featured projects and blogposts -->
     <div
-      class="lg:border-x border-accent p-6 pb-0 lg:col-span-4 lg:row-end-3 lg:row-span-2 overflow-hidden">
+      class="relative p-6 pb-0 lg:col-span-4 lg:row-end-3 lg:row-span-2 overflow-hidden">
       <div ref="featuredContainer" class="grid grid-cols-1">
         <div
           v-for="item in featured"
@@ -57,6 +89,20 @@
           </div>
         </div>
       </div>
+      <!-- Grid lines -->
+      <motion.div
+        :initial="{ height: 0 }"
+        :animate="{ height: '100%' }"
+        :transition="{ duration: 0.6 }"
+        class="absolute top-0 left-0 h-full w-[1px] bg-accent hidden lg:block">
+      </motion.div>
+      <motion.div
+        :initial="{ height: 0 }"
+        :animate="{ height: '100%' }"
+        :transition="{ duration: 0.6 }"
+        class="absolute top-0 right-0 h-full w-[1px] bg-accent hidden lg:block">
+      </motion.div>
+      <!--  -->
     </div>
     <NuxtLink
       to="/contact"
@@ -74,6 +120,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import { motion } from 'motion-v';
 
 const featured = [
   {

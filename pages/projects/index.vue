@@ -45,10 +45,12 @@
               <div
                 class="lg:pr-2 lg:pb-10 lg:w-2/3 lg:absolute right-5 top-10 h-auto lg:h-[calc(100vh-100px)] overflow-y-scroll custom-scrollbar">
                 <div class="">
-                  <img
-                    :src="item.fields.image[0].url"
-                    alt=""
-                    class="w-full rounded-sm" />
+                  <div class="h-fit">
+                    <img
+                      :src="item.fields.image[0].url"
+                      alt=""
+                      class="w-full rounded-sm" />
+                  </div>
                   <div class="flex gap-3 mt-5">
                     <p
                       class="px-2 py-1 border border-accent rounded-sm text-xs"
