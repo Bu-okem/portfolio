@@ -11,20 +11,51 @@
 
       <section v-else class="relative min-h-screen mt-10">
         <div class="lg:w-[26vw] 3xl:w-[26%] lg:fixed 3xl:absolute mb-6">
-          <h1
-            class="text-3xl lg:text-4xl font-semibold mb-5 lg:mb-10 font-header"
-            style="word-break: break-word">
-            {{ project.name }}
-          </h1>
-          <p class="font-extralight text-secondary-text mb-2">
-            {{ project.shortDescription }}
-          </p>
-          <p class="font-extralight text-secondary-text italic uppercase">
-            {{ project.role }}
-          </p>
+          <span class="mb-5 lg:mb-10">
+            <span
+              class="inline-block overflow-hidden"
+              v-for="(text, index) in project.name.split(' ')"
+              :key="index">
+              <motion.h1
+                :initial="{ y: 50 }"
+                :animate="{ y: 0 }"
+                :transition="{ delay: 0.3, duration: 0.6 }"
+                class="text-3xl lg:text-4xl font-semibold font-header"
+                style="word-break: break-word">
+                {{ text }}<span>&nbsp;</span>
+              </motion.h1>
+            </span>
+          </span>
+          <div class="mb-2">
+            <span
+              class="inline-block overflow-hidden"
+              v-for="(text, index) in project.shortDescription.split(' ')"
+              :key="index">
+              <motion.p
+                :initial="{ y: 50 }"
+                :animate="{ y: 0 }"
+                :transition="{ delay: 0.3, duration: 0.6 }"
+                class="font-extralight text-secondary-text">
+                {{ text }}<span>&nbsp;</span>
+              </motion.p>
+            </span>
+          </div>
+          <span class="block overflow-hidden">
+            <motion.p
+              :initial="{ y: 50 }"
+              :animate="{ y: 0 }"
+              :transition="{ delay: 0.3, duration: 0.6 }"
+              class="font-extralight text-secondary-text italic uppercase">
+              {{ project.role }}
+            </motion.p>
+          </span>
         </div>
         <!--  -->
-        <div class="lg:w-2/3 lg:absolute right-0 top-0 h-full">
+        <motion.div
+          :initial="{ opacity: 0, y: 50 }"
+          :animate="{ opacity: 1, y: 0 }"
+          :transition="{ delay: 0.3, duration: 0.6 }"
+          class="lg:w-2/3 lg:absolute right-0 top-0 h-full">
           <img :src="project.image[0].url" alt="" class="w-full rounded-sm" />
           <div class="flex gap-3 mt-5">
             <p
@@ -59,7 +90,7 @@
               class="font-extralight markdown"
               v-html="marked.parse(project.description)"></div>
           </div>
-        </div>
+        </motion.div>
       </section>
     </div>
   </div>
@@ -68,6 +99,7 @@
 <script setup>
 import axios from 'axios';
 import { marked } from 'marked';
+import { motion } from 'motion-v';
 import { useConfig } from '~/composables/useConfig';
 
 const config = useConfig();
