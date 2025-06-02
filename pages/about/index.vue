@@ -1,37 +1,104 @@
 <template>
   <div class="pb-20 mt-[150px] lg:mt-[200px] mx-5 lg:mx-20">
-    <section class="h-[50vh]">
-      <h1 class="text-4xl font-semibold font-header">
-        Hi there, I’m Buokem, a Software Developer.
-        <span class="block font-extralight">I build things for the web.</span>
-      </h1>
+    <section class="h-[50vh] text-4xl font-semibold font-header">
+      <div class="">
+        <span
+          class="overflow-hidden inline-block"
+          v-for="(text, index) in heroText1.split(' ')"
+          :key="index">
+          <motion.h1
+            :initial="{ y: 54 }"
+            :animate="{ y: 0 }"
+            :transition="{ delay: 0.3, duration: 0.6 }"
+            >{{ text }}<span>&nbsp;</span>
+          </motion.h1>
+        </span>
+      </div>
+      <div class="">
+        <span
+          class="overflow-hidden inline-block"
+          v-for="(text, index) in heroText2.split(' ')"
+          :key="index">
+          <motion.h1
+            :initial="{ y: 54 }"
+            :animate="{ y: 0 }"
+            :transition="{ delay: 0.3, duration: 0.6 }"
+            class="font-extralight"
+            >{{ text }}<span>&nbsp;</span>
+          </motion.h1>
+        </span>
+      </div>
     </section>
     <section class="pt-60">
-      <p class="font-extralight leading-9">
-        As a software developer, I have had the privilege of working on a wide
-        range of projects, from web applications to mobile apps. My experience
-        has taught me the importance of attention to detail, effective
-        communication, and efficient problem-solving. I am passionate about
-        building software that is both functional and enjoyable to use. I am
-        always looking for new challenges and opportunities to grow as a
-        developer.
-      </p>
+      <div class="font-light leading-9">
+        <span
+          class="overflow-hidden inline-block"
+          v-for="(text, index) in aboutText.split(' ')"
+          :key="index">
+          <motion.p
+            :initial="{ y: 40 }"
+            :while-in-view="{ y: 0 }"
+            :inViewOptions="{ once: true }"
+            :transition="{ delay: 0.3, duration: 0.6 }"
+            class="my-1">
+            {{ text }}<span>&nbsp;</span>
+          </motion.p>
+        </span>
+      </div>
     </section>
     <section class="pt-32">
-      <h3 class="mb-9 text-4xl font-semibold font-header">Experience</h3>
+      <span class="overflow-hidden block mb-9">
+        <motion.h3
+          :initial="{ y: 40 }"
+          :while-in-view="{ y: 0 }"
+          :transition="{ delay: 0.3, duration: 0.6 }"
+          :inViewOptions="{ once: true }"
+          class="text-4xl font-semibold font-header"
+          >Experience</motion.h3
+        >
+      </span>
       <div>
         <div v-for="exp in sortedExperience" :key="exp.id" class="mb-20">
-          <p class="text-xl">{{ exp.fields.institution }}</p>
-          <h3 class="my-6 text-3xl lg:text-5xl font-semibold font-header">
-            {{ exp.fields.position }}
-          </h3>
-          <span class="flex">
-            <p class="mb-6 tracking-wide">{{ exp.fields.startDate }}</p>
-            <span class="mx-2"> - </span>
-            <p class="mb-6 tracking-wide">
-              {{ exp.fields.endDate ? `${exp.fields.endDate}` : 'Present' }}
-            </p>
+          <span class="overflow-hidden block">
+            <motion.p
+              :initial="{ y: 24 }"
+              :while-in-view="{ y: 0 }"
+              :transition="{ delay: 0.3, duration: 0.6, repeat: 0 }"
+              :inViewOptions="{ once: true }"
+              class="text-xl"
+              >{{ exp.fields.institution }}</motion.p
+            >
           </span>
+          <div class="my-6">
+            <span
+              class="overflow-hidden inline-block"
+              v-for="(text, index) in exp.fields.position.split(' ')"
+              :key="index">
+              <motion.h3
+                :initial="{ y: 50 }"
+                :while-in-view="{ y: 0 }"
+                :inViewOptions="{ once: true }"
+                :transition="{ delay: 0.3, duration: 0.6 }"
+                class="mb-4 lg:my-1 text-3xl lg:text-5xl font-semibold font-header">
+                {{ text }}<span>&nbsp;</span>
+              </motion.h3>
+            </span>
+          </div>
+
+          <div class="overflow-hidden mb-6">
+            <motion.span
+              :initial="{ y: 20 }"
+              :while-in-view="{ y: 0 }"
+              :inViewOptions="{ once: true }"
+              :transition="{ delay: 0.3, duration: 0.6 }"
+              class="flex">
+              <p class="tracking-wide">{{ exp.fields.startDate }}</p>
+              <span class="mx-2"> - </span>
+              <p class="tracking-wide">
+                {{ exp.fields.endDate ? `${exp.fields.endDate}` : 'Present' }}
+              </p>
+            </motion.span>
+          </div>
           <p class="font-extralight leading-9 tracking-wide">
             {{ exp.fields.description }}
           </p>
@@ -42,12 +109,19 @@
 </template>
 
 <script setup>
+import { motion } from 'motion-v';
 import { useExperience } from '~/composables/states';
 
 useHead({
   title: 'Buokem - About',
 });
 
+const heroText1 = `Hi there, I'm Buokem, a Software Developer.`;
+const heroText2 = 'I build things for the web.';
+
+const aboutText =
+  'As a software developer, I have had the privilege of working on a wide range of projects. My experience has taught me the importance of attention to detail, effective communication, and efficient problem-solving. I am passionate about building software that is both functional and enjoyable to use. I am always looking for new challenges and opportunities to grow as a developer.';
+//  , from web applications to mobile apps
 const experience = useExperience();
 
 const sortExperience = (experiences) => {
