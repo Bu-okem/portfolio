@@ -1,8 +1,9 @@
 <template>
-  <div class="grid grid-cols-1 lg:grid-cols-11 lg:h-full">
+  <div class="grid grid-cols-1 lg:grid-cols-11 lg:h-full" role="main">
     <div
-      class="relative p-6 pt-20 text-4xl lg:text-5xl lg:col-span-4 lg:row-end-2 lg:flex flex-col justify-end">
-      <h1 class="sr-only">Software Developer</h1>
+      class="relative p-6 pt-20 text-4xl lg:text-5xl lg:col-span-4 lg:row-end-2 lg:flex flex-col justify-end"
+      role="banner">
+      <h1 class="sr-only">Buokem - Software Developer</h1>
       <span aria-hidden="true" class="block overflow-hidden">
         <motion.h1
           :initial="{ y: 50 }"
@@ -38,12 +39,13 @@
     <!--  -->
     <div
       class="relative p-6 pt-20 text-6xl hidden lg:col-span-3 lg:row-end-2 lg:flex flex-col justify-end">
-      <span class="block overflow-hidden">
+      <span class="block overflow-hidden" aria-hidden="true">
         <motion.h1
           :initial="{ y: 54 }"
           :animate="{ y: 0 }"
           :transition="{ delay: 0.6, duration: 0.6 }"
           class="text-6xl font-ubuntu-mono"
+          aria-hidden="true"
           >b_</motion.h1
         >
       </span>
@@ -64,7 +66,8 @@
 
     <NuxtLink
       to="/about"
-      class="group p-6 pt-[100px] lg:pl-10 lg:pb-14 lg:pr-20 relative lg:col-span-7 lg:row-end-3 lg:flex flex-col justify-end">
+      class="group p-6 pt-[100px] lg:pl-10 lg:pb-14 lg:pr-20 relative lg:col-span-7 lg:row-end-3 lg:flex flex-col justify-end"
+      aria-label="Learn more about me">
       <div
         class="h-fit absolute top-5 lg:top-16 right-5 lg:right-10 group-hover:lg:top-10 group-hover:lg:right-6 duration-300 overflow-hidden block">
         <motion.span
@@ -116,14 +119,17 @@
     </NuxtLink>
 
     <!-- Featured projects and blogposts -->
-    <div
-      class="relative p-6 pb-0 lg:col-span-4 lg:row-end-3 lg:row-span-2 overflow-hidden">
-      <div ref="featuredContainer" class="grid grid-cols-1">
-        <div
+    <section
+      class="relative p-6 pb-0 lg:col-span-4 lg:row-end-3 lg:row-span-2 overflow-hidden"
+      aria-labelledby="featured-projects">
+      <h2 id="featured-projects" class="sr-only">Featured Projects</h2>
+      <div ref="featuredContainer" class="grid grid-cols-1" role="list">
+        <article
           v-for="item in featured"
           :key="item.name"
           class="relative group pt-5 pb-2"
-          @click="toggleDescription(item)">
+          @click="toggleDescription(item)"
+          role="listitem">
           <NuxtLink :to="item.link" class="block overflow-hidden">
             <motion.div
               :initial="{ y: 24 }"
@@ -150,7 +156,7 @@
             :animate="{ width: '100%' }"
             :transition="{ duration: 0.6 }"
             class="bottom-0 left-0 h-[1px] bg-accent"></motion.div>
-        </div>
+        </article>
       </div>
       <!-- Grid lines -->
       <motion.div
@@ -166,22 +172,39 @@
         class="absolute top-0 right-0 h-full w-[1px] bg-accent hidden lg:block">
       </motion.div>
       <!--  -->
-    </div>
+    </section>
     <NuxtLink
       to="/contact"
-      class="border border-accent mt-3 px-6 pt-[100px] pb-20 relative lg:hidden">
+      class="border border-accent mt-3 px-6 pt-[100px] pb-20 relative lg:hidden"
+      aria-label="Contact me">
       <Icon
         name="streamline:interface-arrows-corner-up-right-keyboard-top-arrow-right-up"
         size="24"
         class="absolute top-5 right-5" />
-      <h3 class="text-4xl font-extralight font-header">
+      <h2 class="text-4xl font-extralight font-header">
         <span class="font-semibold">Contact</span> Me
-      </h3>
+      </h2>
+      <p class="sr-only">Click to contact me via the contact form</p>
     </NuxtLink>
   </div>
 </template>
 
 <script setup>
+// Set the page title and meta description for better SEO and accessibility
+useHead({
+  title: 'Buokem - Software Developer',
+  meta: [
+    {
+      name: 'description',
+      content:
+        'Portfolio of Buokem, a skilled software developer with experience in modern web technologies.',
+    },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+  ],
+  htmlAttrs: {
+    lang: 'en',
+  },
+});
 import { ref, onMounted } from 'vue';
 import { delay, motion } from 'motion-v';
 
