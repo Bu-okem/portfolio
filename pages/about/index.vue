@@ -2,7 +2,9 @@
   <div class="pb-20 mt-[150px] lg:mt-[200px] mx-5 lg:mx-20">
     <section class="h-[50vh] text-4xl font-semibold font-header">
       <div class="">
+        <h1 class="sr-only">{{ heroText1 }}</h1>
         <span
+          aria-hidden="true"
           class="overflow-hidden inline-block"
           v-for="(text, index) in heroText1.split(' ')"
           :key="index">
@@ -15,7 +17,9 @@
         </span>
       </div>
       <div class="">
+        <p class="sr-only">{{ heroText2 }}</p>
         <span
+          aria-hidden="true"
           class="overflow-hidden inline-block"
           v-for="(text, index) in heroText2.split(' ')"
           :key="index">
@@ -31,7 +35,9 @@
     </section>
     <section class="pt-60">
       <div class="font-light leading-9">
+        <p class="sr-only">{{ aboutText }}</p>
         <span
+          aria-hidden="true"
           class="overflow-hidden inline-block"
           v-for="(text, index) in aboutText.split(' ')"
           :key="index">
@@ -70,7 +76,9 @@
             >
           </span>
           <div class="my-6">
+            <h3 class="sr-only">{{ exp.fields.position }}</h3>
             <span
+              aria-hidden="true"
               class="overflow-hidden inline-block"
               v-for="(text, index) in exp.fields.position.split(' ')"
               :key="index">
