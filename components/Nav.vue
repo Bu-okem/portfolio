@@ -28,10 +28,10 @@
     class="sticky top-0 z-50 w-full lg:w-fit bg-background flex items-center justify-between px-5 py-6 3xl:bg-transparent">
     <h1 class="text-2xl font-ubuntu-mono">b_</h1>
     <div class="lg:hidden">
-      <button v-if="!isOpen" @click="toggleMenu">
+      <button v-if="!isOpen" @click="toggleMenu" aria-label="Open Menu">
         <Icon name="hugeicons:menu-02" size="24" />
       </button>
-      <button v-if="isOpen" @click="toggleMenu">
+      <button v-if="isOpen" @click="toggleMenu" aria-label="Close Menu">
         <Icon name="jam:close" size="24" />
       </button>
     </div>
