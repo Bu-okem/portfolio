@@ -1,7 +1,13 @@
 <template>
-  <div class="mt-[100px] mx-5 pb-9">
+  <main class="mt-[100px] mx-5 pb-9">
+    <h1 class="sr-only">Projects - Buokem's Portfolio</h1>
     <ProjectsLoading v-if="loading" />
-    <masonry-wall v-else :items="projects" :column-width="250" :gap="20">
+    <masonry-wall
+      v-else
+      :items="projects"
+      :column-width="250"
+      :gap="20"
+      role="list">
       <template #default="{ item }">
         <motion.div
           :initial="{ opacity: 0, y: 30 }"
@@ -9,12 +15,15 @@
           :transition="{ duration: 0.6 }"
           class="">
           <Drawer>
-            <DrawerTrigger @click="setPath(item.id)">
+            <DrawerTrigger
+              @click="setPath(item.id)"
+              :aria-label="`View details for ${item.fields.name} project`">
               <ProjectCard
                 :name="item.fields.name"
                 :description="item.fields.shortDescription"
                 :link="item.fields.link"
-                :type="item.fields.type" />
+                :type="item.fields.type"
+                :aria-label="`${item.fields.name} - ${item.fields.type}`" />
             </DrawerTrigger>
             <DrawerContent
               class="h-[calc(100dvh-20px)] bg-background rounded-t-sm text-foreground">
@@ -24,8 +33,9 @@
                   <Button
                     variant="outline"
                     @click="removePath"
-                    class="cursor-pointer">
-                    <Icon name="ic:round-close" size="24" />
+                    class="cursor-pointer"
+                    aria-label="Close project details">
+                    <Icon name="ic:round-close" size="24" aria-hidden="true" />
                   </Button>
                 </DrawerClose>
               </div>
@@ -52,9 +62,10 @@
                   <div class="">
                     <div class="h-fit">
                       <img
-                        :src="item.fields.image[0].url"
-                        alt=""
-                        class="w-full rounded-sm" />
+                        :src="item.fields.image[0]?.url"
+                        :alt="`Screenshot of ${item.fields.name} project`"
+                        class="w-full rounded-sm"
+                        loading="lazy" />
                     </div>
                     <div class="flex gap-3 mt-5">
                       <p
@@ -66,23 +77,30 @@
                     <div class="flex gap-3 mt-5 mb-10">
                       <a
                         :href="item.fields.sourcecode"
-                        v-if="item.fields.sourcecode">
-                        <span class="h-fit flex gap-x-1 py-1">
-                          <p>Source Code</p>
-                          <Icon
-                            name="streamline:interface-arrows-corner-up-right-keyboard-top-arrow-right-up"
-                            size="9"
-                            class="h-2" />
-                        </span>
+                        v-if="item.fields.sourcecode"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center gap-1 hover:underline"
+                        aria-label="View source code (opens in new tab)">
+                        <span>Source Code</span>
+                        <Icon
+                          name="streamline:interface-arrows-corner-up-right-keyboard-top-arrow-right-up"
+                          size="9"
+                          class="h-2"
+                          aria-hidden="true" />
                       </a>
-                      <a :href="item.fields.link">
-                        <span class="h-fit flex gap-x-1 py-1">
-                          <p>Live Project</p>
-                          <Icon
-                            name="streamline:interface-arrows-corner-up-right-keyboard-top-arrow-right-up"
-                            size="9"
-                            class="h-2" />
-                        </span>
+                      <a
+                        :href="item.fields.link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center gap-1 hover:underline"
+                        aria-label="View live project (opens in new tab)">
+                        <span>Live Project</span>
+                        <Icon
+                          name="streamline:interface-arrows-corner-up-right-keyboard-top-arrow-right-up"
+                          size="9"
+                          class="h-2"
+                          aria-hidden="true" />
                       </a>
                     </div>
                     <div class="mt-10 pb-52 lg:pb-0">
@@ -102,7 +120,7 @@
         </motion.div>
       </template>
     </masonry-wall>
-  </div>
+  </main>
 </template>
 
 <script setup>
@@ -118,8 +136,20 @@ import {
 } from '@/components/ui/drawer';
 import { useProjects } from '~/composables/states';
 
+// Set page metadata for SEO and accessibility
 useHead({
-  title: `Buokem - Projects`,
+  title: 'Projects - Buokem',
+  meta: [
+    {
+      name: 'description',
+      content:
+        'Explore the portfolio projects of Buokem, showcasing web development and design work.',
+    },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+  ],
+  htmlAttrs: {
+    lang: 'en',
+  },
 });
 
 const loading = ref(true);

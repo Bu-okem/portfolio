@@ -1,8 +1,9 @@
 <template>
-  <div class="pb-20 mt-[150px] lg:mt-[200px] mx-5 lg:mx-20">
-    <section class="h-[50vh] text-4xl font-semibold font-header">
+  <main class="pb-20 mt-[150px] lg:mt-[200px] mx-5 lg:mx-20">
+    <h1 class="sr-only">About Buokem - Software Developer</h1>
+    <section class="h-[50vh] text-4xl font-semibold font-header" aria-labelledby="hero-heading">
       <div class="">
-        <h1 class="sr-only">{{ heroText1 }}</h1>
+        <h2 id="hero-heading" class="sr-only">{{ heroText1 }} {{ heroText2 }}</h2>
         <span
           aria-hidden="true"
           class="overflow-hidden inline-block"
@@ -33,7 +34,8 @@
         </span>
       </div>
     </section>
-    <section class="pt-60">
+    <section class="pt-60" aria-labelledby="about-me">
+      <h2 id="about-me" class="sr-only">About Me</h2>
       <div class="font-light leading-9">
         <p class="sr-only">{{ aboutText }}</p>
         <span
@@ -52,7 +54,8 @@
         </span>
       </div>
     </section>
-    <section class="pt-32">
+    <section class="pt-32" aria-labelledby="experience">
+      <h2 id="experience" class="sr-only">Work Experience</h2>
       <span class="overflow-hidden block mb-9">
         <motion.h3
           :initial="{ y: 40 }"
@@ -60,8 +63,7 @@
           :transition="{ delay: 0.3, duration: 0.6 }"
           :inViewOptions="{ once: true }"
           class="text-4xl font-semibold font-header"
-          >Experience</motion.h3
-        >
+          aria-hidden="true">Experience</motion.h3>
       </span>
       <div>
         <div v-for="exp in sortedExperience" :key="exp.id" class="mb-20">
@@ -113,15 +115,26 @@
         </div>
       </div>
     </section>
-  </div>
+  </main>
 </template>
 
 <script setup>
 import { motion } from 'motion-v';
 import { useExperience } from '~/composables/states';
 
+// Set page metadata for SEO and accessibility
 useHead({
-  title: 'Buokem - About',
+  title: 'About - Buokem',
+  meta: [
+    {
+      name: 'description',
+      content: 'Learn more about Buokem, a skilled software developer with experience in modern web technologies.',
+    },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+  ],
+  htmlAttrs: {
+    lang: 'en',
+  },
 });
 
 const heroText1 = `Hi there, I'm Buokem, a Software Developer.`;

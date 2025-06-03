@@ -16,6 +16,17 @@ import { useConfig } from '~/composables/useConfig';
 import { useExperience, useFeatured } from '~/composables/states';
 useHead({
   title: 'Buokem — Software Developer',
+  meta: [
+    {
+      name: 'description',
+      content:
+        'Portfolio of Buokem, a skilled software developer with experience in modern web technologies.',
+    },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+  ],
+  htmlAttrs: {
+    lang: 'en',
+  },
 });
 const config = useConfig();
 const experience = useExperience();
