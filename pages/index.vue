@@ -2,7 +2,8 @@
   <div class="grid grid-cols-1 lg:grid-cols-11 lg:h-full">
     <div
       class="relative p-6 pt-20 text-4xl lg:text-5xl lg:col-span-4 lg:row-end-2 lg:flex flex-col justify-end">
-      <span class="block overflow-hidden">
+      <h1 class="sr-only">Software Developer</h1>
+      <span aria-hidden="true" class="block overflow-hidden">
         <motion.h1
           :initial="{ y: 50 }"
           :animate="{ y: 0 }"
@@ -11,7 +12,7 @@
           >Software</motion.h1
         >
       </span>
-      <span class="block overflow-hidden">
+      <span aria-hidden="true" class="block overflow-hidden">
         <motion.h1
           :initial="{ y: 50 }"
           :animate="{ y: 0 }"
@@ -77,12 +78,14 @@
         </motion.span>
       </div>
       <div class="overflow-hidden">
+        <p class="sr-only">{{ aboutText }}</p>
         <motion.div
           :initial="{ y: 10 }"
           :animate="{ y: 0 }"
           :transition="{ delay: 0.8 }"
           class="text-xl lg:text-2xl font-extralight line-clamp-4 font-header">
           <span
+            aria-hidden="true"
             class="overflow-hidden inline-block"
             v-for="(text, index) in aboutText.split(' ')"
             :key="index">

@@ -12,7 +12,9 @@
       <section v-else class="relative min-h-screen mt-10">
         <div class="lg:w-[26vw] 3xl:w-[26%] lg:fixed 3xl:absolute mb-6">
           <span class="mb-5 lg:mb-10">
+            <h1 class="sr-only">{{ project.name }}</h1>
             <span
+              aria-hidden="true"
               class="inline-block overflow-hidden"
               v-for="(text, index) in project.name.split(' ')"
               :key="index">
@@ -27,7 +29,9 @@
             </span>
           </span>
           <div class="mb-2">
+            <p class="sr-only">{{ project.shortDescription }}</p>
             <span
+              aria-hidden="true"
               class="inline-block overflow-hidden"
               v-for="(text, index) in project.shortDescription.split(' ')"
               :key="index">
