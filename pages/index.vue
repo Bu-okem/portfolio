@@ -173,8 +173,8 @@
       </motion.div>
       <!--  -->
     </section>
-    <NuxtLink
-      to="/contact"
+    <a
+      href="https://wa.me/2348154387988" target="_blank"
       class="border border-accent mt-3 px-6 pt-[100px] pb-20 relative lg:hidden"
       aria-label="Contact me">
       <Icon
@@ -184,8 +184,8 @@
       <h2 class="text-4xl font-extralight font-header">
         <span class="font-semibold">Contact</span> Me
       </h2>
-      <p class="sr-only">Click to contact me via the contact form</p>
-    </NuxtLink>
+      <p class="sr-only">Click to contact me via whatsapp</p>
+    </a>
   </div>
 </template>
 
