@@ -23,7 +23,7 @@
           target="_blank"
           class="font-semibold underline underline-offset-2"
           >chiobiegbulem@gmail.com</a
-        >) or
+        >), <a href="https://wa.me/2348154387988" target="_blank" class="font-semibold underline underline-offset-2">WhatsApp</a>, or 
         <a
           href="https://www.linkedin.com/in/chibuokem-obiegbulem/"
           target="_blank"

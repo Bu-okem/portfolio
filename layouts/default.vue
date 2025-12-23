@@ -10,10 +10,10 @@
 </template>
 
 <script setup>
-import axios from 'axios';
+import { api } from "../convex/_generated/api";
 import Switch from '@/components/Switch.vue';
-import { useConfig } from '~/composables/useConfig';
-import { useExperience, useFeatured } from '~/composables/states';
+import { useExperience } from '~/composables/states';
+
 useHead({
   title: 'Buokem — Software Developer',
   meta: [
@@ -28,45 +28,11 @@ useHead({
     lang: 'en',
   },
 });
-const config = useConfig();
+const { data } = useConvexQuery(api.workExperience.get);
 const experience = useExperience();
-const featured = useFeatured();
-
-const headers = {
-  Authorization: `Bearer ${config.apiKey}`,
-};
-
-const fetchExperience = async () => {
-  try {
-    const res = await axios.get(
-      `https://api.airtable.com/v0/${config.base}/${config.experienceTableId}`,
-      {
-        headers: headers,
-      }
-    );
-    const { records } = res.data;
-    experience.value = records;
-  } catch (err) {
-    setTimeout(fetchExperience, 10000);
-    console.log('Error loading experience', err);
+watchEffect(() => {
+  if (data.value) {
+    experience.value = data.value;
   }
-};
-const fetchFeatured = async () => {
-  try {
-    const res = await axios.get(
-      `https://api.airtable.com/v0/${config.base}/${config.featuredTableId}`,
-      {
-        headers: headers,
-      }
-    );
-    const { records } = res.data;
-    featured.value = records;
-  } catch (err) {
-    setTimeout(fetchFeatured, 10000);
-    console.log('Error loading featured', err);
-  }
-};
-
-fetchExperience();
-fetchFeatured();
+});
 </script>

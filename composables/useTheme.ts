@@ -59,10 +59,20 @@ export default function useTheme() {
       name: 'green',
       vars: {
         background: 'oklch(0.32 0.0229 173.56)',
-        foreground: 'oklch(0.94 0.0225 151.64)',
+        foreground: 'oklch(0.9381 0.029 72.47)',
         accent: 'oklch(0.58 0.0753 153.78)',
         'secondary-text': 'oklch(0.63 0.06 161.59)',
         border: 'oklch(0.58 0.0753 153.78)',
+      },
+    },
+    {
+      name: 'blue',
+      vars: {
+        background: 'oklch(0.18 0.04 269.52)',
+        foreground: 'oklch(0.9014 0.0389 66.04)',
+        accent: 'oklch(0.54 0.02 66.05)',
+        'secondary-text': 'oklch(0.5988 0.1009 260.24)',
+        border: 'oklch(0.54 0.02 66.05)',
       },
     },
   ];
