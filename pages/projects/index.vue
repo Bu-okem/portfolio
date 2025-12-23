@@ -18,7 +18,7 @@
         >
           <Drawer>
             <DrawerTrigger
-              @click="setPath(item._id)"
+              @click="setPath(item.name.split(' ').join('-'))"
               :aria-label="`View details for ${item.name} project`"
             >
               <ProjectCard
@@ -52,7 +52,7 @@
                 <div class="lg:w-[26vw] lg:absolute top-10 left-5 mb-5 lg:mb-0">
                   <div class="">
                     <h1
-                      class="text-3xl lg:text-4xl font-semibold mb-5 lg:mb-10 font-header"
+                      class="text-3xl lg:text-4xl font-semibold mb-5 lg:mb-10 font-header capitalize"
                       style="word-break: break-word"
                     >
                       {{ item.name }}

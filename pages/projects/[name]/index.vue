@@ -22,7 +22,7 @@
                 :initial="{ y: 50 }"
                 :animate="{ y: 0 }"
                 :transition="{ delay: 0.3, duration: 0.6 }"
-                class="text-3xl lg:text-4xl font-semibold font-header"
+                class="text-3xl lg:text-4xl font-semibold font-header capitalize"
                 style="word-break: break-word">
                 {{ text }}<span>&nbsp;</span>
               </motion.h1>
@@ -60,16 +60,16 @@
           :animate="{ opacity: 1, y: 0 }"
           :transition="{ delay: 0.3, duration: 0.6 }"
           class="lg:w-2/3 lg:absolute right-0 top-0 h-full">
-          <img :src="project.image[0].url" alt="" class="w-full rounded-sm" />
+          <img :src="project.imageUrl" alt="" class="w-full rounded-sm" />
           <div class="flex gap-3 mt-5">
             <p
               class="px-2 py-1 border border-accent rounded-sm text-xs"
-              v-for="tag in project.stack?.split(',')">
+              v-for="tag in project.stack">
               {{ tag }}
             </p>
           </div>
           <div class="flex gap-3 mt-5 mb-10">
-            <a :href="project.sourcecode" v-if="project.sourcecode">
+            <a :href="project.sourceCode" v-if="project.sourceCode">
               <span class="h-fit flex gap-x-1 py-1">
                 <p>Source Code</p>
                 <Icon
@@ -101,15 +101,10 @@
 </template>
 
 <script setup>
-import axios from 'axios';
+import { api } from '~/convex/_generated/api';
 import { marked } from 'marked';
 import { motion } from 'motion-v';
-import { useConfig } from '~/composables/useConfig';
 
-const config = useConfig();
-const loading = ref(true);
-const project = ref(null);
-const route = useRoute();
 definePageMeta({
   layout: 'project-layout',
 });
@@ -123,32 +118,11 @@ useHead({
     },
   ],
 });
-const url = route.fullPath;
-const projectId = url.split('/').pop() || '';
-const fetchProject = async (projectId) => {
-  try {
-    const response = await axios.get(
-      `https://api.airtable.com/v0/${config.base}/${config.projectsTableId}/${projectId}`,
-      {
-        headers: {
-          Authorization: `Bearer ${config.apiKey}`,
-        },
-      }
-    );
-    const data = await response.data;
-    project.value = data.fields;
-    loading.value = false;
-    useHead({
-      title: `Buokem - ${project.value?.name}`,
-    });
-    return data;
-  } catch (error) {
-    console.error('Error fetching project:', error);
-    return null;
-  }
-};
-
-onMounted(() => {
-  fetchProject(projectId);
+const route = useRoute();
+const projectNameParam = route.params.name;
+const projectName = projectNameParam.split('-').join(' ');
+const { data: project } = useConvexQuery(api.projects.getProjectByName, {
+  name: projectName
 });
+const loading = computed(() => project.value === undefined);
 </script>
