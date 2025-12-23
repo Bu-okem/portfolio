@@ -74,15 +74,15 @@
               :transition="{ delay: 0.3, duration: 0.6, repeat: 0 }"
               :inViewOptions="{ once: true }"
               class="text-xl"
-              >{{ exp.fields.institution }}</motion.p
+              >{{ exp.company }}</motion.p
             >
           </span>
           <div class="my-6">
-            <h3 class="sr-only">{{ exp.fields.position }}</h3>
+            <h3 class="sr-only">{{ exp.position }}</h3>
             <span
               aria-hidden="true"
               class="overflow-hidden inline-block"
-              v-for="(text, index) in exp.fields.position.split(' ')"
+              v-for="(text, index) in exp.position.split(' ')"
               :key="index">
               <motion.h3
                 :initial="{ y: 50 }"
@@ -102,15 +102,15 @@
               :inViewOptions="{ once: true }"
               :transition="{ delay: 0.3, duration: 0.6 }"
               class="flex">
-              <p class="tracking-wide">{{ exp.fields.startDate }}</p>
+              <p class="tracking-wide">{{ exp.startDate }}</p>
               <span class="mx-2"> - </span>
               <p class="tracking-wide">
-                {{ exp.fields.endDate ? `${exp.fields.endDate}` : 'Present' }}
+                {{ exp.endDate ? `${exp.endDate}` : 'Present' }}
               </p>
             </motion.span>
           </div>
           <p class="font-extralight leading-9 tracking-wide">
-            {{ exp.fields.description }}
+            {{ exp.description }}
           </p>
         </div>
       </div>
@@ -119,8 +119,11 @@
 </template>
 
 <script setup>
+import { api } from "../convex/_generated/api";
 import { motion } from 'motion-v';
 import { useExperience } from '~/composables/states';
+
+const experience = useExperience();
 
 // Set page metadata for SEO and accessibility
 useHead({
@@ -143,7 +146,6 @@ const heroText2 = 'I build things for the web.';
 const aboutText =
   'As a software developer, I have had the privilege of working on a wide range of projects. My experience has taught me the importance of attention to detail, effective communication, and efficient problem-solving. I am passionate about building software that is both functional and enjoyable to use. I am always looking for new challenges and opportunities to grow as a developer.';
 //  , from web applications to mobile apps
-const experience = useExperience();
 
 const sortExperience = (experiences) => {
   // Convert "Month YYYY" to ISO format "YYYY-MM-DD"
@@ -215,8 +217,8 @@ const sortExperience = (experiences) => {
   };
 
   return experiences.sort((a, b) => {
-    const dateA = convertToIsoDate(a.fields.endDate || a.fields.startDate);
-    const dateB = convertToIsoDate(b.fields.endDate || b.fields.startDate);
+    const dateA = convertToIsoDate(a.endDate || a.startDate);
+    const dateB = convertToIsoDate(b.endDate || b.startDate);
 
     // For ascending order (oldest first)
     return dateA.localeCompare(dateB);
@@ -226,8 +228,8 @@ const sortExperience = (experiences) => {
 // const sortExperience = (experiences) => {
 //   return experiences.sort((a, b) => {
 //     // Get end dates or fall back to start dates
-//     const dateA = new Date(a.fields.endDate || a.fields.startDate);
-//     const dateB = new Date(b.fields.endDate || b.fields.startDate);
+//     const dateA = new Date(a.endDate || a.startDate);
+//     const dateB = new Date(b.endDate || b.startDate);
 
 //     // Sort in ascending order (oldest first)
 //     return dateA - dateB;

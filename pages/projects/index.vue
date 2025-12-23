@@ -145,7 +145,6 @@
 </template>
 
 <script setup>
-import axios from "axios";
 import { api } from "../convex/_generated/api";
 import { marked } from "marked";
 import { motion } from "motion-v";
