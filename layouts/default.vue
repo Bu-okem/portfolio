@@ -47,7 +47,6 @@ const fetchExperience = async () => {
     const { records } = res.data;
     experience.value = records;
   } catch (err) {
-    setTimeout(fetchExperience, 10000);
     console.log('Error loading experience', err);
   }
 };
@@ -62,11 +61,10 @@ const fetchFeatured = async () => {
     const { records } = res.data;
     featured.value = records;
   } catch (err) {
-    setTimeout(fetchFeatured, 10000);
     console.log('Error loading featured', err);
   }
 };
 
-fetchExperience();
-fetchFeatured();
+// fetchExperience();
+// fetchFeatured();
 </script>

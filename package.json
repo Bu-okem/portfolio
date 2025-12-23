@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --dotenv .env.local",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -17,6 +17,9 @@
     "axios": "^1.9.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "convex": "^1.31.2",
+    "convex-nuxt": "^0.1.5",
+    "convex-vue": "^0.1.5",
     "lucide-vue-next": "^0.508.0",
     "marked": "^15.0.11",
     "medium-sdk-ts": "^0.2.0",
