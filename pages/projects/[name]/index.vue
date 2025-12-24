@@ -1,5 +1,14 @@
 <template>
-  <div>
+  <div v-if="project === null" class="bg-background h-[calc(100dvh-80px)] text-center flex flex-col items-center justify-center gap-4">
+    <h3 class="text-3xl lg:text-4xl font-semibold font-header">Project not found</h3>
+    <p class="text-lg lg:text-xl font-medium font-body">Sorry, we couldn't find the project you're looking for.</p>
+    <NuxtLink
+      to="/projects"
+      class="p-2 border-accent border-solid border font-bold hover:bg-accent hover:text-background transition-colors duration-300">
+      Back to projects
+    </NuxtLink>
+  </div>
+  <div v-else>
     <NuxtLink
       to="/projects"
       class="block w-[90vw] lg:w-auto py-5 lg:py-0 bg-background fixed 3xl:absolute top-0 lg:top-5 left-5 lg:left-10 z-50 font-bold">
@@ -22,7 +31,7 @@
                 :initial="{ y: 50 }"
                 :animate="{ y: 0 }"
                 :transition="{ delay: 0.3, duration: 0.6 }"
-                class="text-3xl lg:text-4xl font-semibold font-header capitalize"
+                class="text-3xl lg:text-4xl font-semibold font-header"
                 style="word-break: break-word">
                 {{ text }}<span>&nbsp;</span>
               </motion.h1>
@@ -98,6 +107,7 @@
       </section>
     </div>
   </div>
+
 </template>
 
 <script setup>
