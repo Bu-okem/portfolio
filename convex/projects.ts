@@ -51,7 +51,7 @@ export const getProjectByName = query({
     }
 
     if (!project) {
-      throw new Error("Project not found");
+      return null;
     }
 
     const imageUrl = await getImageUrl(project.image);
