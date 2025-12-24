@@ -27,7 +27,6 @@
                 :type="item.type"
                 :aria-label="`${item.name} - ${item.type}`"
               />
-
             </DrawerTrigger>
             <DrawerContent
               class="h-[calc(100dvh-20px)] bg-background rounded-t-sm text-foreground"
@@ -71,12 +70,17 @@
                   class="lg:pr-2 lg:pb-10 lg:w-2/3 lg:absolute right-5 top-10 h-auto lg:h-[calc(100vh-100px)] overflow-y-scroll custom-scrollbar"
                 >
                   <div class="">
-                    <div class="h-fit relative w-full aspect-video bg-accent rounded-sm overflow-hidden">
-                       <img
+                    <div
+                      class="h-fit relative w-full aspect-video bg-foreground rounded-sm overflow-hidden"
+                    >
+                      <img
                         :src="item.imageUrl"
                         :alt="`Screenshot of ${item.name} project`"
                         class="w-full h-full object-contain transition-opacity duration-500"
-                        :class="{ 'opacity-0': !isLoaded, 'opacity-100': isLoaded }"
+                        :class="{
+                          'opacity-0': !isLoaded,
+                          'opacity-100': isLoaded,
+                        }"
                         loading="lazy"
                         @load="handleLoad"
                       />
