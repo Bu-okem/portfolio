@@ -3,20 +3,7 @@
     <h1 class="sr-only">Projects - Buokem's Portfolio</h1>
     <ProjectsLoading v-if="loading" />
     <div v-else class="">
-      <div class="w-full flex justify-end mb-6">
-        <Select>
-          <SelectTrigger class="w-[180px]">
-            <SelectValue placeholder="Select a filter" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value="frontend"> frontend </SelectItem>
-              <SelectItem value="npm package"> npm package </SelectItem>
-              <SelectItem value="open source"> open source </SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </div>
+
       <masonry-wall :items="projects" :column-width="250" :gap="20" role="list">
         <template #default="{ item }">
           <motion.div
