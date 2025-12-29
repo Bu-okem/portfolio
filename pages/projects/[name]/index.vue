@@ -104,7 +104,7 @@
                 />
               </span>
             </a>
-            <a :href="project.link">
+            <a :href="project.demoLink">
               <span class="h-fit flex gap-x-1 py-1">
                 <p>Live Project</p>
                 <Icon
