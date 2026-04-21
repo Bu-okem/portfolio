@@ -4,6 +4,7 @@
     <div
       class="lg:fixed 3xl:absolute lg:left-[100px] lg:w-[calc(100%-100px)] 3xl: lg:h-full lg:top-0 lg:overflow-y-scroll 3xl:border-x 3xl:border-accent">
       <slot />
+      <Footer />
       <Switch />
     </div>
   </div>
@@ -15,7 +16,7 @@ import Switch from '@/components/Switch.vue';
 import { useExperience } from '~/composables/states';
 
 useHead({
-  title: 'Buokem — Software Developer',
+  title: 'Buokem - Software Developer',
   meta: [
     {
       name: 'description',

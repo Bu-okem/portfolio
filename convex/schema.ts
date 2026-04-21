@@ -11,6 +11,7 @@ const projects = defineTable({
   sourceCode: v.string(),
   demoLink: v.string(),
   role: v.string(),
+  live: v.boolean(),
 }).index("by_name", ["name"]);
 
 const workExperience = defineTable({

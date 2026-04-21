@@ -331,7 +331,7 @@ const applyThemeVars = (vars) => {
 // Update theme based on slider position
 const updateThemeFromSlider = () => {
   const position = parseFloat(themePosition.value);
-  console.log('Slider position:', position);
+
 
   // Special case for exact matches to predefined themes
   const exactTheme = allThemes.find((t) => t.position === position);
@@ -372,7 +372,7 @@ const setTheme = (themeName) => {
 
 // Initialize theme on component mount
 onMounted(() => {
-  console.log('ThemeSwitcher mounted');
+
 
   // Check for saved slider position
   const savedPosition = localStorage.getItem('theme-position');
@@ -380,7 +380,6 @@ onMounted(() => {
   if (savedPosition !== null) {
     // Use saved position
     themePosition.value = parseInt(savedPosition);
-    console.log('Using saved position:', themePosition.value);
   } else {
     // Check for saved theme name (backward compatibility)
     const savedTheme = localStorage.getItem('theme-preference');
@@ -390,20 +389,13 @@ onMounted(() => {
       const theme = allThemes.find((t) => t.name === savedTheme);
       if (theme) {
         themePosition.value = theme.position;
-        console.log(
-          'Using saved theme:',
-          savedTheme,
-          'at position:',
-          themePosition.value
-        );
       }
     } else {
       // Use system preference
       const prefersDark = window.matchMedia(
         '(prefers-color-scheme: dark)'
       ).matches;
-      themePosition.value = prefersDark ? 100 : 0; // 100 for dark, 0 for light
-      console.log('Using system preference:', prefersDark ? 'dark' : 'light');
+      themePosition.value = prefersDark ? 100 : 0;
     }
   }
 

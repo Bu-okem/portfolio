@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-1 lg:grid-cols-11 lg:h-full" role="main">
+  <div class="grid grid-cols-1 lg:grid-cols-11 lg:h-[91%]" role="main">
     <div
       class="relative p-6 pt-20 text-4xl lg:text-5xl lg:col-span-4 lg:row-end-2 lg:flex flex-col justify-end"
       role="banner"
@@ -224,11 +224,7 @@ useHead({
       content:
         "Portfolio of Buokem, a skilled software developer with experience in modern web technologies.",
     },
-    { name: "viewport", content: "width=device-width, initial-scale=1" },
   ],
-  htmlAttrs: {
-    lang: "en",
-  },
 });
 import { ref, onMounted } from "vue";
 import { delay, motion } from "motion-v";

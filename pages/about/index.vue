@@ -133,11 +133,7 @@ useHead({
       name: 'description',
       content: 'Learn more about Buokem, a skilled software developer with experience in modern web technologies.',
     },
-    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
   ],
-  htmlAttrs: {
-    lang: 'en',
-  },
 });
 
 const heroText1 = `Hi there, I'm Buokem, a Software Developer.`;

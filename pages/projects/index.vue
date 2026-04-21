@@ -1,5 +1,5 @@
 <template>
-  <main class="mt-20 mx-5 pb-9">
+  <main class="mt-20 mx-5 pb-9 h-[84%]">
     <h1 class="sr-only">Projects - Buokem's Portfolio</h1>
     <ProjectsLoading v-if="loading" />
     <div v-else class="">
@@ -180,11 +180,7 @@ useHead({
       content:
         "Explore the portfolio projects of Buokem, showcasing web development and design work.",
     },
-    { name: "viewport", content: "width=device-width, initial-scale=1" },
   ],
-  htmlAttrs: {
-    lang: "en",
-  },
 });
 
 const config = useConfig();
