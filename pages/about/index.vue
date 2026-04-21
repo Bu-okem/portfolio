@@ -12,7 +12,7 @@
           <motion.h1
             :initial="{ y: 54 }"
             :animate="{ y: 0 }"
-            :transition="{ delay: 0.3, duration: 0.6 }"
+            :transition="{ delay: 0.3 + index * 0.04, duration: 0.6 }"
             >{{ text }}<span>&nbsp;</span>
           </motion.h1>
         </span>
@@ -27,7 +27,7 @@
           <motion.h1
             :initial="{ y: 54 }"
             :animate="{ y: 0 }"
-            :transition="{ delay: 0.3, duration: 0.6 }"
+            :transition="{ delay: 0.3 + index * 0.04, duration: 0.6 }"
             class="font-extralight"
             >{{ text }}<span>&nbsp;</span>
           </motion.h1>
@@ -71,7 +71,7 @@
             <motion.p
               :initial="{ y: 24 }"
               :while-in-view="{ y: 0 }"
-              :transition="{ delay: 0.3, duration: 0.6, repeat: 0 }"
+              :transition="{ delay: 0.3 + index * 0.04, duration: 0.6, repeat: 0 }"
               :inViewOptions="{ once: true }"
               class="text-xl"
               >{{ exp.company }}</motion.p
@@ -88,7 +88,7 @@
                 :initial="{ y: 50 }"
                 :while-in-view="{ y: 0 }"
                 :inViewOptions="{ once: true }"
-                :transition="{ delay: 0.3, duration: 0.6 }"
+                :transition="{ delay: 0.3 + index * 0.04, duration: 0.6 }"
                 class="mb-4 lg:my-1 text-3xl lg:text-5xl font-semibold font-header">
                 {{ text }}<span>&nbsp;</span>
               </motion.h3>

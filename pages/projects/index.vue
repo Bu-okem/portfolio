@@ -80,11 +80,11 @@
                           :alt="`Screenshot of ${item.name} project`"
                           class="w-full h-full object-contain transition-opacity duration-500"
                           :class="{
-                            'opacity-0': !isLoaded,
-                            'opacity-100': isLoaded,
+                            'opacity-0': !loadedImages[item._id],
+                            'opacity-100': loadedImages[item._id],
                           }"
                           loading="lazy"
-                          @load="handleLoad"
+                          @load="handleLoad(item._id)"
                         />
                       </div>
                       <div class="flex gap-3 mt-5">
@@ -165,10 +165,10 @@ import {
 import { useProjects } from "~/composables/states";
 import { ProjectsLoading } from "#components";
 
-const isLoaded = ref(false);
+const loadedImages = reactive({});
 
-const handleLoad = () => {
-  isLoaded.value = true;
+const handleLoad = (id) => {
+  loadedImages[id] = true;
 };
 
 // Set page metadata for SEO and accessibility

@@ -9,7 +9,7 @@
         <motion.h1
           :initial="{ y: 50 }"
           :animate="{ y: 0 }"
-          :transition="{ delay: 0.6, duration: 0.6 }"
+          :transition="{ delay: 0.5, duration: 0.6 }"
           class="font-semibold font-header"
           >Software</motion.h1
         >
@@ -47,7 +47,7 @@
         <motion.h1
           :initial="{ y: 54 }"
           :animate="{ y: 0 }"
-          :transition="{ delay: 0.6, duration: 0.6 }"
+          :transition="{ delay: 0.7, duration: 0.6 }"
           class="text-6xl font-ubuntu-mono"
           aria-hidden="true"
           >b_</motion.h1
@@ -107,7 +107,7 @@
             <motion.h3
               :initial="{ y: 54 }"
               :animate="{ y: 0 }"
-              :transition="{ delay: 0.6, duration: 0.6 }"
+              :transition="{ delay: 0.7 + index * 0.02, duration: 0.6 }"
               >{{ text }}<span>&nbsp;</span>
             </motion.h3>
           </span>
@@ -150,7 +150,7 @@
             <motion.div
               :initial="{ y: 24 }"
               :animate="{ y: 0 }"
-              :transition="{ delay: 0.6, duration: 0.6 }"
+              :transition="{ delay: 0.5, duration: 0.6 }"
               class="flex items-center justify-between"
             >
               <h3
@@ -198,6 +198,7 @@
     <a
       href="https://wa.me/2348154387988"
       target="_blank"
+      rel="noopener noreferrer"
       class="border border-accent mt-3 px-6 pt-[100px] pb-20 relative lg:hidden"
       aria-label="Contact me"
     >

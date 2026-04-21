@@ -40,7 +40,7 @@
               <motion.h1
                 :initial="{ y: 50 }"
                 :animate="{ y: 0 }"
-                :transition="{ delay: 0.3, duration: 0.6 }"
+                :transition="{ delay: 0.3 + index * 0.04, duration: 0.6 }"
                 class="text-3xl lg:text-4xl font-semibold font-header capitalize"
                 style="word-break: break-word"
               >
@@ -59,7 +59,7 @@
               <motion.p
                 :initial="{ y: 50 }"
                 :animate="{ y: 0 }"
-                :transition="{ delay: 0.3, duration: 0.6 }"
+                :transition="{ delay: 0.3 + index * 0.02, duration: 0.6 }"
                 class="font-extralight text-secondary-text"
               >
                 {{ text }}<span>&nbsp;</span>
@@ -84,7 +84,7 @@
           :transition="{ delay: 0.3, duration: 0.6 }"
           class="lg:w-2/3 lg:absolute right-0 top-0 h-full"
         >
-          <img :src="project.imageUrl" alt="" class="w-full rounded-sm" />
+          <img :src="project.imageUrl" :alt="`Screenshot of ${project.name} project`" class="w-full rounded-sm" />
           <div class="flex gap-3 mt-5">
             <p
               class="px-2 py-1 border border-accent rounded-sm text-xs"
@@ -94,25 +94,36 @@
             </p>
           </div>
           <div class="flex gap-3 mt-5 mb-10">
-            <a :href="project.sourceCode" v-if="project.sourceCode">
-              <span class="h-fit flex gap-x-1 py-1">
-                <p>Source Code</p>
-                <Icon
-                  name="streamline:interface-arrows-corner-up-right-keyboard-top-arrow-right-up"
-                  size="9"
-                  class="h-2"
-                />
-              </span>
+            <a
+              :href="project.sourceCode"
+              v-if="project.sourceCode"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1 hover:underline"
+              aria-label="View source code (opens in new tab)"
+            >
+              <span>Source Code</span>
+              <Icon
+                name="streamline:interface-arrows-corner-up-right-keyboard-top-arrow-right-up"
+                size="9"
+                class="h-2"
+                aria-hidden="true"
+              />
             </a>
-            <a :href="project.demoLink">
-              <span class="h-fit flex gap-x-1 py-1">
-                <p>Live Project</p>
-                <Icon
-                  name="streamline:interface-arrows-corner-up-right-keyboard-top-arrow-right-up"
-                  size="9"
-                  class="h-2"
-                />
-              </span>
+            <a
+              :href="project.demoLink"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1 hover:underline"
+              aria-label="View live project (opens in new tab)"
+            >
+              <span>Live Project</span>
+              <Icon
+                name="streamline:interface-arrows-corner-up-right-keyboard-top-arrow-right-up"
+                size="9"
+                class="h-2"
+                aria-hidden="true"
+              />
             </a>
           </div>
           <div class="mt-10 pb-5 lg:pb-12">
