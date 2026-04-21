@@ -227,7 +227,7 @@ useHead({
     },
   ],
 });
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { delay, motion } from "motion-v";
 
 const aboutText = `As a software developer, I have had the privilege of working on a wide range of projects. My experience has taught me the importance of attention to detail, effective communication, and efficient problem-solving. I am passionate about building software that is both functional and enjoyable to use. I am always looking for new challenges and opportunities to grow as a developer.`;
@@ -244,7 +244,7 @@ const featured = [
   {
     name: "Stock Afrika",
     description:
-      "Stock Afrika is a vibrant stock photography platform celebrating African culture, people, and landscapes. As one of the developers, I designed this site to display high-quality, authentic images showcasing Africa’s diversity—from bustling markets and stunning landscapes to modern urban life and traditional heritage.",
+      "Stock Afrika is a vibrant stock photography platform celebrating African culture, people, and landscapes. As one of the developers, I designed this site to display high-quality, authentic images showcasing Africa's diversity—from bustling markets and stunning landscapes to modern urban life and traditional heritage.",
     link: "/projects/stock-afrika",
     type: "project",
     showDesc: ref(false),
@@ -265,45 +265,48 @@ const featuredContainer = ref(null);
 // Track if we're on mobile
 const isMobile = ref(false);
 
-// Check device width and set up click outside handler
-onMounted(() => {
-  // Initial check
+const handleResize = () => {
+  const wasMobile = isMobile.value;
+  const isNowDesktop = window.innerWidth >= 1024;
+
   isMobile.value = window.innerWidth < 1024;
 
-  // Set up resize listener
-  window.addEventListener("resize", () => {
-    const wasMobile = isMobile.value;
-    const isNowDesktop = window.innerWidth >= 1024;
+  // If transitioning from mobile to desktop, close all descriptions
+  if (wasMobile && isNowDesktop) {
+    featured.forEach((item) => {
+      if (item.showDesc.value) {
+        item.showDesc.value = false;
+      }
+    });
+  }
+};
 
-    isMobile.value = window.innerWidth < 1024;
+const handleClickOutside = (event) => {
+  if (!isMobile.value) return;
 
-    // If transitioning from mobile to desktop, close all descriptions
-    if (wasMobile && isNowDesktop) {
-      featured.forEach((item) => {
-        if (item.showDesc.value) {
-          item.showDesc.value = false;
-        }
-      });
-    }
-  });
+  // Check if click is outside the container
+  if (
+    featuredContainer.value &&
+    !featuredContainer.value.contains(event.target)
+  ) {
+    // Close all descriptions
+    featured.forEach((item) => {
+      if (item.showDesc.value) {
+        item.showDesc.value = false;
+      }
+    });
+  }
+};
 
-  // Set up document click listener for mobile
-  document.addEventListener("click", (event) => {
-    if (!isMobile.value) return;
+onMounted(() => {
+  isMobile.value = window.innerWidth < 1024;
+  window.addEventListener("resize", handleResize);
+  document.addEventListener("click", handleClickOutside);
+});
 
-    // Check if click is outside the container
-    if (
-      featuredContainer.value &&
-      !featuredContainer.value.contains(event.target)
-    ) {
-      // Close all descriptions
-      featured.forEach((item) => {
-        if (item.showDesc.value) {
-          item.showDesc.value = false;
-        }
-      });
-    }
-  });
+onUnmounted(() => {
+  window.removeEventListener("resize", handleResize);
+  document.removeEventListener("click", handleClickOutside);
 });
 
 // Toggle description visibility on mobile

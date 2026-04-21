@@ -221,15 +221,5 @@ const sortExperience = (experiences) => {
   });
 };
 
-// const sortExperience = (experiences) => {
-//   return experiences.sort((a, b) => {
-//     // Get end dates or fall back to start dates
-//     const dateA = new Date(a.endDate || a.startDate);
-//     const dateB = new Date(b.endDate || b.startDate);
-
-//     // Sort in ascending order (oldest first)
-//     return dateA - dateB;
-//   });
-// };
 const sortedExperience = computed(() => sortExperience(experience.value || []));
 </script>
