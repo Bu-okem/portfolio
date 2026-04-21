@@ -54,6 +54,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     // The private keys which are only available within server-side
+    mediumUsername: process.env.MEDIUM_USERNAME,
 
     // Keys within public, will be also exposed to the client-side
     public: {
