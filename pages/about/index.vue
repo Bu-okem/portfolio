@@ -12,7 +12,7 @@
           <motion.h1
             :initial="{ y: 54 }"
             :animate="{ y: 0 }"
-            :transition="{ delay: 0.3, duration: 0.6 }"
+            :transition="{ delay: 0.3 + index * 0.04, duration: 0.6 }"
             >{{ text }}<span>&nbsp;</span>
           </motion.h1>
         </span>
@@ -27,7 +27,7 @@
           <motion.h1
             :initial="{ y: 54 }"
             :animate="{ y: 0 }"
-            :transition="{ delay: 0.3, duration: 0.6 }"
+            :transition="{ delay: 0.3 + index * 0.04, duration: 0.6 }"
             class="font-extralight"
             >{{ text }}<span>&nbsp;</span>
           </motion.h1>
@@ -71,7 +71,7 @@
             <motion.p
               :initial="{ y: 24 }"
               :while-in-view="{ y: 0 }"
-              :transition="{ delay: 0.3, duration: 0.6, repeat: 0 }"
+              :transition="{ delay: 0.3 + index * 0.04, duration: 0.6, repeat: 0 }"
               :inViewOptions="{ once: true }"
               class="text-xl"
               >{{ exp.company }}</motion.p
@@ -88,7 +88,7 @@
                 :initial="{ y: 50 }"
                 :while-in-view="{ y: 0 }"
                 :inViewOptions="{ once: true }"
-                :transition="{ delay: 0.3, duration: 0.6 }"
+                :transition="{ delay: 0.3 + index * 0.04, duration: 0.6 }"
                 class="mb-4 lg:my-1 text-3xl lg:text-5xl font-semibold font-header">
                 {{ text }}<span>&nbsp;</span>
               </motion.h3>
@@ -133,11 +133,7 @@ useHead({
       name: 'description',
       content: 'Learn more about Buokem, a skilled software developer with experience in modern web technologies.',
     },
-    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
   ],
-  htmlAttrs: {
-    lang: 'en',
-  },
 });
 
 const heroText1 = `Hi there, I'm Buokem, a Software Developer.`;
@@ -225,15 +221,5 @@ const sortExperience = (experiences) => {
   });
 };
 
-// const sortExperience = (experiences) => {
-//   return experiences.sort((a, b) => {
-//     // Get end dates or fall back to start dates
-//     const dateA = new Date(a.endDate || a.startDate);
-//     const dateB = new Date(b.endDate || b.startDate);
-
-//     // Sort in ascending order (oldest first)
-//     return dateA - dateB;
-//   });
-// };
 const sortedExperience = computed(() => sortExperience(experience.value || []));
 </script>

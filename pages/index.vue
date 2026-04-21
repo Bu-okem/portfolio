@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-1 lg:grid-cols-11 lg:h-full" role="main">
+  <div class="grid grid-cols-1 lg:grid-cols-11 lg:h-[91%]" role="main">
     <div
       class="relative p-6 pt-20 text-4xl lg:text-5xl lg:col-span-4 lg:row-end-2 lg:flex flex-col justify-end"
       role="banner"
@@ -9,7 +9,7 @@
         <motion.h1
           :initial="{ y: 50 }"
           :animate="{ y: 0 }"
-          :transition="{ delay: 0.6, duration: 0.6 }"
+          :transition="{ delay: 0.5, duration: 0.6 }"
           class="font-semibold font-header"
           >Software</motion.h1
         >
@@ -47,7 +47,7 @@
         <motion.h1
           :initial="{ y: 54 }"
           :animate="{ y: 0 }"
-          :transition="{ delay: 0.6, duration: 0.6 }"
+          :transition="{ delay: 0.7, duration: 0.6 }"
           class="text-6xl font-ubuntu-mono"
           aria-hidden="true"
           >b_</motion.h1
@@ -107,7 +107,7 @@
             <motion.h3
               :initial="{ y: 54 }"
               :animate="{ y: 0 }"
-              :transition="{ delay: 0.6, duration: 0.6 }"
+              :transition="{ delay: 0.7 + index * 0.02, duration: 0.6 }"
               >{{ text }}<span>&nbsp;</span>
             </motion.h3>
           </span>
@@ -150,7 +150,7 @@
             <motion.div
               :initial="{ y: 24 }"
               :animate="{ y: 0 }"
-              :transition="{ delay: 0.6, duration: 0.6 }"
+              :transition="{ delay: 0.5, duration: 0.6 }"
               class="flex items-center justify-between"
             >
               <h3
@@ -198,6 +198,7 @@
     <a
       href="https://wa.me/2348154387988"
       target="_blank"
+      rel="noopener noreferrer"
       class="border border-accent mt-3 px-6 pt-[100px] pb-20 relative lg:hidden"
       aria-label="Contact me"
     >
@@ -224,13 +225,9 @@ useHead({
       content:
         "Portfolio of Buokem, a skilled software developer with experience in modern web technologies.",
     },
-    { name: "viewport", content: "width=device-width, initial-scale=1" },
   ],
-  htmlAttrs: {
-    lang: "en",
-  },
 });
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { delay, motion } from "motion-v";
 
 const aboutText = `As a software developer, I have had the privilege of working on a wide range of projects. My experience has taught me the importance of attention to detail, effective communication, and efficient problem-solving. I am passionate about building software that is both functional and enjoyable to use. I am always looking for new challenges and opportunities to grow as a developer.`;
@@ -247,7 +244,7 @@ const featured = [
   {
     name: "Stock Afrika",
     description:
-      "Stock Afrika is a vibrant stock photography platform celebrating African culture, people, and landscapes. As one of the developers, I designed this site to display high-quality, authentic images showcasing Africa’s diversity—from bustling markets and stunning landscapes to modern urban life and traditional heritage.",
+      "Stock Afrika is a vibrant stock photography platform celebrating African culture, people, and landscapes. As one of the developers, I designed this site to display high-quality, authentic images showcasing Africa's diversity—from bustling markets and stunning landscapes to modern urban life and traditional heritage.",
     link: "/projects/stock-afrika",
     type: "project",
     showDesc: ref(false),
@@ -268,45 +265,48 @@ const featuredContainer = ref(null);
 // Track if we're on mobile
 const isMobile = ref(false);
 
-// Check device width and set up click outside handler
-onMounted(() => {
-  // Initial check
+const handleResize = () => {
+  const wasMobile = isMobile.value;
+  const isNowDesktop = window.innerWidth >= 1024;
+
   isMobile.value = window.innerWidth < 1024;
 
-  // Set up resize listener
-  window.addEventListener("resize", () => {
-    const wasMobile = isMobile.value;
-    const isNowDesktop = window.innerWidth >= 1024;
+  // If transitioning from mobile to desktop, close all descriptions
+  if (wasMobile && isNowDesktop) {
+    featured.forEach((item) => {
+      if (item.showDesc.value) {
+        item.showDesc.value = false;
+      }
+    });
+  }
+};
 
-    isMobile.value = window.innerWidth < 1024;
+const handleClickOutside = (event) => {
+  if (!isMobile.value) return;
 
-    // If transitioning from mobile to desktop, close all descriptions
-    if (wasMobile && isNowDesktop) {
-      featured.forEach((item) => {
-        if (item.showDesc.value) {
-          item.showDesc.value = false;
-        }
-      });
-    }
-  });
+  // Check if click is outside the container
+  if (
+    featuredContainer.value &&
+    !featuredContainer.value.contains(event.target)
+  ) {
+    // Close all descriptions
+    featured.forEach((item) => {
+      if (item.showDesc.value) {
+        item.showDesc.value = false;
+      }
+    });
+  }
+};
 
-  // Set up document click listener for mobile
-  document.addEventListener("click", (event) => {
-    if (!isMobile.value) return;
+onMounted(() => {
+  isMobile.value = window.innerWidth < 1024;
+  window.addEventListener("resize", handleResize);
+  document.addEventListener("click", handleClickOutside);
+});
 
-    // Check if click is outside the container
-    if (
-      featuredContainer.value &&
-      !featuredContainer.value.contains(event.target)
-    ) {
-      // Close all descriptions
-      featured.forEach((item) => {
-        if (item.showDesc.value) {
-          item.showDesc.value = false;
-        }
-      });
-    }
-  });
+onUnmounted(() => {
+  window.removeEventListener("resize", handleResize);
+  document.removeEventListener("click", handleClickOutside);
 });
 
 // Toggle description visibility on mobile

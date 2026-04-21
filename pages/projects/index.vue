@@ -1,5 +1,5 @@
 <template>
-  <main class="mt-20 mx-5 pb-9">
+  <main class="mt-20 mx-5 pb-9 h-[84%]">
     <h1 class="sr-only">Projects - Buokem's Portfolio</h1>
     <ProjectsLoading v-if="loading" />
     <div v-else class="">
@@ -80,11 +80,11 @@
                           :alt="`Screenshot of ${item.name} project`"
                           class="w-full h-full object-contain transition-opacity duration-500"
                           :class="{
-                            'opacity-0': !isLoaded,
-                            'opacity-100': isLoaded,
+                            'opacity-0': !loadedImages[item._id],
+                            'opacity-100': loadedImages[item._id],
                           }"
                           loading="lazy"
-                          @load="handleLoad"
+                          @load="handleLoad(item._id)"
                         />
                       </div>
                       <div class="flex gap-3 mt-5">
@@ -165,10 +165,10 @@ import {
 import { useProjects } from "~/composables/states";
 import { ProjectsLoading } from "#components";
 
-const isLoaded = ref(false);
+const loadedImages = reactive({});
 
-const handleLoad = () => {
-  isLoaded.value = true;
+const handleLoad = (id) => {
+  loadedImages[id] = true;
 };
 
 // Set page metadata for SEO and accessibility
@@ -180,11 +180,7 @@ useHead({
       content:
         "Explore the portfolio projects of Buokem, showcasing web development and design work.",
     },
-    { name: "viewport", content: "width=device-width, initial-scale=1" },
   ],
-  htmlAttrs: {
-    lang: "en",
-  },
 });
 
 const config = useConfig();

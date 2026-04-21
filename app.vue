@@ -2,12 +2,10 @@
   <div
     class="min-h-screen bg-background text-foreground font-body transition-all duration-500">
     <NuxtLayout>
-      <NuxtPage />
+      <NuxtPage :transition="{ name: 'page', mode: 'out-in' }" />
     </NuxtLayout>
   </div>
 </template>
-
-<!-- #262626 -->
 
 <script setup>
 useHead({
