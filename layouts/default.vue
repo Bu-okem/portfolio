@@ -24,6 +24,21 @@ useHead({
         'Portfolio of Buokem, a skilled software developer with experience in modern web technologies.',
     },
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    // Open Graph
+    { property: 'og:type', content: 'website' },
+    { property: 'og:title', content: 'Buokem - Software Developer' },
+    {
+      property: 'og:description',
+      content: 'Portfolio of Buokem, a skilled software developer with experience in modern web technologies.',
+    },
+    { property: 'og:site_name', content: 'Buokem' },
+    // Twitter Card
+    { name: 'twitter:card', content: 'summary' },
+    { name: 'twitter:title', content: 'Buokem - Software Developer' },
+    {
+      name: 'twitter:description',
+      content: 'Portfolio of Buokem, a skilled software developer with experience in modern web technologies.',
+    },
   ],
   htmlAttrs: {
     lang: 'en',
