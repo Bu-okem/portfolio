@@ -1,5 +1,5 @@
 <template>
-  <main class="h-[84%] pb-20 mt-[150px] lg:mt-[200px] mx-5 lg:mx-20">
+  <main class="h-[73%] pb-20 mt-2 lg:mt-[200px] mx-5 lg:mx-20">
     <h1 class="sr-only">Blog - Buokem</h1>
 
     <section class="mb-16" aria-labelledby="blog-heading">
