@@ -242,14 +242,6 @@ const featured = [
     showDesc: ref(false),
   },
   {
-    name: "Stock Afrika",
-    description:
-      "Stock Afrika is a vibrant stock photography platform celebrating African culture, people, and landscapes. As one of the developers, I designed this site to display high-quality, authentic images showcasing Africa's diversity—from bustling markets and stunning landscapes to modern urban life and traditional heritage.",
-    link: "/projects/stock-afrika",
-    type: "project",
-    showDesc: ref(false),
-  },
-  {
     name: "Verbally Yours",
     description:
       "Verbally Yours is coaching platform built to help professionals find direction, confidence, and fulfillment in their careers. Through personalized coaching sessions, reflective exercises, and actionable strategies, Verbally Yours empowers individuals to articulate their goals, own their strengths, and navigate career transitions with clarity.",
