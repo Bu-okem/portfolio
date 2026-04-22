@@ -12,7 +12,7 @@ const projects = defineTable({
   demoLink: v.string(),
   role: v.string(),
   live: v.boolean(),
-}).index("by_name", ["name"]);
+}).index("by_name", ["name"]).index("featured", ["live"]);
 
 const workExperience = defineTable({
   company: v.string(),

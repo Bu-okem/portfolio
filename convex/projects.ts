@@ -1,9 +1,12 @@
-import { Id, v } from "convex/values";
+import type { Id } from "./_generated/dataModel";
+import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 
 export const get = query({
   handler: async (ctx) => {
-    const projects = await ctx.db.query("projects").collect();
+    const projects = await ctx.db.query("projects")
+      .withIndex("featured", (q) => q.eq("live", true))
+      .collect();
 
     const projectsWithUrls = await Promise.all(
       projects.map(async (project) => {
@@ -30,7 +33,8 @@ export const create = mutation({
     stack: v.array(v.string()),
     sourceCode: v.string(),
     demoLink: v.string(),
-    role: v.string()
+    role: v.string(),
+    live: v.boolean(),
   },
   handler: (ctx, args) => {
     ctx.db.insert("projects", args)
