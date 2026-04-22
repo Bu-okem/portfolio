@@ -2,9 +2,80 @@
   <main class="mt-20 mx-5 pb-9 h-[84%]">
     <h1 class="sr-only">Projects - Buokem's Portfolio</h1>
     <ProjectsLoading v-if="loading" />
-    <div v-else class="">
+    <div v-else>
+      <!-- Filters -->
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <!-- Type pills -->
+        <div
+          class="flex flex-wrap gap-2"
+          role="group"
+          aria-label="Filter projects by type"
+        >
+          <button
+            v-for="type in projectTypes"
+            :key="type"
+            @click="selectedType = type"
+            class="px-4 py-1.5 text-sm border rounded-sm transition-all duration-300 cursor-pointer capitalize"
+            :class="
+              selectedType === type
+                ? 'border-foreground bg-foreground text-background font-medium'
+                : 'border-accent text-secondary-text hover:border-foreground hover:text-foreground'
+            "
+            :aria-pressed="selectedType === type"
+          >
+            {{ type }}
+          </button>
+        </div>
 
-      <masonry-wall :items="projects" :column-width="250" :gap="20" role="list">
+        <!-- Stack dropdown -->
+        <div class="relative" ref="dropdownRef">
+          <button
+            @click="dropdownOpen = !dropdownOpen"
+            class="flex items-center gap-2 px-4 py-1.5 text-sm border border-accent rounded-sm transition-all duration-300 cursor-pointer hover:border-foreground"
+            :class="selectedStack !== 'all' ? 'border-foreground text-foreground' : 'text-secondary-text'"
+            aria-haspopup="listbox"
+            :aria-expanded="dropdownOpen"
+          >
+            <span>{{ selectedStack === 'all' ? 'Technology' : selectedStack }}</span>
+            <Icon
+              name="iconamoon:arrow-down-2-light"
+              size="16"
+              class="transition-transform duration-200"
+              :class="dropdownOpen ? 'rotate-180' : ''"
+              aria-hidden="true"
+            />
+          </button>
+          <div
+            v-show="dropdownOpen"
+            class="absolute right-0 top-full mt-1 z-30 min-w-[180px] max-h-[240px] overflow-y-auto border border-accent bg-background rounded-sm shadow-lg"
+            role="listbox"
+            aria-label="Select technology"
+          >
+            <button
+              v-for="stack in stackOptions"
+              :key="stack"
+              @click="selectStack(stack)"
+              class="w-full text-left px-4 py-2 text-sm transition-colors duration-200 cursor-pointer capitalize"
+              :class="
+                selectedStack === stack
+                  ? 'bg-foreground text-background font-medium'
+                  : 'text-secondary-text hover:bg-accent/20 hover:text-foreground'
+              "
+              role="option"
+              :aria-selected="selectedStack === stack"
+            >
+              {{ stack }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <masonry-wall
+        :items="filteredProjects"
+        :column-width="250"
+        :gap="20"
+        role="list"
+      >
         <template #default="{ item }">
           <motion.div
             :initial="{ opacity: 0, y: 30 }"
@@ -192,6 +263,46 @@ watchEffect(() => {
   if (data.value) {
     projects.value = data.value;
   }
+});
+
+// Filter by project type
+const selectedType = ref("all");
+const selectedStack = ref("all");
+const dropdownOpen = ref(false);
+const dropdownRef = ref(null);
+
+// Close dropdown when clicking outside
+onClickOutside(dropdownRef, () => {
+  dropdownOpen.value = false;
+});
+
+const selectStack = (stack) => {
+  selectedStack.value = stack;
+  dropdownOpen.value = false;
+};
+
+const projectTypes = computed(() => {
+  if (!projects.value) return ["all"];
+  const types = [...new Set(projects.value.map((p) => p.type).filter(Boolean))];
+  return ["all", ...types];
+});
+
+const stackOptions = computed(() => {
+  if (!projects.value) return ["all"];
+  const stacks = [...new Set(projects.value.flatMap((p) => p.stack || []))];
+  return ["all", ...stacks.sort()];
+});
+
+const filteredProjects = computed(() => {
+  if (!projects.value) return [];
+  return projects.value.filter((p) => {
+    const matchesType =
+      selectedType.value === "all" || p.type === selectedType.value;
+    const matchesStack =
+      selectedStack.value === "all" ||
+      (p.stack && p.stack.includes(selectedStack.value));
+    return matchesType && matchesStack;
+  });
 });
 
 const setPath = (path) => {
