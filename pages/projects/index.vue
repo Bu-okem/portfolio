@@ -1,5 +1,5 @@
 <template>
-  <main class="mt-20 mx-5 pb-9 h-[84%]">
+  <main class="mt-20 mx-5 pb-9 min-h-[71dvh] h-[84%]">
     <h1 class="sr-only">Projects - Buokem's Portfolio</h1>
     <ProjectsLoading v-if="loading" />
     <div v-else>
@@ -32,11 +32,17 @@
           <button
             @click="dropdownOpen = !dropdownOpen"
             class="flex items-center gap-2 px-4 py-1.5 text-sm border border-accent rounded-sm transition-all duration-300 cursor-pointer hover:border-foreground"
-            :class="selectedStack !== 'all' ? 'border-foreground text-foreground' : 'text-secondary-text'"
+            :class="
+              selectedStack !== 'all'
+                ? 'border-foreground text-foreground'
+                : 'text-secondary-text'
+            "
             aria-haspopup="listbox"
             :aria-expanded="dropdownOpen"
           >
-            <span>{{ selectedStack === 'all' ? 'Technology' : selectedStack }}</span>
+            <span>{{
+              selectedStack === "all" ? "Technology" : selectedStack
+            }}</span>
             <Icon
               name="iconamoon:arrow-down-2-light"
               size="16"
@@ -47,7 +53,7 @@
           </button>
           <div
             v-show="dropdownOpen"
-            class="absolute right-0 top-full mt-1 z-30 min-w-[180px] max-h-[240px] overflow-y-auto border border-accent bg-background rounded-sm shadow-lg"
+            class="absolute left-0 lg:left-auto lg:right-0 top-full mt-1 z-30 min-w-[180px] max-h-[240px] overflow-y-auto border border-accent bg-background rounded-sm shadow-lg"
             role="listbox"
             aria-label="Select technology"
           >
@@ -71,6 +77,7 @@
       </div>
 
       <masonry-wall
+        v-if="filteredProjects.length > 0"
         :items="filteredProjects"
         :column-width="250"
         :gap="20"
@@ -218,6 +225,13 @@
           </motion.div>
         </template>
       </masonry-wall>
+      <div v-else>
+        <h1 class="text-2xl mt-12">Couldn't find a match</h1>
+        <p>
+          No records match the selected criteria. Try removing one or more
+          active filters.
+        </p>
+      </div>
     </div>
   </main>
 </template>
