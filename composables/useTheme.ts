@@ -55,6 +55,16 @@ export default function useTheme() {
         border: "oklch(0.85 0.05 85)",
       },
     },
+    {
+      name: "terracotta-cream",
+      vars: {
+        background: "oklch(0.944 0.0156 86.43)",
+        foreground: "oklch(0.4913 0.1344 36.35)",
+        accent: "oklch(0.45 0.15 35)",
+        "secondary-text": "oklch(0.65 0.03 70)",
+        border: "oklch(0.88 0.02 85)",
+      },
+    },
     // background: "oklch(0.97 0.03 90)" /* Warm Sand Beige */,
     {
       name: "green",
@@ -89,11 +99,11 @@ export default function useTheme() {
     {
       name: "espresso",
       vars: {
-        background: "oklch(0.19 0.02 50)",
-        foreground: "oklch(0.95 0.04 50)",
-        accent: "oklch(0.9 0.05 50)",
-        "secondary-text": "oklch(0.75 0.05 50)",
-        border: "oklch(0.35 0.05 50)",
+        background: "oklch(0.22 0.03 45)",
+        foreground: "oklch(0.92 0.02 60)",
+        accent: "oklch(0.70 0.12 50)",
+        "secondary-text": "oklch(0.65 0.03 55)",
+        border: "oklch(0.32 0.03 48)",
       },
     },
   ];
