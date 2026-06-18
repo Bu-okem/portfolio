@@ -11,10 +11,17 @@ export const get = query({
     const projectsWithUrls = await Promise.all(
       projects.map(async (project) => {
         const imageUrl = await ctx.storage.getUrl(project.image);
-
+        const imageUrls = [];
+        if (project.images) {
+          for (const image of project.images) {
+            const imageUrl = await ctx.storage.getUrl(image);
+            imageUrls.push(imageUrl);
+          }
+        }
         return {
           ...project,
           imageUrl: imageUrl,
+          imageUrls: imageUrls,
         };
       })
     );
@@ -29,6 +36,7 @@ export const create = mutation({
     description: v.string(),
     shortDescription: v.string(),
     image: v.id("_storage"),
+    images: v.array(v.id("_storage")),
     type: v.string(),
     stack: v.array(v.string()),
     sourceCode: v.string(),
@@ -59,10 +67,16 @@ export const getProjectByName = query({
     }
 
     const imageUrl = await getImageUrl(project.image);
+    const imageUrls = [];
+    for (const image of project.images) {
+      const imageUrl = await getImageUrl(image);
+      imageUrls.push(imageUrl);
+    }
 
     return {
       ...project,
       imageUrl: imageUrl,
+      imageUrls: imageUrls,
     };
   },
 });
