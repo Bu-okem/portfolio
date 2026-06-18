@@ -84,7 +84,15 @@
           :transition="{ delay: 0.3, duration: 0.6 }"
           class="lg:w-2/3 lg:absolute right-0 top-0 h-full"
         >
-          <img :src="project.imageUrl" :alt="`Screenshot of ${project.name} project`" class="w-full rounded-sm" />
+          <Carousel>
+            <CarouselContent>
+                <CarouselItem v-for="(image, index) in project.imageUrls" :key="index">
+                  <img :src="image" :alt="`Screenshot of ${project.name} project`" class="w-full rounded-sm" />
+                </CarouselItem>
+            </CarouselContent>
+            <CarouselPrevious class="left-2" v-if="project.imageUrls.length > 1"/>
+            <CarouselNext class="right-2" v-if="project.imageUrls.length > 1"/>
+          </Carousel>
           <div class="flex gap-3 mt-5">
             <p
               class="px-2 py-1 border border-accent rounded-sm text-xs"

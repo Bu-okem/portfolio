@@ -151,19 +151,27 @@
                   >
                     <div class="">
                       <div
-                        class="h-fit relative w-full aspect-video bg-foreground rounded-sm overflow-hidden"
+                        class="h-fit relative aspect-video bg-foreground rounded-sm overflow-hidden"
                       >
-                        <img
-                          :src="item.imageUrl"
-                          :alt="`Screenshot of ${item.name} project`"
-                          class="w-full h-full object-contain transition-opacity duration-500"
+                      <Carousel>
+                          <CarouselContent>
+                        <CarouselItem v-for="(image, index) in item.imageUrls" :key="index">
+                            <img
+                              :src="image"
+                              :alt="`Screenshot of ${item.name} project`"
+                              class="w-full h-full object-contain transition-opacity duration-500"
                           :class="{
-                            'opacity-0': !loadedImages[item._id],
-                            'opacity-100': loadedImages[item._id],
+                            'opacity-0': !loadedImages[`${item._id}-${index}`],
+                            'opacity-100': loadedImages[`${item._id}-${index}`],
                           }"
                           loading="lazy"
-                          @load="handleLoad(item._id)"
+                          @load="handleLoad(`${item._id}-${index}`)"
                         />
+                        </CarouselItem>
+                        </CarouselContent>
+                        <CarouselPrevious class="left-2" v-if="item.imageUrls.length > 1"/>
+                        <CarouselNext class="right-2" v-if="item.imageUrls.length > 1"/>
+                      </Carousel>
                       </div>
                       <div class="flex gap-3 mt-5">
                         <p
@@ -175,8 +183,8 @@
                       </div>
                       <div class="flex gap-3 mt-5 mb-10">
                         <a
-                          :href="item.sourcecode"
-                          v-if="item.sourcecode"
+                          :href="item.sourceCode"
+                          v-if="item.sourceCode"
                           target="_blank"
                           rel="noopener noreferrer"
                           class="inline-flex items-center gap-1 hover:underline"
@@ -276,6 +284,7 @@ const projects = useProjects();
 watchEffect(() => {
   if (data.value) {
     projects.value = data.value;
+    console.log(projects.value);
   }
 });
 

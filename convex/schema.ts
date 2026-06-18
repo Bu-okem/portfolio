@@ -6,6 +6,7 @@ const projects = defineTable({
   description: v.string(),
   shortDescription: v.string(),
   image: v.id("_storage"),
+  images: v.array(v.id("_storage")),
   type: v.string(),
   stack: v.array(v.string()),
   sourceCode: v.string(),
