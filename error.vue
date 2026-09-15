@@ -1,4 +1,5 @@
 <template>
+  <MotionConfig reduce-motion="user">
   <div
     class="min-h-screen bg-background text-foreground font-body flex flex-col items-center justify-center px-5">
     <div class="text-center max-w-[600px]">
@@ -7,7 +8,7 @@
           :initial="{ y: 160 }"
           :animate="{ y: 0 }"
           :transition="{ delay: 0.1, duration: 0.6 }"
-          class="text-7xl lg:text-9xl font-semibold font-header"
+          class="text-7xl lg:text-9xl font-semibold font-header text-heading"
           >{{ error?.statusCode || 404 }}</motion.h1
         >
       </span>
@@ -30,7 +31,7 @@
           </p>
           <NuxtLink
             to="/"
-            class="inline-block px-6 py-3 border border-accent hover:border-foreground hover:bg-foreground hover:text-background transition-all duration-300 font-medium"
+            class="inline-block px-6 py-3 border border-border hover:border-foreground hover:bg-foreground hover:text-background transition-all duration-300 font-medium"
             @click="handleError"
           >
             Back to Home
@@ -39,10 +40,12 @@
       </span>
     </div>
   </div>
+</MotionConfig>
 </template>
 
 <script setup>
-import { motion } from 'motion-v';
+import { motion, MotionConfig } from 'motion-v';
+import { themeBootstrapScript } from '~/lib/themes';
 
 defineProps({
   error: Object,
@@ -54,19 +57,9 @@ useHead({
 
 const handleError = () => clearError({ redirect: '/' });
 
+// Applies the stored theme before first paint. Generated from lib/themes.ts,
+// so deleting a theme there automatically retires it here too.
 useHead({
-  script: [
-    {
-      children: `if (
-    localStorage.theme === 'dark' ||
-    (!('theme' in localStorage) &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches)
-  ) {
-    document.documentElement.classList.add('dark');
-  } else {
-    document.documentElement.classList.remove('dark');
-  }`,
-    },
-  ],
+  script: [{ children: themeBootstrapScript() }],
 });
 </script>

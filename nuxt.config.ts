@@ -29,7 +29,29 @@ export default defineNuxtConfig({
     "shadcn-nuxt",
     "@nuxtjs/google-fonts",
     "convex-nuxt",
+    "@nuxt/image",
   ],
+
+  icon: {
+    // The @iconify-json/* collections are devDependencies: at build time the
+    // source is scanned and only the icons actually referenced are inlined,
+    // so no collection JSON ships to the server and the page no longer hits
+    // the Iconify API at runtime. Anything the scan misses still falls back
+    // to the API rather than failing.
+    clientBundle: { scan: true },
+    serverBundle: false,
+  },
+
+  image: {
+    // "auto" resolves to the platform provider - Vercel's image CDN today.
+    // Moving host is an env change, not a code change: set
+    // NUXT_IMAGE_PROVIDER=cloudflare (plus image.cloudflare.baseURL) on
+    // Cloudflare, since that one is not auto-detectable.
+    provider: "auto",
+    // Project screenshots are served from Convex storage, a remote origin, so
+    // it has to be allowlisted before it can be optimised.
+    domains: [process.env.CONVEX_URL].filter(Boolean) as string[],
+  },
   convex: {
     url: process.env.CONVEX_URL,
   },
@@ -53,16 +75,8 @@ export default defineNuxtConfig({
     },
   },
   runtimeConfig: {
-    // The private keys which are only available within server-side
+    // Server-side only. Project and work-experience data comes from Convex;
+    // the Airtable keys that used to live here went with it.
     mediumUsername: process.env.MEDIUM_USERNAME,
-
-    // Keys within public, will be also exposed to the client-side
-    public: {
-      API_TOKEN: process.env.API_TOKEN,
-      AIRTABLE_BASE_ID: process.env.AIRTABLE_BASE_ID,
-      PROJECTS_TABLE_ID: process.env.PROJECTS_TABLE_ID,
-      WORK_EXPERIENCE_TABLE_ID: process.env.WORK_EXPERIENCE_TABLE_ID,
-      FEATURED_TABLE_ID: process.env.FEATURED_TABLE_ID,
-    },
   },
 });

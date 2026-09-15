@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="fixed 3xl:absolute z-50 top-0 left-0 right-0 lg:right-auto overflow-hidden transition-all duration-700 border-b border-solid border-accent 3xl:border-l"
+    class="fixed 3xl:absolute z-50 top-0 left-0 right-0 lg:right-auto overflow-hidden transition-all duration-700 border-b border-solid border-border 3xl:border-l"
     :class="
       isOpen
         ? 'h-[calc(100vh+2px)] border-b lg:border-b-0'
@@ -26,7 +26,7 @@
   </nav>
   <header
     class="sticky top-0 z-50 w-full lg:w-fit bg-background flex items-center justify-between px-5 py-6 3xl:bg-transparent">
-    <h1 class="text-2xl font-ubuntu-mono">b_</h1>
+    <span class="text-2xl font-ubuntu-mono">b_</span>
     <div class="lg:hidden">
       <button v-if="!isOpen" @click="toggleMenu" aria-label="Open Menu">
         <Icon name="hugeicons:menu-02" size="24" />

@@ -3,7 +3,7 @@
     <h1 class="sr-only">Blog - Buokem</h1>
 
     <section class="mb-16" aria-labelledby="blog-heading">
-      <div class="text-4xl font-semibold font-header">
+      <div class="text-4xl font-semibold font-header text-heading">
         <div>
           <h2 id="blog-heading" class="sr-only">{{ heroText1 }} {{ heroText2 }}</h2>
           <span
@@ -43,7 +43,7 @@
       <div
         v-for="n in 4"
         :key="n"
-        class="min-h-[240px] border border-accent rounded-sm p-6 animate-pulse">
+        class="min-h-[240px] border border-border rounded-sm p-6 animate-pulse">
         <div class="h-6 bg-accent/20 rounded w-3/4 mb-4"></div>
         <div class="h-4 bg-accent/20 rounded w-full mb-2"></div>
         <div class="h-4 bg-accent/20 rounded w-2/3 mb-8"></div>
@@ -59,7 +59,7 @@
       <p class="text-xl text-secondary-text mb-4">Unable to load blog posts right now.</p>
       <button
         @click="refresh"
-        class="px-5 py-2 border border-accent hover:border-foreground hover:bg-foreground hover:text-background transition-all duration-300">
+        class="px-5 py-2 border border-border hover:border-foreground hover:bg-foreground hover:text-background transition-all duration-300">
         Try Again
       </button>
     </section>

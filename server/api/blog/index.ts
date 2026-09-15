@@ -1,25 +1,44 @@
-export default defineEventHandler(async () => {
-  const { mediumUsername } = useRuntimeConfig();
-  const username = mediumUsername || "@buokem";
-  const feedUrl = `https://medium.com/feed/${username}`;
+/**
+ * Medium's RSS feed used to be refetched on every single request. It is now
+ * cached for 30 minutes, and `swr` keeps serving the last good copy for up to
+ * a day while a refresh happens in the background - so a slow or unreachable
+ * Medium no longer blocks the blog page.
+ *
+ * Failures are never cached: nitro rejects any entry with a status >= 400, and
+ * a background refresh that throws is logged while the stale copy keeps
+ * serving.
+ */
+export default defineCachedEventHandler(
+  async () => {
+    const { mediumUsername } = useRuntimeConfig();
+    const username = mediumUsername || "@buokem";
+    const feedUrl = `https://medium.com/feed/${username}`;
 
-  try {
-    const response = await $fetch<string>(feedUrl, {
-      headers: {
-        Accept: "application/rss+xml, application/xml, text/xml",
-      },
-    });
+    try {
+      const response = await $fetch<string>(feedUrl, {
+        headers: {
+          Accept: "application/rss+xml, application/xml, text/xml",
+        },
+      });
 
-    const posts = parseRssFeed(response);
-    return { posts };
-  } catch (error: any) {
-    console.error("Failed to fetch Medium feed:", error.message);
-    throw createError({
-      statusCode: 502,
-      statusMessage: "Failed to fetch blog posts from Medium",
-    });
+      const posts = parseRssFeed(response);
+      return { posts };
+    } catch (error: any) {
+      console.error("Failed to fetch Medium feed:", error.message);
+      throw createError({
+        statusCode: 502,
+        statusMessage: "Failed to fetch blog posts from Medium",
+      });
+    }
+  },
+  {
+    name: "medium-feed",
+    getKey: () => "posts",
+    maxAge: 60 * 30,
+    staleMaxAge: 60 * 60 * 24,
+    swr: true,
   }
-});
+);
 
 interface BlogPost {
   title: string;

@@ -1,26 +1,25 @@
 <template>
-  <div class="grid grid-cols-1 lg:grid-cols-11 lg:h-[91%]" role="main">
+  <main class="grid grid-cols-1 lg:grid-cols-11 lg:h-[91%]">
     <div
       class="relative p-6 pt-20 text-4xl lg:text-5xl lg:col-span-4 lg:row-end-2 lg:flex flex-col justify-end"
-      role="banner"
     >
       <h1 class="sr-only">Buokem - Software Developer</h1>
       <span aria-hidden="true" class="block overflow-hidden">
-        <motion.h1
+        <motion.span
           :initial="{ y: 50 }"
           :animate="{ y: 0 }"
           :transition="{ delay: 0.5, duration: 0.6 }"
-          class="font-semibold font-header"
-          >Software</motion.h1
+          class="block font-semibold font-header text-heading"
+          >Software</motion.span
         >
       </span>
       <span aria-hidden="true" class="block overflow-hidden">
-        <motion.h1
+        <motion.span
           :initial="{ y: 50 }"
           :animate="{ y: 0 }"
           :transition="{ delay: 0.6, duration: 0.6 }"
-          class="font-light font-header"
-          >Developer</motion.h1
+          class="block font-light font-header text-heading"
+          >Developer</motion.span
         >
       </span>
 
@@ -29,13 +28,13 @@
         :initial="{ height: 0 }"
         :animate="{ height: '100%' }"
         :transition="{ duration: 0.3 }"
-        class="absolute top-0 left-0 w-[1px] bg-accent hidden lg:block"
+        class="absolute top-0 left-0 w-[1px] bg-border hidden lg:block"
       ></motion.div>
       <motion.div
         :initial="{ width: 0 }"
         :animate="{ width: '100%' }"
         :transition="{ duration: 0.3 }"
-        class="absolute bottom-0 left-0 w-full h-[1px] bg-accent"
+        class="absolute bottom-0 left-0 w-full h-[1px] bg-border"
       ></motion.div>
       <!--  -->
     </div>
@@ -44,13 +43,13 @@
       class="relative p-6 pt-20 text-6xl hidden lg:col-span-3 lg:row-end-2 lg:flex flex-col justify-end"
     >
       <span class="block overflow-hidden" aria-hidden="true">
-        <motion.h1
+        <motion.span
           :initial="{ y: 54 }"
           :animate="{ y: 0 }"
           :transition="{ delay: 0.7, duration: 0.6 }"
-          class="text-6xl font-ubuntu-mono"
+          class="block text-6xl font-ubuntu-mono"
           aria-hidden="true"
-          >b_</motion.h1
+          >b_</motion.span
         >
       </span>
       <!-- Grid lines -->
@@ -58,13 +57,13 @@
         :initial="{ height: 0 }"
         :animate="{ height: '100%' }"
         :transition="{ duration: 0.6 }"
-        class="absolute top-0 left-0 h-full w-[1px] bg-accent"
+        class="absolute top-0 left-0 h-full w-[1px] bg-border"
       ></motion.div>
       <motion.div
         :initial="{ width: 0 }"
         :animate="{ width: '100%' }"
         :transition="{ delay: 0.25, duration: 0.3 }"
-        class="absolute bottom-0 left-0 w-full h-[1px] bg-accent"
+        class="absolute bottom-0 left-0 w-full h-[1px] bg-border"
       ></motion.div>
       <!--  -->
     </div>
@@ -104,12 +103,13 @@
             v-for="(text, index) in aboutText.split(' ')"
             :key="index"
           >
-            <motion.h3
+            <motion.span
               :initial="{ y: 54 }"
               :animate="{ y: 0 }"
               :transition="{ delay: 0.7 + index * 0.02, duration: 0.6 }"
+              class="block"
               >{{ text }}<span>&nbsp;</span>
-            </motion.h3>
+            </motion.span>
           </span>
         </motion.div>
       </div>
@@ -119,14 +119,14 @@
         :initial="{ height: 0 }"
         :animate="{ height: '100%' }"
         :transition="{ delay: 0.25, duration: 0.3 }"
-        class="absolute top-0 left-0 h-full w-[1px] bg-accent hidden lg:block"
+        class="absolute top-0 left-0 h-full w-[1px] bg-border hidden lg:block"
       >
       </motion.div>
       <motion.div
         :initial="{ width: 0 }"
         :animate="{ width: '100%' }"
         :transition="{ duration: 0.3 }"
-        class="absolute bottom-0 left-0 h-[1px] w-[1px] bg-accent block lg:hidden"
+        class="absolute bottom-0 left-0 h-[1px] w-[1px] bg-border block lg:hidden"
       >
       </motion.div>
       <!--  -->
@@ -138,13 +138,12 @@
       aria-labelledby="featured-projects"
     >
       <h2 id="featured-projects" class="sr-only">Featured Projects</h2>
-      <div ref="featuredContainer" class="grid grid-cols-1" role="list">
-        <article
+      <ul ref="featuredContainer" class="grid grid-cols-1">
+        <li
           v-for="item in featured"
           :key="item.name"
           class="relative group pt-5 pb-2"
           @click="toggleDescription(item)"
-          role="listitem"
         >
           <NuxtLink :to="item.link" class="block overflow-hidden">
             <motion.div
@@ -154,7 +153,7 @@
               class="flex items-center justify-between"
             >
               <h3
-                class="text-xl font-medium overflow-hidden group-hover:overflow-visible text-ellipsis whitespace-nowrap group-hover:whitespace-normal w-[80%] transition-all duration-300"
+                class="text-xl font-medium text-heading overflow-hidden group-hover:overflow-visible text-ellipsis whitespace-nowrap group-hover:whitespace-normal w-[80%] transition-all duration-300"
               >
                 {{ item.name }}
               </h3>
@@ -174,23 +173,23 @@
             :initial="{ width: 0 }"
             :animate="{ width: '100%' }"
             :transition="{ duration: 0.6 }"
-            class="bottom-0 left-0 h-[1px] bg-accent"
+            class="bottom-0 left-0 h-[1px] bg-border"
           ></motion.div>
-        </article>
-      </div>
+        </li>
+      </ul>
       <!-- Grid lines -->
       <motion.div
         :initial="{ height: 0 }"
         :animate="{ height: '100%' }"
         :transition="{ duration: 0.6 }"
-        class="absolute top-0 left-0 h-full w-[1px] bg-accent hidden lg:block"
+        class="absolute top-0 left-0 h-full w-[1px] bg-border hidden lg:block"
       >
       </motion.div>
       <motion.div
         :initial="{ height: 0 }"
         :animate="{ height: '100%' }"
         :transition="{ duration: 0.6 }"
-        class="absolute top-0 right-0 h-full w-[1px] bg-accent hidden lg:block"
+        class="absolute top-0 right-0 h-full w-[1px] bg-border hidden lg:block"
       >
       </motion.div>
       <!--  -->
@@ -199,7 +198,7 @@
       href="https://wa.me/2348154387988"
       target="_blank"
       rel="noopener noreferrer"
-      class="border border-accent mt-3 px-6 pt-[100px] pb-20 relative lg:hidden"
+      class="border border-border mt-3 px-6 pt-[100px] pb-20 relative lg:hidden"
       aria-label="Contact me"
     >
       <Icon
@@ -207,12 +206,12 @@
         size="24"
         class="absolute top-5 right-5"
       />
-      <h2 class="text-4xl font-extralight font-header">
+      <h2 class="text-4xl font-extralight font-header text-heading">
         <span class="font-semibold">Contact</span> Me
       </h2>
       <p class="sr-only">Click to contact me via whatsapp</p>
     </a>
-  </div>
+  </main>
 </template>
 
 <script setup>

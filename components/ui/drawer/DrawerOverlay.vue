@@ -13,18 +13,10 @@ const delegatedProps = computed(() => {
 
   return delegated;
 });
-
-const removePath = () => {
-  window.history.pushState({}, '', useRoute().path);
-  useHead({
-    title: `Buokem - Software Developer`,
-  });
-};
 </script>
 
 <template>
   <DrawerOverlay
-    @click="removePath"
     data-slot="drawer-overlay"
     v-bind="delegatedProps"
     :class="

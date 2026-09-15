@@ -3,7 +3,7 @@
     <h1 class="sr-only">Contact - Get In Touch With Buokem</h1>
 
     <section class="mb-20" aria-labelledby="contact-heading">
-      <div class="text-4xl font-semibold font-header">
+      <div class="text-4xl font-semibold font-header text-heading">
         <div>
           <h2 id="contact-heading" class="sr-only">
             {{ heroText1 }} {{ heroText2 }}

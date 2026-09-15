@@ -1,5 +1,5 @@
 <template>
-    <footer class="py-8 px-5 lg:px-20 border-t border-accent">
+    <footer class="py-8 px-5 lg:px-20 border-t border-border">
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-sm text-secondary-text">
           <p>&copy; {{ new Date().getFullYear() }} Buokem. All rights reserved.</p>
           <div class="flex items-center gap-5">
