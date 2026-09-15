@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { mutation, query } from "./_generated/server";
+import { internalMutation, query } from "./_generated/server";
 
 export const get = query({
   args: {},
@@ -8,14 +8,14 @@ export const get = query({
   },
 });
 
-export const create = mutation({
+export const create = internalMutation({
   args: {
     company: v.string(),
     position: v.string(),
     startDate: v.string(),
     endDate: v.string(),
   },
-  handler: (ctx, args) => {
-    ctx.db.insert("workExperience", args)
-  }
-})
+  handler: async (ctx, args) => {
+    await ctx.db.insert("workExperience", args);
+  },
+});

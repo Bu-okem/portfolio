@@ -2,7 +2,7 @@
   <div>
     <Nav />
     <div
-      class="lg:fixed 3xl:absolute lg:left-[100px] lg:w-[calc(100%-100px)] 3xl: lg:h-full lg:top-0 lg:overflow-y-scroll 3xl:border-x 3xl:border-accent">
+      class="lg:fixed 3xl:absolute lg:left-[100px] lg:w-[calc(100%-100px)] 3xl: lg:h-full lg:top-0 lg:overflow-y-scroll 3xl:border-x 3xl:border-border">
       <slot />
       <Footer />
       <Switch />
@@ -11,12 +11,9 @@
 </template>
 
 <script setup>
-import { api } from "../convex/_generated/api";
 import Switch from '@/components/Switch.vue';
-import { useExperience } from '~/composables/states';
 
 useHead({
-  title: 'Buokem - Software Developer',
   meta: [
     {
       name: 'description',
@@ -43,12 +40,5 @@ useHead({
   htmlAttrs: {
     lang: 'en',
   },
-});
-const { data } = useConvexQuery(api.workExperience.get);
-const experience = useExperience();
-watchEffect(() => {
-  if (data.value) {
-    experience.value = data.value;
-  }
 });
 </script>

@@ -1,7 +1,7 @@
 <template>
   <main class="pb-20 mt-[150px] lg:mt-[200px] mx-5 lg:mx-20">
     <h1 class="sr-only">About Buokem - Software Developer</h1>
-    <section class="h-[50vh] text-4xl font-semibold font-header" aria-labelledby="hero-heading">
+    <section class="h-[50vh] text-4xl font-semibold font-header text-heading" aria-labelledby="hero-heading">
       <div class="">
         <h2 id="hero-heading" class="sr-only">{{ heroText1 }} {{ heroText2 }}</h2>
         <span
@@ -9,12 +9,13 @@
           class="overflow-hidden inline-block"
           v-for="(text, index) in heroText1.split(' ')"
           :key="index">
-          <motion.h1
+          <motion.span
             :initial="{ y: 54 }"
             :animate="{ y: 0 }"
             :transition="{ delay: 0.3 + index * 0.04, duration: 0.6 }"
+            class="block"
             >{{ text }}<span>&nbsp;</span>
-          </motion.h1>
+          </motion.span>
         </span>
       </div>
       <div class="">
@@ -24,13 +25,13 @@
           class="overflow-hidden inline-block"
           v-for="(text, index) in heroText2.split(' ')"
           :key="index">
-          <motion.h1
+          <motion.span
             :initial="{ y: 54 }"
             :animate="{ y: 0 }"
             :transition="{ delay: 0.3 + index * 0.04, duration: 0.6 }"
             class="font-extralight"
             >{{ text }}<span>&nbsp;</span>
-          </motion.h1>
+          </motion.span>
         </span>
       </div>
     </section>
@@ -57,13 +58,13 @@
     <section class="pt-32" aria-labelledby="experience">
       <h2 id="experience" class="sr-only">Work Experience</h2>
       <span class="overflow-hidden block mb-9">
-        <motion.h3
+        <motion.span
           :initial="{ y: 40 }"
           :while-in-view="{ y: 0 }"
           :transition="{ delay: 0.3, duration: 0.6 }"
           :inViewOptions="{ once: true }"
-          class="text-4xl font-semibold font-header"
-          aria-hidden="true">Experience</motion.h3>
+          class="block text-4xl font-semibold font-header text-heading"
+          aria-hidden="true">Experience</motion.span>
       </span>
       <div>
         <div v-for="exp in sortedExperience" :key="exp.id" class="mb-20">
@@ -84,14 +85,14 @@
               class="overflow-hidden inline-block"
               v-for="(text, index) in exp.position.split(' ')"
               :key="index">
-              <motion.h3
+              <motion.span
                 :initial="{ y: 50 }"
                 :while-in-view="{ y: 0 }"
                 :inViewOptions="{ once: true }"
                 :transition="{ delay: 0.3 + index * 0.04, duration: 0.6 }"
-                class="mb-4 lg:my-1 text-3xl lg:text-5xl font-semibold font-header">
+                class="block mb-4 lg:my-1 text-3xl lg:text-5xl font-semibold font-header text-heading">
                 {{ text }}<span>&nbsp;</span>
-              </motion.h3>
+              </motion.span>
             </span>
           </div>
 
@@ -119,15 +120,20 @@
 </template>
 
 <script setup>
-import { api } from "../convex/_generated/api";
+import { api } from "~/convex/_generated/api";
+import { useConvexHttpClient } from "convex-vue";
 import { motion } from 'motion-v';
-import { useExperience } from '~/composables/states';
 
-const experience = useExperience();
+// Fetched here rather than in the layout so only this page pays for it, and
+// over the HTTP client so the work history is in the server-rendered HTML.
+const convex = useConvexHttpClient();
+const { data: experience } = await useAsyncData("work-experience", () =>
+  convex.query(api.workExperience.get)
+);
 
 // Set page metadata for SEO and accessibility
 useHead({
-  title: 'About - Buokem',
+  title: 'About',
   meta: [
     {
       name: 'description',
@@ -212,7 +218,7 @@ const sortExperience = (experiences) => {
     return '2000-01-01';
   };
 
-  return experiences.sort((a, b) => {
+  return [...experiences].sort((a, b) => {
     const dateA = convertToIsoDate(a.endDate || a.startDate);
     const dateB = convertToIsoDate(b.endDate || b.startDate);
 

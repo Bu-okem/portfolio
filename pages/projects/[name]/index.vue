@@ -3,15 +3,15 @@
     v-if="project === null"
     class="bg-background h-[calc(100dvh-80px)] text-center flex flex-col items-center justify-center gap-4"
   >
-    <h3 class="text-3xl lg:text-4xl font-semibold font-header">
+    <h1 class="text-3xl lg:text-4xl font-semibold font-header text-heading">
       Project not found
-    </h3>
+    </h1>
     <p class="text-lg lg:text-xl font-medium font-body">
       Sorry, we couldn't find the project you're looking for.
     </p>
     <NuxtLink
       to="/projects"
-      class="p-2 border-accent border-solid border font-bold hover:bg-accent hover:text-background transition-colors duration-300"
+      class="p-2 border-border border-solid border font-bold hover:bg-foreground hover:text-background transition-colors duration-300"
     >
       Back to projects
     </NuxtLink>
@@ -37,15 +37,15 @@
               v-for="(text, index) in project.name.split(' ')"
               :key="index"
             >
-              <motion.h1
+              <motion.span
                 :initial="{ y: 50 }"
                 :animate="{ y: 0 }"
                 :transition="{ delay: 0.3 + index * 0.04, duration: 0.6 }"
-                class="text-3xl lg:text-4xl font-semibold font-header capitalize"
+                class="block text-3xl lg:text-4xl font-semibold font-header text-heading capitalize"
                 style="word-break: break-word"
               >
                 {{ text }}<span>&nbsp;</span>
-              </motion.h1>
+              </motion.span>
             </span>
           </span>
           <div class="mb-2">
@@ -87,7 +87,16 @@
           <Carousel>
             <CarouselContent>
                 <CarouselItem v-for="(image, index) in project.imageUrls" :key="index">
-                  <img :src="image" :alt="`Screenshot of ${project.name} project`" class="w-full rounded-sm" />
+                  <NuxtImg
+                    :src="image"
+                    :alt="`Screenshot of ${project.name} project`"
+                    class="w-full rounded-sm"
+                    sizes="xs:100vw sm:100vw md:100vw lg:66vw xl:66vw xxl:66vw"
+                    format="webp"
+                    :loading="index === 0 ? 'eager' : 'lazy'"
+                    :fetchpriority="index === 0 ? 'high' : 'auto'"
+                    decoding="async"
+                  />
                 </CarouselItem>
             </CarouselContent>
             <CarouselPrevious class="left-2" v-if="project.imageUrls.length > 1"/>
@@ -95,7 +104,7 @@
           </Carousel>
           <div class="flex gap-3 mt-5">
             <p
-              class="px-2 py-1 border border-accent rounded-sm text-xs"
+              class="px-2 py-1 border border-border rounded-sm text-xs"
               v-for="tag in project.stack"
             >
               {{ tag }}
@@ -135,10 +144,10 @@
             </a>
           </div>
           <div class="mt-10 pb-5 lg:pb-12">
-            <h3 class="text-3xl font-header font-medium mb-5">Description</h3>
+            <h2 class="text-3xl font-header font-medium mb-5 text-heading">Description</h2>
             <div
               class="font-extralight markdown"
-              v-html="marked.parse(project.description)"
+              v-html="renderMarkdown(project.description)"
             ></div>
           </div>
         </motion.div>
@@ -149,27 +158,66 @@
 
 <script setup>
 import { api } from "~/convex/_generated/api";
-import { marked } from "marked";
+import { useConvexHttpClient } from "convex-vue";
+import { renderMarkdown } from "~/lib/markdown";
 import { motion } from "motion-v";
 
 definePageMeta({
   layout: "project-layout",
 });
-useHead({
-  title: `Buokem`,
-  link: [
-    {
-      rel: "icon",
-      type: "image/x-icon",
-      href: "favicon.png",
-    },
-  ],
-});
+
 const route = useRoute();
 const projectNameParam = route.params.name;
 const projectName = projectNameParam.split("-").join(" ");
-const { data: project } = useConvexQuery(api.projects.getProjectByName, {
-  name: projectName,
+
+// Fetched over Convex's HTTP client (not the websocket subscription) so the
+// project is present in the server-rendered HTML and can drive the meta tags.
+const convex = useConvexHttpClient();
+const { data: project, status } = await useAsyncData(
+  `project:${projectNameParam}`,
+  () => convex.query(api.projects.getProjectByName, { name: projectName })
+);
+const loading = computed(() => status.value === "pending");
+
+// An unknown project should answer 404, not 200 with a "not found" body.
+if (import.meta.server && !project.value) {
+  setResponseStatus(useRequestEvent(), 404);
+}
+
+const url = useRequestURL();
+const canonical = `${url.origin}/projects/${projectNameParam}`;
+const titleCase = (value) =>
+  value.replace(/\b\w/g, (character) => character.toUpperCase());
+
+// Search results cut off around 160 characters; keep the tag close to that.
+const truncate = (value, limit = 155) =>
+  !value || value.length <= limit
+    ? value
+    : `${value.slice(0, value.lastIndexOf(" ", limit))}…`;
+
+useSeoMeta({
+  title: () =>
+    project.value ? titleCase(project.value.name) : "Project not found",
+  description: () =>
+    truncate(project.value?.shortDescription) ??
+    "This project could not be found on Buokem's portfolio.",
+  ogType: "article",
+  ogUrl: canonical,
+  ogTitle: () =>
+    project.value ? `${titleCase(project.value.name)} - Buokem` : "Project not found",
+  ogDescription: () => truncate(project.value?.shortDescription),
+  ogImage: () => project.value?.imageUrl,
+  ogImageAlt: () =>
+    project.value ? `Screenshot of the ${project.value.name} project` : undefined,
+  twitterCard: "summary_large_image",
+  twitterTitle: () =>
+    project.value ? `${titleCase(project.value.name)} - Buokem` : "Project not found",
+  twitterDescription: () => truncate(project.value?.shortDescription),
+  twitterImage: () => project.value?.imageUrl,
+  robots: () => (project.value ? "index, follow" : "noindex, follow"),
 });
-const loading = computed(() => project.value === undefined);
+
+useHead({
+  link: [{ rel: "canonical", href: canonical }],
+});
 </script>

@@ -19,7 +19,7 @@
             :class="
               selectedType === type
                 ? 'border-foreground bg-foreground text-background font-medium'
-                : 'border-accent text-secondary-text hover:border-foreground hover:text-foreground'
+                : 'border-border text-secondary-text hover:border-foreground hover:text-foreground'
             "
             :aria-pressed="selectedType === type"
           >
@@ -31,7 +31,7 @@
         <div class="relative" ref="dropdownRef">
           <button
             @click="dropdownOpen = !dropdownOpen"
-            class="flex items-center gap-2 px-4 py-1.5 text-sm border border-accent rounded-sm transition-all duration-300 cursor-pointer hover:border-foreground"
+            class="flex items-center gap-2 px-4 py-1.5 text-sm border border-border rounded-sm transition-all duration-300 cursor-pointer hover:border-foreground"
             :class="
               selectedStack !== 'all'
                 ? 'border-foreground text-foreground'
@@ -53,7 +53,7 @@
           </button>
           <div
             v-show="dropdownOpen"
-            class="absolute left-0 lg:left-auto lg:right-0 top-full mt-1 z-30 min-w-[180px] max-h-[240px] overflow-y-auto border border-accent bg-background rounded-sm shadow-lg"
+            class="absolute left-0 lg:left-auto lg:right-0 top-full mt-1 z-30 min-w-[180px] max-h-[240px] overflow-y-auto border border-border bg-background rounded-sm shadow-lg"
             role="listbox"
             aria-label="Select technology"
           >
@@ -81,7 +81,7 @@
         :items="filteredProjects"
         :column-width="250"
         :gap="20"
-        role="list"
+        :ssr-columns="1"
       >
         <template #default="{ item }">
           <motion.div
@@ -90,9 +90,11 @@
             :transition="{ duration: 0.6 }"
             class=""
           >
-            <Drawer>
+            <Drawer
+              :open="openSlug === slugify(item.name)"
+              @update:open="(isOpen) => setDrawer(item, isOpen)"
+            >
               <DrawerTrigger
-                @click="setPath(item.name.split(' ').join('-'))"
                 :aria-label="`View details for ${item.name} project`"
               >
                 <ProjectCard
@@ -111,7 +113,6 @@
                   <DrawerClose>
                     <Button
                       variant="outline"
-                      @click="removePath"
                       class="cursor-pointer"
                       aria-label="Close project details"
                     >
@@ -130,12 +131,12 @@
                     class="lg:w-[26vw] lg:absolute top-10 left-5 mb-5 lg:mb-0"
                   >
                     <div class="">
-                      <h1
-                        class="text-3xl lg:text-4xl font-semibold mb-5 lg:mb-10 font-header capitalize"
+                      <h2
+                        class="text-3xl lg:text-4xl font-semibold mb-5 lg:mb-10 font-header text-heading capitalize"
                         style="word-break: break-word"
                       >
                         {{ item.name }}
-                      </h1>
+                      </h2>
                       <p class="font-extralight text-secondary-text mb-2">
                         {{ item.shortDescription }}
                       </p>
@@ -156,17 +157,20 @@
                       <Carousel>
                           <CarouselContent>
                         <CarouselItem v-for="(image, index) in item.imageUrls" :key="index">
-                            <img
+                            <NuxtImg
                               :src="image"
                               :alt="`Screenshot of ${item.name} project`"
                               class="w-full h-full object-contain transition-opacity duration-500"
-                          :class="{
-                            'opacity-0': !loadedImages[`${item._id}-${index}`],
-                            'opacity-100': loadedImages[`${item._id}-${index}`],
-                          }"
-                          loading="lazy"
-                          @load="handleLoad(`${item._id}-${index}`)"
-                        />
+                              :class="{
+                                'opacity-0': !loadedImages[`${item._id}-${index}`],
+                                'opacity-100': loadedImages[`${item._id}-${index}`],
+                              }"
+                              sizes="xs:100vw sm:100vw md:100vw lg:66vw xl:66vw xxl:66vw"
+                              format="webp"
+                              loading="lazy"
+                              decoding="async"
+                              @load="handleLoad(`${item._id}-${index}`)"
+                            />
                         </CarouselItem>
                         </CarouselContent>
                         <CarouselPrevious class="left-2" v-if="item.imageUrls.length > 1"/>
@@ -175,7 +179,7 @@
                       </div>
                       <div class="flex gap-3 mt-5">
                         <p
-                          class="px-2 py-1 border border-accent rounded-sm text-xs"
+                          class="px-2 py-1 border border-border rounded-sm text-xs"
                           v-for="tag in item.stack"
                         >
                           {{ tag }}
@@ -216,13 +220,13 @@
                       </div>
                       <div class="mt-10 pb-52 lg:pb-0">
                         <h3
-                          class="text-2xl lg:text-3xl font-medium mb-5 font-header"
+                          class="text-2xl lg:text-3xl font-medium mb-5 font-header text-heading"
                         >
                           Description
                         </h3>
                         <div
                           class="font-extralight markdown"
-                          v-html="marked.parse(item.description)"
+                          v-html="renderMarkdown(item.description)"
                         ></div>
                       </div>
                     </div>
@@ -234,7 +238,7 @@
         </template>
       </masonry-wall>
       <div v-else>
-        <h1 class="text-2xl mt-12">Couldn't find a match</h1>
+        <h2 class="text-2xl mt-12 text-heading">Couldn't find a match</h2>
         <p>
           No records match the selected criteria. Try removing one or more
           active filters.
@@ -246,9 +250,9 @@
 
 <script setup>
 import { api } from "../convex/_generated/api";
-import { marked } from "marked";
+import { useConvexHttpClient } from "convex-vue";
+import { renderMarkdown } from "~/lib/markdown";
 import { motion } from "motion-v";
-import { useConfig } from "~/composables/useConfig";
 import {
   Drawer,
   DrawerClose,
@@ -264,29 +268,23 @@ const handleLoad = (id) => {
   loadedImages[id] = true;
 };
 
-// Set page metadata for SEO and accessibility
-useHead({
-  title: "Projects - Buokem",
-  meta: [
-    {
-      name: "description",
-      content:
-        "Explore the portfolio projects of Buokem, showcasing web development and design work.",
-    },
-  ],
-});
-
-const config = useConfig();
-const { data } = useConvexQuery(api.projects.get);
-const loading = computed(() => data.value === undefined);
+// Fetched over Convex's HTTP client (not the websocket subscription) so the
+// project list is present in the server-rendered HTML for crawlers.
+const convex = useConvexHttpClient();
+const { data, status } = await useAsyncData("projects", () =>
+  convex.query(api.projects.get)
+);
+const loading = computed(() => status.value === "pending");
 
 const projects = useProjects();
 watchEffect(() => {
   if (data.value) {
     projects.value = data.value;
-    console.log(projects.value);
   }
 });
+
+const route = useRoute();
+const router = useRouter();
 
 // Filter by project type
 const selectedType = ref("all");
@@ -328,19 +326,48 @@ const filteredProjects = computed(() => {
   });
 });
 
-const setPath = (path) => {
-  window.history.pushState({}, "", `/projects/${path}`);
-  useHead({
-    title: `Project`,
-  });
+const slugify = (name) => name.split(" ").join("-");
+
+// The open drawer is kept in the URL as ?open=<slug> and driven through
+// vue-router rather than history.pushState. Router and URL stay in sync, so
+// every close path (button, Esc, overlay, swipe) clears it, and the browser
+// Back button closes the drawer instead of leaving the page.
+// Only synced after mount: the drawer teleports to <body>, so there is nothing
+// to server-render. /projects/<slug> remains the shareable, indexable page.
+const mounted = ref(false);
+onMounted(() => {
+  mounted.value = true;
+});
+
+const openSlug = computed(() =>
+  mounted.value ? route.query.open ?? null : null
+);
+
+const setDrawer = (item, isOpen) => {
+  const slug = slugify(item.name);
+  if (isOpen) {
+    router.push({ query: { ...route.query, open: slug } });
+  } else if (route.query.open === slug) {
+    const { open, ...rest } = route.query;
+    router.replace({ query: rest });
+  }
 };
 
-const removePath = () => {
-  window.history.pushState({}, "", useRoute().path);
-  useHead({
-    title: `Buokem - Projects`,
-  });
-};
+const openProject = computed(() =>
+  (projects.value ?? []).find((item) => slugify(item.name) === openSlug.value)
+);
+
+// Set page metadata for SEO and accessibility
+useHead({
+  title: () => openProject.value?.name ?? "Projects",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Explore the portfolio projects of Buokem, showcasing web development and design work.",
+    },
+  ],
+});
 </script>
 
 <style scoped>

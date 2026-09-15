@@ -4,14 +4,14 @@
     @mouseleave="() => (isOpen = false)"
     class="fixed bottom-5 right-6 flex flex-col items-center justify-center z-40">
     <div
-      class="bg-background h-10 w-10 border border-solid border-accent rounded-full cursor-pointer flex items-center justify-center z-10"
+      class="bg-background h-10 w-10 border border-solid border-border rounded-full cursor-pointer flex items-center justify-center z-10"
       aria-label="Toggle theme palette">
       <Icon name="solar:pallete-2-outline" size="24" />
     </div>
 
     <!-- Theme Dots Container -->
     <div
-      class="pb-3 absolute bottom-8 w-full flex justify-center overflow-hidden transition-all duration-500 ease-in-out bg-background rounded-full border border-accent"
+      class="pb-3 absolute bottom-8 w-full flex justify-center overflow-hidden transition-all duration-500 ease-in-out bg-background rounded-full border border-border"
       :style="{
         maxHeight: isOpen ? `${themes.length * 2.5}rem` : '0px',
         opacity: isOpen ? 1 : 0,
@@ -19,68 +19,47 @@
       role="group"
       aria-label="Theme options">
       <div class="flex flex-col items-center gap-2 py-2">
-        <span
+        <button
           v-for="theme in themes"
           :key="theme.name"
+          type="button"
           @click="selectTheme(theme)"
           class="dot"
+          :class="{ 'dot-active': theme.name === activeTheme }"
           :style="{ backgroundColor: theme.vars.background }"
-          :title="theme.name.charAt(0).toUpperCase() + theme.name.slice(1).split('-').join(' ')"
-          :aria-label="`Switch to ${theme.name} theme`"
-          role="button"
-          tabindex="0"
-          @keydown.enter="selectTheme(theme)"
-          @keydown.space.prevent="selectTheme(theme)"></span>
+          :title="label(theme.name)"
+          :aria-label="`Switch to ${label(theme.name)} theme`"
+          :aria-current="theme.name === activeTheme ? 'true' : undefined"></button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-const isOpen = ref(false);
-const { allThemes, applyThemeVars, setDark, setLight } = useTheme();
-const themes = [
-  {
-    name: 'light',
-    vars: {
-      background: 'oklch(0.98 0 0)',
-      foreground: 'oklch(0.2 0 0)',
-      accent: 'oklch(0.72 0 0)',
-      'secondary-text': 'oklch(0.556 0 0)',
-      border: 'oklch(0.85 0 0)',
-    },
-  },
-  ...allThemes,
-  {
-    name: 'dark',
-    vars: {
-      background: 'oklch(0.23 0 0)',
-      foreground: 'oklch(0.985 0 0)',
-      accent: 'oklch(0.47 0 0)',
-      'secondary-text': 'oklch(0.7 0 0)',
-      border: 'oklch(0.47 0 0)',
-    },
-  },
-];
+const { themes, activeTheme, applyTheme, resolveStoredTheme } = useTheme();
 
-// Refactored theme selection logic
+const isOpen = ref(false);
+
+onMounted(() => {
+  // The inline script in app.vue already painted the right theme; this syncs
+  // the picker's highlight and clears a stored theme that no longer exists.
+  const theme = resolveStoredTheme();
+  if (theme) activeTheme.value = theme.name;
+});
+
 const selectTheme = (theme) => {
-  if (theme.name === 'light') {
-    setLight();
-    applyThemeVars(theme.vars);
-  } else if (theme.name === 'dark') {
-    setDark();
-    applyThemeVars(theme.vars);
-  } else {
-    applyThemeVars(theme.vars);
-  }
+  applyTheme(theme);
+  isOpen.value = false;
 };
+
+const label = (name) =>
+  name.charAt(0).toUpperCase() + name.slice(1).split('-').join(' ');
 </script>
 
 <style scoped>
 .dot {
   background-color: var(--color-background);
-  border: solid 1px var(--color-accent);
+  border: solid 1px var(--color-border);
   border-radius: 50%;
   display: block;
   min-height: 1rem;
@@ -93,6 +72,11 @@ const selectTheme = (theme) => {
 .dot:focus-visible {
   transform: scale(1.2);
   outline: 1px solid var(--color-foreground);
+  outline-offset: 2px;
+}
+
+.dot-active {
+  outline: 2px solid var(--color-foreground);
   outline-offset: 2px;
 }
 </style>

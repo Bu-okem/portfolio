@@ -47,7 +47,7 @@ const handleMouseUp = () => {
           :class="isDragging ? 'cursor-grabbing' : 'cursor-grab'"
           class="w-fit py-2">
           <div
-            class="bg-accent mx-auto mt-4 hidden h-[2px] w-[100px] shrink-0 rounded-sm group-data-[vaul-drawer-direction=bottom]/drawer-content:block" />
+            class="bg-border mx-auto mt-4 hidden h-[2px] w-[100px] shrink-0 rounded-sm group-data-[vaul-drawer-direction=bottom]/drawer-content:block" />
         </div>
       </div>
       <slot />
