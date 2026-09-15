@@ -359,10 +359,7 @@ const openProject = computed(() =>
 
 // Set page metadata for SEO and accessibility
 useHead({
-  title: () =>
-    openProject.value
-      ? `${openProject.value.name} - Buokem`
-      : "Projects - Buokem",
+  title: () => openProject.value?.name ?? "Projects",
   meta: [
     {
       name: "description",

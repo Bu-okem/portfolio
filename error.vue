@@ -52,7 +52,7 @@ defineProps({
 });
 
 useHead({
-  title: 'Page Not Found - Buokem',
+  title: 'Page Not Found',
 });
 
 const handleError = () => clearError({ redirect: '/' });

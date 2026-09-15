@@ -217,7 +217,6 @@
 <script setup>
 // Set the page title and meta description for better SEO and accessibility
 useHead({
-  title: "Buokem - Software Developer",
   meta: [
     {
       name: "description",

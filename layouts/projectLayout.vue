@@ -7,7 +7,5 @@
 
 <script setup>
 import Switch from '@/components/Switch.vue';
-useHead({
-  title: 'Buokem — Software Developer',
-});
+useHead({});
 </script>

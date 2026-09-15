@@ -168,7 +168,7 @@
 import { motion } from "motion-v";
 
 useHead({
-  title: "Buokem - Contact",
+  title: "Contact",
   meta: [
     {
       name: "description",

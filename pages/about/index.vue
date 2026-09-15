@@ -133,7 +133,7 @@ const { data: experience } = await useAsyncData("work-experience", () =>
 
 // Set page metadata for SEO and accessibility
 useHead({
-  title: 'About - Buokem',
+  title: 'About',
   meta: [
     {
       name: 'description',

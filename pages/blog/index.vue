@@ -94,7 +94,7 @@
 import { motion } from 'motion-v';
 
 useHead({
-  title: 'Blog - Buokem',
+  title: 'Blog',
   meta: [
     {
       name: 'description',

@@ -197,23 +197,21 @@ const truncate = (value, limit = 155) =>
 
 useSeoMeta({
   title: () =>
-    project.value
-      ? `${titleCase(project.value.name)} — Buokem`
-      : "Project not found — Buokem",
+    project.value ? titleCase(project.value.name) : "Project not found",
   description: () =>
     truncate(project.value?.shortDescription) ??
     "This project could not be found on Buokem's portfolio.",
   ogType: "article",
   ogUrl: canonical,
   ogTitle: () =>
-    project.value ? `${titleCase(project.value.name)} — Buokem` : "Project not found",
+    project.value ? `${titleCase(project.value.name)} - Buokem` : "Project not found",
   ogDescription: () => truncate(project.value?.shortDescription),
   ogImage: () => project.value?.imageUrl,
   ogImageAlt: () =>
     project.value ? `Screenshot of the ${project.value.name} project` : undefined,
   twitterCard: "summary_large_image",
   twitterTitle: () =>
-    project.value ? `${titleCase(project.value.name)} — Buokem` : "Project not found",
+    project.value ? `${titleCase(project.value.name)} - Buokem` : "Project not found",
   twitterDescription: () => truncate(project.value?.shortDescription),
   twitterImage: () => project.value?.imageUrl,
   robots: () => (project.value ? "index, follow" : "noindex, follow"),

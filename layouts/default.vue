@@ -14,7 +14,6 @@
 import Switch from '@/components/Switch.vue';
 
 useHead({
-  title: 'Buokem - Software Developer',
   meta: [
     {
       name: 'description',

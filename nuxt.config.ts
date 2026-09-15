@@ -30,7 +30,20 @@ export default defineNuxtConfig({
     "@nuxtjs/google-fonts",
     "convex-nuxt",
     "@nuxt/image",
+    "@nuxtjs/sitemap",
   ],
+
+  site: {
+    // Set NUXT_SITE_URL in the host's env (Vercel project settings). Without
+    // it the module falls back to the incoming request's origin, which works
+    // but cannot produce absolute URLs at build time.
+    url: process.env.NUXT_SITE_URL,
+  },
+
+  sitemap: {
+    // Project pages are dynamic, so they come from Convex at request time.
+    sources: ["/api/__sitemap__/urls"],
+  },
 
   icon: {
     // The @iconify-json/* collections are devDependencies: at build time the
