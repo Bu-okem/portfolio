@@ -22,6 +22,7 @@
     "convex-nuxt": "^0.1.5",
     "convex-vue": "^0.1.5",
     "embla-carousel-vue": "^8.6.0",
+    "isomorphic-dompurify": "^3.19.0",
     "lucide-vue-next": "^0.508.0",
     "marked": "^15.0.11",
     "motion-v": "^1.0.1",

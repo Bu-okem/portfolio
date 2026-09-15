@@ -1,6 +1,6 @@
 import type { Id } from "./_generated/dataModel";
 import { v } from "convex/values";
-import { mutation, query } from "./_generated/server";
+import { internalMutation, query } from "./_generated/server";
 
 export const get = query({
   handler: async (ctx) => {
@@ -30,7 +30,7 @@ export const get = query({
   },
 });
 
-export const create = mutation({
+export const create = internalMutation({
   args: {
     name: v.string(),
     description: v.string(),
@@ -44,10 +44,10 @@ export const create = mutation({
     role: v.string(),
     live: v.boolean(),
   },
-  handler: (ctx, args) => {
-    ctx.db.insert("projects", args)
-  }
-})
+  handler: async (ctx, args) => {
+    await ctx.db.insert("projects", args);
+  },
+});
 
 export const getProjectByName = query({
   args: { name: v.string() },

@@ -138,7 +138,7 @@
             <h3 class="text-3xl font-header font-medium mb-5">Description</h3>
             <div
               class="font-extralight markdown"
-              v-html="marked.parse(project.description)"
+              v-html="renderMarkdown(project.description)"
             ></div>
           </div>
         </motion.div>
@@ -149,7 +149,7 @@
 
 <script setup>
 import { api } from "~/convex/_generated/api";
-import { marked } from "marked";
+import { renderMarkdown } from "~/lib/markdown";
 import { motion } from "motion-v";
 
 definePageMeta({

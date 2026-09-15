@@ -222,7 +222,7 @@
                         </h3>
                         <div
                           class="font-extralight markdown"
-                          v-html="marked.parse(item.description)"
+                          v-html="renderMarkdown(item.description)"
                         ></div>
                       </div>
                     </div>
@@ -246,7 +246,7 @@
 
 <script setup>
 import { api } from "../convex/_generated/api";
-import { marked } from "marked";
+import { renderMarkdown } from "~/lib/markdown";
 import { motion } from "motion-v";
 import { useConfig } from "~/composables/useConfig";
 import {
