@@ -167,7 +167,7 @@
               class="flex items-center justify-between"
             >
               <h3
-                class="text-xl font-medium text-heading capitalize overflow-hidden group-hover:overflow-visible text-ellipsis whitespace-nowrap group-hover:whitespace-normal w-[80%] transition-all duration-300"
+                class="text-xl font-medium text-heading first-letter:uppercase overflow-hidden group-hover:overflow-visible text-ellipsis whitespace-nowrap group-hover:whitespace-normal w-[80%] transition-all duration-300"
               >
                 {{ item.name }}
               </h3>
