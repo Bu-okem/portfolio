@@ -151,28 +151,51 @@
                     class="lg:pr-2 lg:pb-10 lg:w-2/3 lg:absolute right-5 top-10 h-auto lg:h-[calc(100vh-100px)] overflow-y-scroll custom-scrollbar"
                   >
                     <div class="">
-                      <div
-                        class="h-fit relative aspect-video bg-foreground rounded-sm overflow-hidden"
-                      >
-                      <Carousel>
+                      <div class="relative rounded-sm overflow-hidden">
+                        <Carousel>
                           <CarouselContent>
-                        <CarouselItem v-for="(image, index) in item.imageUrls" :key="index">
-                            <NuxtImg
-                              :src="image"
-                              :alt="`Screenshot of ${item.name} project`"
-                              class="w-full h-full object-contain transition-opacity duration-500"
-                              :class="{
-                                'opacity-0': !loadedImages[`${item._id}-${index}`],
-                                'opacity-100': loadedImages[`${item._id}-${index}`],
-                              }"
-                              sizes="xs:100vw sm:100vw md:100vw lg:66vw xl:66vw xxl:66vw"
-                              format="webp"
-                              loading="lazy"
-                              decoding="async"
-                              @load="handleLoad(`${item._id}-${index}`)"
-                            />
-                        </CarouselItem>
-                        </CarouselContent>
+                            <CarouselItem
+                              v-for="(image, index) in item.imageUrls"
+                              :key="index"
+                            >
+                              <!--
+                                Screenshots range from ~1.66 to ~2.08, so none
+                                fit a 16:9 frame exactly. A blurred, scaled copy
+                                fills the letterbox gaps, which keeps the frame
+                                uniform and space reserved without cropping the
+                                screenshot. Same src/sizes/format as the sharp
+                                image, so it is one fetch, not two.
+                              -->
+                              <div
+                                class="relative aspect-video overflow-hidden bg-background"
+                              >
+                                <NuxtImg
+                                  :src="image"
+                                  alt=""
+                                  aria-hidden="true"
+                                  class="absolute inset-0 w-full h-full object-cover scale-125 blur-2xl"
+                                  sizes="xs:100vw sm:100vw md:100vw lg:66vw xl:66vw xxl:66vw"
+                                  format="webp"
+                                  loading="lazy"
+                                  decoding="async"
+                                />
+                                <NuxtImg
+                                  :src="image"
+                                  :alt="`Screenshot of ${item.name} project`"
+                                  class="relative w-full h-full object-contain transition-opacity duration-500"
+                                  :class="{
+                                    'opacity-0': !loadedImages[`${item._id}-${index}`],
+                                    'opacity-100': loadedImages[`${item._id}-${index}`],
+                                  }"
+                                  sizes="xs:100vw sm:100vw md:100vw lg:66vw xl:66vw xxl:66vw"
+                                  format="webp"
+                                  loading="lazy"
+                                  decoding="async"
+                                  @load="handleLoad(`${item._id}-${index}`)"
+                                />
+                              </div>
+                            </CarouselItem>
+                          </CarouselContent>
                         <CarouselPrevious class="left-2" v-if="item.imageUrls.length > 1"/>
                         <CarouselNext class="right-2" v-if="item.imageUrls.length > 1"/>
                       </Carousel>
