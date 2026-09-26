@@ -107,8 +107,14 @@
               <DrawerContent
                 class="h-[calc(100dvh-20px)] bg-background rounded-t-sm text-foreground"
               >
+                <!--
+                  z-50: the <section> below is positioned too, and its right
+                  column sits at the same top-right corner. Both were z-auto,
+                  so DOM order won and the column painted over this button -
+                  swallowing clicks on its lower half.
+                -->
                 <div
-                  class="hidden lg:flex items-center justify-end absolute top-5 right-5"
+                  class="hidden lg:flex items-center justify-end absolute top-5 right-5 z-50"
                 >
                   <DrawerClose>
                     <Button
