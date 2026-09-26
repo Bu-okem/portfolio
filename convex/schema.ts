@@ -13,7 +13,13 @@ const projects = defineTable({
   demoLink: v.string(),
   role: v.string(),
   live: v.boolean(),
-}).index("by_name", ["name"]).index("featured", ["live"]);
+  // Optional: rows created before this field existed stay valid, and a missing
+  // value simply is not featured.
+  featured: v.optional(v.boolean()),
+})
+  .index("by_name", ["name"])
+  .index("featured", ["live"])
+  .index("by_featured", ["live", "featured"]);
 
 const workExperience = defineTable({
   company: v.string(),

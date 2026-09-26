@@ -137,15 +137,29 @@
       class="relative p-6 pb-0 lg:col-span-4 lg:row-end-3 lg:row-span-2 overflow-hidden"
       aria-labelledby="featured-projects"
     >
-      <h2 id="featured-projects" class="sr-only">Featured Projects</h2>
-      <ul ref="featuredContainer" class="grid grid-cols-1">
+      <h2 id="featured-projects" class="sr-only">
+        Featured projects and writing
+      </h2>
+      <ul
+        v-if="featured.length"
+        ref="featuredContainer"
+        class="grid grid-cols-1"
+      >
         <li
           v-for="item in featured"
-          :key="item.name"
-          class="relative group pt-5 pb-2"
-          @click="toggleDescription(item)"
+          :key="item.id"
+          class="relative group pt-5 pb-4"
+          @click="onFeaturedTap(item, $event)"
         >
-          <NuxtLink :to="item.link" class="block overflow-hidden">
+          <NuxtLink
+            :to="item.link"
+            :target="item.external ? '_blank' : undefined"
+            :rel="item.external ? 'noopener noreferrer' : undefined"
+            :aria-label="
+              item.external ? `${item.name} (opens in new tab)` : undefined
+            "
+            class="block overflow-hidden"
+          >
             <motion.div
               :initial="{ y: 24 }"
               :animate="{ y: 0 }"
@@ -153,7 +167,7 @@
               class="flex items-center justify-between"
             >
               <h3
-                class="text-xl font-medium text-heading overflow-hidden group-hover:overflow-visible text-ellipsis whitespace-nowrap group-hover:whitespace-normal w-[80%] transition-all duration-300"
+                class="text-xl font-medium text-heading capitalize overflow-hidden group-hover:overflow-visible text-ellipsis whitespace-nowrap group-hover:whitespace-normal w-[80%] transition-all duration-300"
               >
                 {{ item.name }}
               </h3>
@@ -162,7 +176,7 @@
           </NuxtLink>
           <div
             class="grid grid-cols-1 grid-rows-[0fr] overflow-hidden lg:group-hover:grid-rows-[1fr] transition-all duration-300"
-            :class="{ 'grid-rows-[1fr]': item.showDesc.value }"
+            :class="{ 'grid-rows-[1fr]': openItem === item.id }"
           >
             <p class="line-clamp-4 pt-3">
               {{ item.description }}
@@ -173,7 +187,7 @@
             :initial="{ width: 0 }"
             :animate="{ width: '100%' }"
             :transition="{ duration: 0.6 }"
-            class="bottom-0 left-0 h-[1px] bg-border"
+            class="absolute bottom-0 left-0 w-full h-[1px] bg-border"
           ></motion.div>
         </li>
       </ul>
@@ -225,86 +239,82 @@ useHead({
     },
   ],
 });
-import { ref, onMounted, onUnmounted } from "vue";
-import { delay, motion } from "motion-v";
+import { motion } from "motion-v";
+import { api } from "~/convex/_generated/api";
+import { useConvexHttpClient } from "convex-vue";
 
 const aboutText = `As a software developer, I have had the privilege of working on a wide range of projects. My experience has taught me the importance of attention to detail, effective communication, and efficient problem-solving. I am passionate about building software that is both functional and enjoyable to use. I am always looking for new challenges and opportunities to grow as a developer.`;
-// , from web applications to mobile apps
-const featured = [
-  {
-    name: "File Organiser",
-    description:
-      "A CLI tool to help you quickly sort your files into folders based on their extension, date created, size or type.",
-    link: "/projects/file-organiser",
-    type: "project",
-    showDesc: ref(false),
-  },
-  {
-    name: "Verbally Yours",
-    description:
-      "Verbally Yours is coaching platform built to help professionals find direction, confidence, and fulfillment in their careers. Through personalized coaching sessions, reflective exercises, and actionable strategies, Verbally Yours empowers individuals to articulate their goals, own their strengths, and navigate career transitions with clarity.",
-    link: "/projects/verbally-yours",
-    type: "project",
-    showDesc: ref(false),
-  },
-];
 
-// Use template ref for the container
+// Projects are marked featured in Convex (projects:setFeatured). The try/catch
+// covers the window between a frontend deploy and a Convex deploy, where the
+// query may not exist yet - the column degrades to writing only.
+const convex = useConvexHttpClient();
+const { data: featuredProjects } = await useAsyncData(
+  "featured-projects",
+  async () => {
+    try {
+      return await convex.query(api.projects.getFeatured, { limit: 2 });
+    } catch (error) {
+      console.warn("[home] featured projects unavailable:", error);
+      return [];
+    }
+  },
+  { default: () => [] }
+);
+
+// Newest two posts from the Medium feed, which is already cached server-side.
+const { data: featuredPosts } = await useAsyncData(
+  "featured-posts",
+  async () => {
+    const response = await $fetch("/api/blog").catch(() => ({ posts: [] }));
+    return (response?.posts ?? []).slice(0, 2);
+  },
+  { default: () => [] }
+);
+
+const featured = computed(() => [
+  ...featuredProjects.value.map((project) => ({
+    id: project._id,
+    name: project.name,
+    description: project.shortDescription,
+    type: "project",
+    link: `/projects/${project.name.split(" ").join("-")}`,
+    external: false,
+  })),
+  ...featuredPosts.value.map((post) => ({
+    id: post.link,
+    name: post.title,
+    description: post.description,
+    type: "article",
+    link: post.link,
+    external: true,
+  })),
+]);
+
+// Which item has its description open. Desktop expands on hover via CSS; this
+// only drives the tap-to-expand behaviour below.
 const featuredContainer = ref(null);
+const openItem = ref(null);
+const isMobile = useMediaQuery("(max-width: 1023px)");
 
-// Track if we're on mobile
-const isMobile = ref(false);
+onClickOutside(featuredContainer, () => {
+  openItem.value = null;
+});
 
-const handleResize = () => {
-  const wasMobile = isMobile.value;
-  const isNowDesktop = window.innerWidth >= 1024;
+watch(isMobile, (mobile) => {
+  if (!mobile) openItem.value = null;
+});
 
-  isMobile.value = window.innerWidth < 1024;
-
-  // If transitioning from mobile to desktop, close all descriptions
-  if (wasMobile && isNowDesktop) {
-    featured.forEach((item) => {
-      if (item.showDesc.value) {
-        item.showDesc.value = false;
-      }
-    });
-  }
-};
-
-const handleClickOutside = (event) => {
+/**
+ * On mobile the first tap expands the description and the second follows the
+ * link. preventDefault works from here even though the anchor is a descendant:
+ * the default action is resolved after the event finishes propagating.
+ */
+const onFeaturedTap = (item, event) => {
   if (!isMobile.value) return;
+  if (openItem.value === item.id) return;
 
-  // Check if click is outside the container
-  if (
-    featuredContainer.value &&
-    !featuredContainer.value.contains(event.target)
-  ) {
-    // Close all descriptions
-    featured.forEach((item) => {
-      if (item.showDesc.value) {
-        item.showDesc.value = false;
-      }
-    });
-  }
-};
-
-onMounted(() => {
-  isMobile.value = window.innerWidth < 1024;
-  window.addEventListener("resize", handleResize);
-  document.addEventListener("click", handleClickOutside);
-});
-
-onUnmounted(() => {
-  window.removeEventListener("resize", handleResize);
-  document.removeEventListener("click", handleClickOutside);
-});
-
-// Toggle description visibility on mobile
-const toggleDescription = (item) => {
-  // Use the reactive isMobile value instead of directly checking window.innerWidth
-  // This prevents SSR errors since window is not available during server rendering
-  if (isMobile.value) {
-    item.showDesc.value = !item.showDesc.value;
-  }
+  event.preventDefault();
+  openItem.value = item.id;
 };
 </script>

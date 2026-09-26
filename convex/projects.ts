@@ -49,6 +49,41 @@ export const create = internalMutation({
   },
 });
 
+/**
+ * Small payload for the homepage column: no image URLs, since it renders only
+ * a title, a short description and a label.
+ */
+export const getFeatured = query({
+  args: { limit: v.optional(v.number()) },
+  handler: async (ctx, args) => {
+    const projects = await ctx.db
+      .query("projects")
+      .withIndex("by_featured", (q) => q.eq("live", true).eq("featured", true))
+      .take(args.limit ?? 2);
+
+    return projects.map((project) => ({
+      _id: project._id,
+      name: project.name,
+      shortDescription: project.shortDescription,
+    }));
+  },
+});
+
+/** Run with: npx convex run projects:setFeatured '{"name":"crag","featured":true}' */
+export const setFeatured = internalMutation({
+  args: { name: v.string(), featured: v.boolean() },
+  handler: async (ctx, args) => {
+    const project = await ctx.db
+      .query("projects")
+      .withIndex("by_name", (q) => q.eq("name", args.name))
+      .unique();
+
+    if (!project) throw new Error(`No project named "${args.name}"`);
+
+    await ctx.db.patch(project._id, { featured: args.featured });
+  },
+});
+
 export const getProjectByName = query({
   args: { name: v.string() },
   handler: async (ctx, args) => {
