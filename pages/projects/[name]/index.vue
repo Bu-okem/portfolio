@@ -144,7 +144,7 @@
             </a>
           </div>
           <div class="mt-10 pb-5 lg:pb-12">
-            <h2 class="text-3xl font-header font-medium mb-5 text-heading">Description</h2>
+            <h2 class="text-3xl font-header font-medium mb-5 text-heading">Case Study</h2>
             <div
               class="font-extralight markdown"
               v-html="renderMarkdown(project.description)"

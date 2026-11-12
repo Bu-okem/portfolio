@@ -18,7 +18,7 @@ import { themeBootstrapScript } from "~/lib/themes";
 useHead({
   // One place defines the title format. Pages set a bare name ("About") and
   // this appends the suffix; a page with no title gets the site default.
-  titleTemplate: (title) => (title ? `${title} - Buokem` : "Buokem - Software Developer"),
+  titleTemplate: (title) => (title ? `${title} - Buokem` : "Buokem — Software Engineer"),
   script: [{ children: themeBootstrapScript() }],
 });
 </script>

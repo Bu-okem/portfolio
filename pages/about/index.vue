@@ -1,95 +1,57 @@
 <template>
   <main class="pb-20 mt-[150px] lg:mt-[200px] mx-5 lg:mx-20">
-    <h1 class="sr-only">About Buokem - Software Developer</h1>
+    <h1 class="sr-only">About Buokem — Software Engineer</h1>
     <section class="h-[50vh] text-4xl font-semibold font-header text-heading" aria-labelledby="hero-heading">
-      <div class="">
+      <div>
         <h2 id="hero-heading" class="sr-only">{{ heroText1 }} {{ heroText2 }}</h2>
-        <span
-          aria-hidden="true"
-          class="overflow-hidden inline-block"
-          v-for="(text, index) in heroText1.split(' ')"
+        <span aria-hidden="true" class="overflow-hidden inline-block" v-for="(text, index) in heroText1.split(' ')"
           :key="index">
-          <motion.span
-            :initial="{ y: 54 }"
-            :animate="{ y: 0 }"
-            :transition="{ delay: 0.3 + index * 0.04, duration: 0.6 }"
-            class="block"
-            >{{ text }}<span>&nbsp;</span>
+          <motion.span :initial="{ y: 54 }" :animate="{ y: 0 }"
+            :transition="{ delay: 0.3 + index * 0.04, duration: 0.6 }" class="block">{{ text }}<span>&nbsp;</span>
           </motion.span>
         </span>
       </div>
-      <div class="">
-        <p class="sr-only">{{ heroText2 }}</p>
-        <span
-          aria-hidden="true"
-          class="overflow-hidden inline-block"
-          v-for="(text, index) in heroText2.split(' ')"
+      <div>
+        <span aria-hidden="true" class="overflow-hidden inline-block" v-for="(text, index) in heroText2.split(' ')"
           :key="index">
-          <motion.span
-            :initial="{ y: 54 }"
-            :animate="{ y: 0 }"
-            :transition="{ delay: 0.3 + index * 0.04, duration: 0.6 }"
-            class="font-extralight"
-            >{{ text }}<span>&nbsp;</span>
+          <motion.span :initial="{ y: 54 }" :animate="{ y: 0 }"
+            :transition="{ delay: 0.3 + index * 0.04, duration: 0.6 }" class="font-extralight">{{ text
+            }}<span>&nbsp;</span>
           </motion.span>
         </span>
       </div>
     </section>
-    <section class="pt-60" aria-labelledby="about-me">
-      <h2 id="about-me" class="sr-only">About Me</h2>
-      <div class="font-light leading-9">
-        <p class="sr-only">{{ aboutText }}</p>
-        <span
-          aria-hidden="true"
-          class="overflow-hidden inline-block"
-          v-for="(text, index) in aboutText.split(' ')"
-          :key="index">
-          <motion.p
-            :initial="{ y: 40 }"
-            :while-in-view="{ y: 0 }"
-            :inViewOptions="{ once: true }"
-            :transition="{ delay: 0.3, duration: 0.6 }"
-            class="my-1">
-            {{ text }}<span>&nbsp;</span>
-          </motion.p>
-        </span>
+    <section class="pt-60 max-w-[850px]" aria-labelledby="about-me">
+      <h2 id="about-me" class="sr-only">Engineering Philosophy</h2>
+      <div class="font-light leading-9 space-y-6 text-lg">
+        <motion.p v-for="(paragraph, index) in aboutParagraphs" :key="index" :initial="{ opacity: 0, y: 24 }"
+          :while-in-view="{ opacity: 1, y: 0 }" :inViewOptions="{ once: true }"
+          :transition="{ delay: 0.15 + index * 0.12, duration: 0.6 }">
+          {{ paragraph }}
+        </motion.p>
       </div>
     </section>
     <section class="pt-32" aria-labelledby="experience">
-      <h2 id="experience" class="sr-only">Work Experience</h2>
       <span class="overflow-hidden block mb-9">
-        <motion.span
-          :initial="{ y: 40 }"
-          :while-in-view="{ y: 0 }"
-          :transition="{ delay: 0.3, duration: 0.6 }"
-          :inViewOptions="{ once: true }"
-          class="block text-4xl font-semibold font-header text-heading"
-          aria-hidden="true">Experience</motion.span>
+        <motion.h2 id="experience" :initial="{ y: 40 }" :while-in-view="{ y: 0 }"
+          :transition="{ delay: 0.3, duration: 0.6 }" :inViewOptions="{ once: true }"
+          class="block text-4xl font-semibold font-header text-heading">
+          Experience
+        </motion.h2>
       </span>
       <div>
-        <div v-for="exp in sortedExperience" :key="exp.id" class="mb-20">
+        <div v-for="(exp, index) in sortedExperience" :key="exp._id || exp.id || index" class="mb-20">
           <span class="overflow-hidden block">
-            <motion.p
-              :initial="{ y: 24 }"
-              :while-in-view="{ y: 0 }"
-              :transition="{ delay: 0.3 + index * 0.04, duration: 0.6, repeat: 0 }"
-              :inViewOptions="{ once: true }"
-              class="text-xl"
-              >{{ exp.company }}</motion.p
-            >
+            <motion.p :initial="{ y: 24 }" :while-in-view="{ y: 0 }"
+              :transition="{ delay: 0.2 + index * 0.04, duration: 0.6, repeat: 0 }" :inViewOptions="{ once: true }"
+              class="text-xl text-secondary-text">{{ exp.company }}</motion.p>
           </span>
           <div class="my-6">
             <h3 class="sr-only">{{ exp.position }}</h3>
-            <span
-              aria-hidden="true"
-              class="overflow-hidden inline-block"
-              v-for="(text, index) in exp.position.split(' ')"
-              :key="index">
-              <motion.span
-                :initial="{ y: 50 }"
-                :while-in-view="{ y: 0 }"
-                :inViewOptions="{ once: true }"
-                :transition="{ delay: 0.3 + index * 0.04, duration: 0.6 }"
+            <span aria-hidden="true" class="overflow-hidden inline-block"
+              v-for="(text, wordIndex) in exp.position.split(' ')" :key="wordIndex">
+              <motion.span :initial="{ y: 50 }" :while-in-view="{ y: 0 }" :inViewOptions="{ once: true }"
+                :transition="{ delay: 0.25 + wordIndex * 0.04, duration: 0.6 }"
                 class="block mb-4 lg:my-1 text-3xl lg:text-5xl font-semibold font-header text-heading">
                 {{ text }}<span>&nbsp;</span>
               </motion.span>
@@ -97,20 +59,16 @@
           </div>
 
           <div class="overflow-hidden mb-6">
-            <motion.span
-              :initial="{ y: 20 }"
-              :while-in-view="{ y: 0 }"
-              :inViewOptions="{ once: true }"
-              :transition="{ delay: 0.3, duration: 0.6 }"
-              class="flex">
+            <motion.div :initial="{ y: 20 }" :while-in-view="{ y: 0 }" :inViewOptions="{ once: true }"
+              :transition="{ delay: 0.3, duration: 0.6 }" class="flex text-secondary-text">
               <p class="tracking-wide">{{ exp.startDate }}</p>
-              <span class="mx-2"> - </span>
+              <span class="mx-2">—</span>
               <p class="tracking-wide">
                 {{ exp.endDate ? `${exp.endDate}` : 'Present' }}
               </p>
-            </motion.span>
+            </motion.div>
           </div>
-          <p class="font-extralight leading-9 tracking-wide">
+          <p v-if="exp.description" class="font-light leading-9 tracking-wide max-w-[780px]">
             {{ exp.description }}
           </p>
         </div>
@@ -137,22 +95,26 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: 'Learn more about Buokem, a skilled software developer with experience in modern web technologies.',
+      content:
+        'About Buokem — Full-stack Software Engineer building resilient, high-craft web applications and cloud backends.',
     },
   ],
 });
 
-const heroText1 = `Hi there, I'm Buokem, a Software Developer.`;
-const heroText2 = 'I build things for the web.';
+const heroText1 = `Hi, I'm Buokem — a Software Engineer.`;
+const heroText2 = 'I architect and ship products for the web.';
 
-const aboutText =
-  'As a software developer, I have had the privilege of working on a wide range of projects. My experience has taught me the importance of attention to detail, effective communication, and efficient problem-solving. I am passionate about building software that is both functional and enjoyable to use. I am always looking for new challenges and opportunities to grow as a developer.';
-//  , from web applications to mobile apps
+const aboutParagraphs = [
+  "I'm a product-focused Full-Stack Software Engineer specializing in TypeScript, Vue/Nuxt, React/Next.js, Node.js, and modern cloud backends. I build end-to-end systems where performance, accessibility, and clean domain modeling are treated as first-class requirements rather than afterthoughts.",
+  "Whether architecting real-time data flows, crafting tactile interfaces with zero layout shift, or untangling complex product constraints, I focus on shipping software that holds up under production load and feels effortless to the people using it.",
+];
 
 const sortExperience = (experiences) => {
   // Convert "Month YYYY" to ISO format "YYYY-MM-DD"
-  const convertToIsoDate = (dateString) => {
-    if (!dateString) return '2000-01-01';
+  const convertToIsoDate = (dateString, isEndDate = false) => {
+    if (!dateString || /^present$/i.test(dateString.trim())) {
+      return isEndDate ? '9999-12-31' : '2000-01-01';
+    }
 
     const months = {
       january: '01',
@@ -171,7 +133,7 @@ const sortExperience = (experiences) => {
       feb: '02',
       mar: '03',
       apr: '04',
-      may: '05',
+      // may: '05',
       jun: '06',
       jul: '07',
       aug: '08',
@@ -188,7 +150,7 @@ const sortExperience = (experiences) => {
 
     // Try to parse "Month YYYY" format
     const monthYearRegex = /^([a-z]+)\s+(\d{4})$/i;
-    const match = dateString.match(monthYearRegex);
+    const match = dateString.trim().match(monthYearRegex);
 
     if (match) {
       const monthName = match[1].toLowerCase();
@@ -196,7 +158,6 @@ const sortExperience = (experiences) => {
       const month = months[monthName];
 
       if (month && year) {
-        // Return ISO format date (YYYY-MM-DD)
         return `${year}-${month}-01`;
       }
     }
@@ -206,7 +167,6 @@ const sortExperience = (experiences) => {
       const date = new Date(dateString);
       if (!isNaN(date.getTime())) {
         const year = date.getFullYear();
-        // getMonth() is 0-indexed, so I added 1 and padded with leading zero
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const day = String(date.getDate()).padStart(2, '0');
         return `${year}-${month}-${day}`;
@@ -219,11 +179,17 @@ const sortExperience = (experiences) => {
   };
 
   return [...experiences].sort((a, b) => {
-    const dateA = convertToIsoDate(a.endDate || a.startDate);
-    const dateB = convertToIsoDate(b.endDate || b.startDate);
+    const endA = convertToIsoDate(a.endDate, true);
+    const endB = convertToIsoDate(b.endDate, true);
 
-    // For ascending order (oldest first)
-    return dateA.localeCompare(dateB);
+    if (endA !== endB) {
+      // Descending order (newest / current roles first)
+      return endB.localeCompare(endA);
+    }
+
+    const startA = convertToIsoDate(a.startDate, false);
+    const startB = convertToIsoDate(b.startDate, false);
+    return startB.localeCompare(startA);
   });
 };
 

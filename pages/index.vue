@@ -3,7 +3,7 @@
     <div
       class="relative p-6 pt-20 text-4xl lg:text-5xl lg:col-span-4 lg:row-end-2 lg:flex flex-col justify-end"
     >
-      <h1 class="sr-only">Buokem - Software Developer</h1>
+      <h1 class="sr-only">Buokem — Software Engineer</h1>
       <span aria-hidden="true" class="block overflow-hidden">
         <motion.span
           :initial="{ y: 50 }"
@@ -19,7 +19,7 @@
           :animate="{ y: 0 }"
           :transition="{ delay: 0.6, duration: 0.6 }"
           class="block font-light font-header text-heading"
-          >Developer</motion.span
+          >Engineer</motion.span
         >
       </span>
 
@@ -208,23 +208,20 @@
       </motion.div>
       <!--  -->
     </section>
-    <a
-      href="https://wa.me/2348154387988"
-      target="_blank"
-      rel="noopener noreferrer"
+    <NuxtLink
+      to="/contact"
       class="border border-border mt-3 px-6 pt-[100px] pb-20 relative lg:hidden"
-      aria-label="Contact me"
     >
       <Icon
         name="streamline:interface-arrows-corner-up-right-keyboard-top-arrow-right-up"
         size="24"
         class="absolute top-5 right-5"
+        aria-hidden="true"
       />
       <h2 class="text-4xl font-extralight font-header text-heading">
         <span class="font-semibold">Contact</span> Me
       </h2>
-      <p class="sr-only">Click to contact me via whatsapp</p>
-    </a>
+    </NuxtLink>
   </main>
 </template>
 
@@ -235,7 +232,7 @@ useHead({
     {
       name: "description",
       content:
-        "Portfolio of Buokem, a skilled software developer with experience in modern web technologies.",
+        "Buokem — Full-stack Software Engineer architecting fast, resilient web products and cloud-backed systems in TypeScript, Vue/Nuxt, React/Next.js, and Node.js.",
     },
   ],
 });
@@ -243,7 +240,7 @@ import { motion } from "motion-v";
 import { api } from "~/convex/_generated/api";
 import { useConvexHttpClient } from "convex-vue";
 
-const aboutText = `As a software developer, I have had the privilege of working on a wide range of projects. My experience has taught me the importance of attention to detail, effective communication, and efficient problem-solving. I am passionate about building software that is both functional and enjoyable to use. I am always looking for new challenges and opportunities to grow as a developer.`;
+const aboutText = `I engineer fast, resilient web products and full-stack systems where architectural rigor meets editorial craft. From interactive TypeScript frontends to real-time cloud backends, I partner with teams to turn complex product requirements into software that performs at scale.`;
 
 // Projects are marked featured in Convex (projects:setFeatured). The try/catch
 // covers the window between a frontend deploy and a Convex deploy, where the

@@ -18,23 +18,25 @@ useHead({
     {
       name: 'description',
       content:
-        'Portfolio of Buokem, a skilled software developer with experience in modern web technologies.',
+        'Buokem — Full-stack Software Engineer architecting fast, resilient web products and cloud-backed systems in TypeScript, Vue/Nuxt, React/Next.js, and Node.js.',
     },
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     // Open Graph
     { property: 'og:type', content: 'website' },
-    { property: 'og:title', content: 'Buokem - Software Developer' },
+    { property: 'og:title', content: 'Buokem — Software Engineer' },
     {
       property: 'og:description',
-      content: 'Portfolio of Buokem, a skilled software developer with experience in modern web technologies.',
+      content:
+        'Full-stack Software Engineer architecting fast, resilient web products and cloud-backed systems in TypeScript, Vue/Nuxt, React/Next.js, and Node.js.',
     },
     { property: 'og:site_name', content: 'Buokem' },
     // Twitter Card
     { name: 'twitter:card', content: 'summary' },
-    { name: 'twitter:title', content: 'Buokem - Software Developer' },
+    { name: 'twitter:title', content: 'Buokem — Software Engineer' },
     {
       name: 'twitter:description',
-      content: 'Portfolio of Buokem, a skilled software developer with experience in modern web technologies.',
+      content:
+        'Full-stack Software Engineer architecting fast, resilient web products and cloud-backed systems in TypeScript, Vue/Nuxt, React/Next.js, and Node.js.',
     },
   ],
   htmlAttrs: {
