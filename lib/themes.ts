@@ -81,19 +81,6 @@ export const themes: Theme[] = [
     },
   },
   {
-    name: "green",
-    dark: true,
-    vars: {
-      background: "oklch(0.18 0.018 180)",
-      foreground: "oklch(0.96 0.03 110)",
-      heading: "oklch(0.96 0.03 110)",
-      body: "oklch(0.96 0.03 110)",
-      accent: "oklch(0.492 0.08 180)",
-      "secondary-text": "oklch(0.75 0.05 140)",
-      border: "oklch(0.4932 0.08 150)",
-    },
-  },
-  {
     name: "deep-midnight",
     dark: true,
     vars: {
@@ -117,19 +104,6 @@ export const themes: Theme[] = [
       accent: "oklch(0.75 0.18 190)",
       "secondary-text": "oklch(0.6 0.05 200)",
       border: "oklch(0.4756 0.05 200)",
-    },
-  },
-  {
-    name: "espresso",
-    dark: true,
-    vars: {
-      background: "oklch(0.22 0.03 45)",
-      foreground: "oklch(0.92 0.02 60)",
-      heading: "oklch(0.92 0.02 60)",
-      body: "oklch(0.92 0.02 60)",
-      accent: "oklch(0.70 0.12 50)",
-      "secondary-text": "oklch(0.65 0.03 55)",
-      border: "oklch(0.5214 0.03 48)",
     },
   },
   {
