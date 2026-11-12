@@ -20,6 +20,7 @@
   --accent: oklch(0.642 0 0);
   --secondary-text: oklch(0.549 0 0);
   --border: oklch(0.642 0 0);
+  --grain: url("/grain.png");
 }
 
 .dark {
@@ -50,11 +51,11 @@
   --breakpoint-3xl: 115rem;
 }
 
-.markdown > h3 {
+.markdown>h3 {
   @apply text-xl lg:text-2xl font-medium my-5 text-heading;
 }
 
-.markdown > ul {
+.markdown>ul {
   list-style: disc;
   list-style-position: outside;
   padding-left: 1.5rem;
@@ -92,6 +93,7 @@ html {
  * animationend still fire - reka-ui's Presence relies on them to unmount.
  */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
