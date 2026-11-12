@@ -98,13 +98,13 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: 'Blog posts and articles by Buokem on software development, web technologies, and more.',
+      content: 'Technical essays and architecture notes by Buokem on full-stack software engineering and modern web systems.',
     },
   ],
 });
 
-const heroText1 = 'Blog';
-const heroText2 = 'Thoughts & Writings.';
+const heroText1 = 'Writing';
+const heroText2 = 'Engineering & Architecture.';
 
 const { data, error, status, refresh } = useFetch('/api/blog', {
   transform: (response) => response.posts || [],

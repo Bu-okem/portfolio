@@ -14,6 +14,7 @@ export const create = internalMutation({
     position: v.string(),
     startDate: v.string(),
     endDate: v.string(),
+    description: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     await ctx.db.insert("workExperience", args);

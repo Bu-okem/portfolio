@@ -26,6 +26,7 @@ const workExperience = defineTable({
   position: v.string(),
   startDate: v.string(),
   endDate: v.string(),
+  description: v.optional(v.string()),
 });
 
 export default defineSchema({
