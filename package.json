@@ -28,7 +28,6 @@
     "marked": "^15.0.11",
     "motion-v": "^1.0.1",
     "nuxt": "^3.16.2",
-    "packageManager": "11.11.0",
     "reka-ui": "^2.9.10",
     "rss-parser": "^3.13.0",
     "shadcn-nuxt": "^2.1.0",
