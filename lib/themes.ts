@@ -110,7 +110,7 @@ export const themes: Theme[] = [
     name: "dark",
     dark: true,
     vars: {
-      background: "oklch(0.23 0 0)",
+      background: "oklch(0.20 0 0)",
       foreground: "oklch(0.985 0 0)",
       heading: "oklch(0.985 0 0)",
       body: "oklch(0.985 0 0)",
@@ -119,6 +119,17 @@ export const themes: Theme[] = [
       border: "oklch(0.5264 0 0)",
     },
   },
+  /* 
+  vars: {
+      background: "oklch(0.20 0 0)",
+      foreground: "oklch(0.9084 0.0239 70.5)",
+      heading: "oklch(0.9084 0.0239 70.5)",
+      body: "oklch(0.9084 0.0239 70.5)",
+      accent: "oklch(0.5264 0.0239 70.5)",
+      "secondary-text": "oklch(0.7 0.0239 70.5)",
+      border: "oklch(0.5264 0.0239 70.5)",
+    },
+  */
 ];
 
 /** Every CSS variable any theme defines, so switching fully resets the last one. */

@@ -1,174 +1,86 @@
 <template>
   <main class="grid grid-cols-1 lg:grid-cols-11 lg:h-[91%]">
-    <div
-      class="relative p-6 pt-20 text-4xl lg:text-5xl lg:col-span-4 lg:row-end-2 lg:flex flex-col justify-end"
-    >
+    <div class="relative p-6 pt-20 text-4xl lg:text-5xl lg:col-span-4 lg:row-end-2 lg:flex flex-col justify-end">
       <h1 class="sr-only">Buokem — Software Engineer</h1>
       <span aria-hidden="true" class="block overflow-hidden">
-        <motion.span
-          :initial="{ y: 50 }"
-          :animate="{ y: 0 }"
-          :transition="{ delay: 0.5, duration: 0.6 }"
-          class="block font-semibold font-header text-heading"
-          >Software</motion.span
-        >
+        <motion.span :initial="{ y: 50 }" :animate="{ y: 0 }" :transition="{ delay: 0.5, duration: 0.6 }"
+          class="block font-semibold font-header text-heading">Software</motion.span>
       </span>
       <span aria-hidden="true" class="block overflow-hidden">
-        <motion.span
-          :initial="{ y: 50 }"
-          :animate="{ y: 0 }"
-          :transition="{ delay: 0.6, duration: 0.6 }"
-          class="block font-light font-header text-heading"
-          >Engineer</motion.span
-        >
+        <motion.span :initial="{ y: 50 }" :animate="{ y: 0 }" :transition="{ delay: 0.6, duration: 0.6 }"
+          class="block font-light font-header text-heading">Engineer</motion.span>
       </span>
 
       <!-- Grid lines -->
-      <motion.div
-        :initial="{ height: 0 }"
-        :animate="{ height: '100%' }"
-        :transition="{ duration: 0.3 }"
-        class="absolute top-0 left-0 w-[1px] bg-border hidden lg:block"
-      ></motion.div>
-      <motion.div
-        :initial="{ width: 0 }"
-        :animate="{ width: '100%' }"
-        :transition="{ duration: 0.3 }"
-        class="absolute bottom-0 left-0 w-full h-[1px] bg-border"
-      ></motion.div>
+      <motion.div :initial="{ height: 0 }" :animate="{ height: '100%' }" :transition="{ duration: 0.3 }"
+        class="absolute top-0 left-0 w-[1px] bg-border hidden lg:block"></motion.div>
+      <motion.div :initial="{ width: 0 }" :animate="{ width: '100%' }" :transition="{ duration: 0.3 }"
+        class="absolute bottom-0 left-0 w-full h-[1px] bg-border"></motion.div>
       <!--  -->
     </div>
     <!--  -->
-    <div
-      class="relative p-6 pt-20 text-6xl hidden lg:col-span-3 lg:row-end-2 lg:flex flex-col justify-end"
-    >
+    <div class="relative p-6 pt-20 text-6xl hidden lg:col-span-3 lg:row-end-2 lg:flex flex-col justify-end">
       <span class="block overflow-hidden" aria-hidden="true">
-        <motion.span
-          :initial="{ y: 54 }"
-          :animate="{ y: 0 }"
-          :transition="{ delay: 0.7, duration: 0.6 }"
-          class="block text-6xl font-ubuntu-mono"
-          aria-hidden="true"
-          >b_</motion.span
-        >
+        <motion.span :initial="{ y: 54 }" :animate="{ y: 0 }" :transition="{ delay: 0.7, duration: 0.6 }"
+          class="block text-6xl font-ubuntu-mono" aria-hidden="true">b_</motion.span>
       </span>
       <!-- Grid lines -->
-      <motion.div
-        :initial="{ height: 0 }"
-        :animate="{ height: '100%' }"
-        :transition="{ duration: 0.6 }"
-        class="absolute top-0 left-0 h-full w-[1px] bg-border"
-      ></motion.div>
-      <motion.div
-        :initial="{ width: 0 }"
-        :animate="{ width: '100%' }"
-        :transition="{ delay: 0.25, duration: 0.3 }"
-        class="absolute bottom-0 left-0 w-full h-[1px] bg-border"
-      ></motion.div>
+      <motion.div :initial="{ height: 0 }" :animate="{ height: '100%' }" :transition="{ duration: 0.6 }"
+        class="absolute top-0 left-0 h-full w-[1px] bg-border"></motion.div>
+      <motion.div :initial="{ width: 0 }" :animate="{ width: '100%' }" :transition="{ delay: 0.25, duration: 0.3 }"
+        class="absolute bottom-0 left-0 w-full h-[1px] bg-border"></motion.div>
       <!--  -->
     </div>
     <!--  -->
 
-    <NuxtLink
-      to="/about"
+    <NuxtLink to="/about"
       class="group p-6 pt-[100px] lg:pl-10 lg:pb-14 lg:pr-20 relative lg:col-span-7 lg:row-end-3 lg:flex flex-col justify-end"
-      aria-label="Learn more about me"
-    >
+      aria-label="Learn more about me">
       <div
-        class="h-fit absolute top-5 lg:top-16 right-5 lg:right-10 group-hover:lg:top-10 group-hover:lg:right-6 duration-300 overflow-hidden block"
-      >
-        <motion.span
-          :initial="{ y: 40 }"
-          :animate="{ y: 0 }"
-          :transition="{ delay: 0.6, duration: 0.6 }"
-          class="block"
-        >
-          <Icon
-            name="streamline:interface-arrows-corner-up-right-keyboard-top-arrow-right-up"
-            size="24"
-          />
+        class="h-fit absolute top-5 lg:top-16 right-5 lg:right-10 group-hover:lg:top-10 group-hover:lg:right-6 duration-300 overflow-hidden block">
+        <motion.span :initial="{ y: 40 }" :animate="{ y: 0 }" :transition="{ delay: 0.6, duration: 0.6 }" class="block">
+          <Icon name="streamline:interface-arrows-corner-up-right-keyboard-top-arrow-right-up" size="24" />
         </motion.span>
       </div>
       <div class="overflow-hidden">
         <p class="sr-only">{{ aboutText }}</p>
-        <motion.div
-          :initial="{ y: 10 }"
-          :animate="{ y: 0 }"
-          :transition="{ delay: 0.8 }"
-          class="text-xl lg:text-2xl font-extralight line-clamp-4 font-header"
-        >
-          <span
-            aria-hidden="true"
-            class="overflow-hidden inline-block"
-            v-for="(text, index) in aboutText.split(' ')"
-            :key="index"
-          >
-            <motion.span
-              :initial="{ y: 54 }"
-              :animate="{ y: 0 }"
-              :transition="{ delay: 0.7 + index * 0.02, duration: 0.6 }"
-              class="block"
-              >{{ text }}<span>&nbsp;</span>
+        <motion.div :initial="{ y: 10 }" :animate="{ y: 0 }" :transition="{ delay: 0.8 }"
+          class="text-xl lg:text-2xl font-extralight line-clamp-4 font-header">
+          <span aria-hidden="true" class="overflow-hidden inline-block" v-for="(text, index) in aboutText.split(' ')"
+            :key="index">
+            <motion.span :initial="{ y: 54 }" :animate="{ y: 0 }"
+              :transition="{ delay: 0.7 + index * 0.02, duration: 0.6 }" class="block">{{ text }}<span>&nbsp;</span>
             </motion.span>
           </span>
         </motion.div>
       </div>
 
       <!-- Grid lines -->
-      <motion.div
-        :initial="{ height: 0 }"
-        :animate="{ height: '100%' }"
-        :transition="{ delay: 0.25, duration: 0.3 }"
-        class="absolute top-0 left-0 h-full w-[1px] bg-border hidden lg:block"
-      >
+      <motion.div :initial="{ height: 0 }" :animate="{ height: '100%' }" :transition="{ delay: 0.25, duration: 0.3 }"
+        class="absolute top-0 left-0 h-full w-[1px] bg-border hidden lg:block">
       </motion.div>
-      <motion.div
-        :initial="{ width: 0 }"
-        :animate="{ width: '100%' }"
-        :transition="{ duration: 0.3 }"
-        class="absolute bottom-0 left-0 h-[1px] w-[1px] bg-border block lg:hidden"
-      >
+      <motion.div :initial="{ width: 0 }" :animate="{ width: '100%' }" :transition="{ duration: 0.3 }"
+        class="absolute bottom-0 left-0 h-[1px] w-[1px] bg-border block lg:hidden">
       </motion.div>
       <!--  -->
     </NuxtLink>
 
     <!-- Featured projects and blogposts -->
-    <section
-      class="relative p-6 pb-0 lg:col-span-4 lg:row-end-3 lg:row-span-2 overflow-hidden"
-      aria-labelledby="featured-projects"
-    >
+    <section class="relative p-6 pb-0 lg:col-span-4 lg:row-end-3 lg:row-span-2 overflow-hidden"
+      aria-labelledby="featured-projects">
       <h2 id="featured-projects" class="sr-only">
         Featured projects and writing
       </h2>
-      <ul
-        v-if="featured.length"
-        ref="featuredContainer"
-        class="grid grid-cols-1"
-      >
-        <li
-          v-for="item in featured"
-          :key="item.id"
-          class="relative group pt-5 pb-4"
-          @click="onFeaturedTap(item, $event)"
-        >
-          <NuxtLink
-            :to="item.link"
-            :target="item.external ? '_blank' : undefined"
-            :rel="item.external ? 'noopener noreferrer' : undefined"
-            :aria-label="
-              item.external ? `${item.name} (opens in new tab)` : undefined
-            "
-            class="block overflow-hidden"
-          >
-            <motion.div
-              :initial="{ y: 24 }"
-              :animate="{ y: 0 }"
-              :transition="{ delay: 0.5, duration: 0.6 }"
-              class="flex items-center justify-between"
-            >
+      <ul v-if="featured.length" ref="featuredContainer" class="grid grid-cols-1">
+        <li v-for="item in featured" :key="item.id" class="relative group pt-5 pb-4"
+          @click="onFeaturedTap(item, $event)">
+          <NuxtLink :to="item.link" :target="item.external ? '_blank' : undefined"
+            :rel="item.external ? 'noopener noreferrer' : undefined" :aria-label="item.external ? `${item.name} (opens in new tab)` : undefined
+              " class="block overflow-hidden">
+            <motion.div :initial="{ y: 24 }" :animate="{ y: 0 }" :transition="{ delay: 0.5, duration: 0.6 }"
+              class="flex items-center justify-between">
               <h3
-                class="text-xl font-medium text-heading first-letter:uppercase overflow-hidden group-hover:overflow-visible text-ellipsis whitespace-nowrap group-hover:whitespace-normal w-[80%] transition-all duration-300"
-              >
+                class="text-xl font-medium text-heading first-letter:uppercase overflow-hidden group-hover:overflow-visible text-ellipsis whitespace-nowrap group-hover:whitespace-normal w-[80%] transition-all duration-300">
                 {{ item.name }}
               </h3>
               <p class="text-xs opacity-50">{{ item.type }}</p>
@@ -176,48 +88,28 @@
           </NuxtLink>
           <div
             class="grid grid-cols-1 grid-rows-[0fr] overflow-hidden lg:group-hover:grid-rows-[1fr] transition-all duration-300"
-            :class="{ 'grid-rows-[1fr]': openItem === item.id }"
-          >
+            :class="{ 'grid-rows-[1fr]': openItem === item.id }">
             <p class="line-clamp-4 pt-3">
               {{ item.description }}
             </p>
           </div>
           <!-- Grid lines -->
-          <motion.div
-            :initial="{ width: 0 }"
-            :animate="{ width: '100%' }"
-            :transition="{ duration: 0.6 }"
-            class="absolute bottom-0 left-0 w-full h-[1px] bg-border"
-          ></motion.div>
+          <motion.div :initial="{ width: 0 }" :animate="{ width: '100%' }" :transition="{ duration: 0.6 }"
+            class="absolute bottom-0 left-0 w-full h-[1px] bg-border"></motion.div>
         </li>
       </ul>
       <!-- Grid lines -->
-      <motion.div
-        :initial="{ height: 0 }"
-        :animate="{ height: '100%' }"
-        :transition="{ duration: 0.6 }"
-        class="absolute top-0 left-0 h-full w-[1px] bg-border hidden lg:block"
-      >
+      <motion.div :initial="{ height: 0 }" :animate="{ height: '100%' }" :transition="{ duration: 0.6 }"
+        class="absolute top-0 left-0 h-full w-[1px] bg-border hidden lg:block">
       </motion.div>
-      <motion.div
-        :initial="{ height: 0 }"
-        :animate="{ height: '100%' }"
-        :transition="{ duration: 0.6 }"
-        class="absolute top-0 right-0 h-full w-[1px] bg-border hidden lg:block"
-      >
+      <motion.div :initial="{ height: 0 }" :animate="{ height: '100%' }" :transition="{ duration: 0.6 }"
+        class="absolute top-0 right-0 h-full w-[1px] bg-border hidden lg:block">
       </motion.div>
       <!--  -->
     </section>
-    <NuxtLink
-      to="/contact"
-      class="border border-border mt-3 px-6 pt-[100px] pb-20 relative lg:hidden"
-    >
-      <Icon
-        name="streamline:interface-arrows-corner-up-right-keyboard-top-arrow-right-up"
-        size="24"
-        class="absolute top-5 right-5"
-        aria-hidden="true"
-      />
+    <NuxtLink to="/contact" class="border border-border mt-3 px-6 pt-[100px] pb-20 relative lg:hidden">
+      <Icon name="streamline:interface-arrows-corner-up-right-keyboard-top-arrow-right-up" size="24"
+        class="absolute top-5 right-5" aria-hidden="true" />
       <h2 class="text-4xl font-extralight font-header text-heading">
         <span class="font-semibold">Contact</span> Me
       </h2>
