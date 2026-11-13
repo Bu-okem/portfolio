@@ -1,5 +1,5 @@
 <template>
-  <main class="pb-20 mt-[150px] lg:mt-[200px] mx-5 lg:mx-20">
+  <main class="pb-20 mt-[150px] lg:mt-[200px] mx-5 lg:mx-20 min-h-[72vh]">
     <h1 class="sr-only">About Buokem — Software Engineer</h1>
     <section class="h-[50vh] text-4xl font-semibold font-header text-heading" aria-labelledby="hero-heading">
       <div>
