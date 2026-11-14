@@ -1,5 +1,5 @@
 <template>
-  <main class="pb-20 mt-[150px] lg:mt-[200px] mx-5 lg:mx-20 max-w-[850px]">
+  <main class="pb-20 mt-[150px] lg:mt-[200px] mx-5 lg:mx-20 max-w-[850px] min-h-[72vh]">
     <h1 class="sr-only">Contact — Work With Buokem</h1>
 
     <section class="mb-20" aria-labelledby="contact-heading">
